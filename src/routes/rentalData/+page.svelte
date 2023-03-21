@@ -1,11 +1,16 @@
 <script>
+    //page level varibles 
+    let liveServerURL = 'https://mesn-backend.onrender.com/rentalData';
+    let localServerURL = 'http://localhost:5001/';
+    
+
     // import components to be used on this page
 
     // declare a varible to hold the data from the fetch
     let result = {};
     //perform fetch and assign the result to the above varible
     async function getData() {
-        await fetch("http://localhost:5001/rentalData", {
+        await fetch(`${liveServerURL}/rentalData`, {
             method: "GET",
         })
             .then((data) => {
