@@ -1,44 +1,26 @@
-# Full Stack Starter - Svelte and Express
+# Installation Guide
 
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+1. Create local project folder
+2. Open a CMD and cd to this folder or open a VS code terminal at this location
+3. $ git clone https://github.com/kDuffy93/MESN-frontend.git
+4. $ git clone https://github.com/kDuffy93/MESN-backend.git
+5. $ cd MESN-frontend && npm install
+6. $ cd ../MESN-backend && npm install
 
----
+# Local development startup guide
 
-## Svelte app
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
-
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
-
-## Express app
-
-This app uses Node and Express as the backend. To start the backend run:
-
-```bash
-yarn start
-```
-
-## Full Stack Startup
-
-To develop the frontend and the backend together run the following:
-
-```bash
-yarn dev
-```
-
-To create an optimized and minified production bundle, run this:
-```bash
-yarn build
-```
-
+## frontend 
+ - $ git pull
+ - $ npm run dev
+ - $ make changes
+ - $ git add .
+ - $ git commit -m "Message"
+ - $ git push
+## backend 
+ - $ git pull
+ - $ npm start
+ - $ make changes
+ - $ git add .
+ - $ git commit -m "Message"
+ - $ git push
 
