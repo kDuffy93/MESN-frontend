@@ -15,11 +15,14 @@
   let loginLinks = [{ href: "/", linkText: "Go Back" }];
   let heatMapLinks = [
     { href: "/rentalData", linkText: "View Rental Data" },
-    { href: "/login", linkText: "Log in" },
+    { href: "/", linkText: "Log Out" },
+
   ];
   let rentalDataLinks = [
     { href: "/heatMap", linkText: "View Heat Map" },
-    { href: "/login", linkText: "Log in" },
+    { href: "/", linkText: "Log Out" },
+
+    
   ];
   let landingPageLinks = [{ href: "/login", linkText: "Log In" }];
 </script>

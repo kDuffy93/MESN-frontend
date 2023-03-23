@@ -7,19 +7,19 @@ const axios = require('axios');
 
 
 // router imports
-let giphy = require('./routes/giphy')
+/* let giphy = require('./routes/giphy')
 let mainRoutes = require('./routes/mainRoutes')
 let login = require('./routes/login')
 let rentalData = require('./routes/rentalData')
-let heatMap = require('./routes/heatMap')
+let heatMap = require('./routes/heatMap') */
 
 app.use(cors());
 
-app.use('/giphy', giphy);
-/* app.use('/', mainRoutes);
+/* app.use('/giphy', giphy);
+app.use('/', mainRoutes);
 app.use('/login', login);
 app.use('/rentalData', rentalData);
-app.use('/heatMap', heatMap); */
+app.use('/heatMap', heatMap);  */
 
 
 app.use(express.static('public'));

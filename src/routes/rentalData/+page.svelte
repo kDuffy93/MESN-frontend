@@ -1,8 +1,11 @@
 <script>
     //page level varibles 
     let liveServerURL = 'https://mesn-backend.onrender.com';
-    let localServerURL = 'http://localhost:5001/';
+    let localServerURL = 'http://localhost:5001';
     
+   //let currentURL = liveServerURL;
+   let currentURL = localServerURL;
+
 
     // import components to be used on this page
 
@@ -10,7 +13,7 @@
     let result = {};
     //perform fetch and assign the result to the above varible
     async function getData() {
-        await fetch(`${liveServerURL}/rentalData`, {
+        await fetch(`${currentURL}/rentalData`, {
             method: "GET",
         })
             .then((data) => {
@@ -35,6 +38,10 @@
         console.log(Object.entries(result));
 
     })();
+
+  
+
+
 </script>
 
 <main>
@@ -200,10 +207,11 @@
 
             <button class="exportAll" type="button">Export All</button>
             <button class="exportCurrent" type="button">Export Current</button>
-            <button class="getData" type="button">Get Data</button>
+            <button class="getData" type="button" >Get Data</button>
         </section>
         <table>
             <tr>
+                <th>Listing No.</th>
                 <th>Stratified Area</th>
                 <th>Municipality</th>
                 <th>Street #</th>
@@ -219,6 +227,7 @@
             {#if Object.entries(result).length > 0}
                 {#each Object.entries(result) as [listingNumber, listingDetails]}
                     <tr>
+                        <td>{listingNumber}</td>
                         <td>{listingDetails.stratifiedArea}</td>
                         <td>{listingDetails.municipality}</td>
                         <td>{listingDetails.streetNumber}</td>
