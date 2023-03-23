@@ -5,7 +5,7 @@
     
 //change which is commented dependant on where youre working
    //let currentURL = liveServerURL;
-   let currentURL = localServerURL;
+   let currentURL = liveServerURL;
 
 
     // import components to be used on this page
@@ -39,6 +39,7 @@
         console.log(Object.entries(result));
 
     })();
+
 
   
 
@@ -225,7 +226,7 @@
                 <th>Landlord Type</th>
                 <th>Stability</th>
             </tr>
-            {#if Object.entries(result).length > 0}
+           {#if Object.entries(result).length > 0}
                 {#each Object.entries(result) as [listingNumber, listingDetails]}
                     <tr>
                         <td>{listingNumber}</td>
@@ -254,7 +255,7 @@
                     <td></td>
                     <td></td>
                     <td></td></tr>
-            {/if}
+            {/if}>
         </table>
     </main>
 </main>
