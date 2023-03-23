@@ -1,4 +1,4 @@
-# Installation Guide
+# Installation Guide 
 
 1. Create local project folder
 2. Open a CMD and cd to this folder or open a VS code terminal at this location
