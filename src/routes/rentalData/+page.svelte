@@ -3,6 +3,7 @@
     let liveServerURL = 'https://mesn-backend.onrender.com';
     let localServerURL = 'http://localhost:5001';
     
+//change which is commented dependant on where youre working
    //let currentURL = liveServerURL;
    let currentURL = localServerURL;
 
