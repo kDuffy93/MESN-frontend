@@ -22,7 +22,7 @@
 ## backend 
  - $ git pull
  - checkout or create branch as needed
- - $ npm start
+ - $ npm run dev
  - $ make changes
  - $ git add .
  - $ git commit -m "Message"
