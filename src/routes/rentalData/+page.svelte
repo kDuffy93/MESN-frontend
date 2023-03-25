@@ -1,513 +1,479 @@
 <script>
-    //page level varibles 
-    let liveServerURL = 'https://mesn-backend.onrender.com';
-    let localServerURL = 'http://localhost:5001';
-    
-//change which is commented dependant on where youre working
-   //let currentURL = liveServerURL;
-   let currentURL = liveServerURL;
+  //page level varibles
+  let liveServerURL = 'https://mesn-backend.onrender.com';
+  let localServerURL = 'http://localhost:5001';
 
+  //change which is commented dependant on where youre working
+  //let currentURL = liveServerURL;
+  let currentURL = localServerURL;
 
-    // import components to be used on this page
-
-    // declare a varible to hold the data from the fetch
-    let result = {};
-    //perform fetch and assign the result to the above varible
-    async function getData() {
-        await fetch(`${currentURL}/rentalData`, {
-            method: "GET",
-        })
-            .then((data) => {
-                return data.json();
-            })
-            .then((rentalListings) => {
-                //loop through thr result and console log each obj
-                /* for (const listing in rentalListings) {
+  // import components to be used on this page
+  import Button from '../../components/global/button.svelte';
+  // declare a varible to hold the data from the fetch
+  let result = {};
+  //perform fetch and assign the result to the above varible
+  async function getData() {
+    await fetch(`${currentURL}/rentalData`, {
+      method: 'GET',
+    })
+      .then((data) => {
+        return data.json();
+      })
+      .then((rentalListings) => {
+        //loop through thr result and console log each obj
+        /* for (const listing in rentalListings) {
                     if (Object.hasOwnProperty.call(rentalListings, listing)) {
                         const listingObj = rentalListings[listing];
                         console.log(listingObj);
                     }
                 } */
-                //assign the rentalListings from the fetch to the global result varible
-                result = rentalListings;
-            });
-    }
-    //IFFIE to run at component initialization
-    (async function () {
-        await getData();
-        console.log(result);
-        console.log(Object.entries(result));
-
-    })();
-
-
-  
-
-
+        //assign the rentalListings from the fetch to the global result varible
+        result = rentalListings;
+      });
+  }
+  //IFFIE to run at component initialization
+  (async function () {
+    await getData();
+    console.log(result);
+    console.log(Object.entries(result));
+  })();
 </script>
 
 <main>
-    <main>
-        <section class="buttonSection">
-            <button id="openModal">&emsp;&emsp;≡&emsp;filter&emsp;</button>
-            <section id="modalArea" class="modalArea">
-                <div id="modalBg" class="modalBg" />
-                <div class="modalWrapper">
-                    <div class="modalContents">
-                        <h1>Filter</h1>
-                        <h2>City/Town</h2>
-                        <button class="cityTown" type="button"
-                            >Alliston/Bradford</button
-                        >
-                        <button class="cityTown" type="button">Barrie</button>
-                        <button class="cityTown" type="button"
-                            >Collingwood</button
-                        >
-                        <button class="cityTown" type="button">Midland</button>
-                        <button class="cityTown" type="button">Orillia</button>
-                        <h2 class="priceRange">Price Range</h2>
-                        <div class="price">
-                            <div class="minPrice">
-                                <label for="minprice">Min Price:&nbsp;</label>
-                                <input
-                                    type="text"
-                                    id="minprice"
-                                    size="15"
-                                    value="$ "
-                                />
-                            </div>
-                            <span>-</span>
-                            <div class="maxPrice">
-                                <label for="maxprice">Max Price:&nbsp;</label>
-                                <input
-                                    type="text"
-                                    id="maxprice"
-                                    size="15"
-                                    value="$ "
-                                />
-                            </div>
-                        </div>
-                        <h2 class="housingType">Housing Type</h2>
-                        <button class="housing-tp-buttton" type="button"
-                            ><i class="fa-solid fa-house" />detached</button
-                        >
-                        <button class="housing-tp-buttton" type="button"
-                            ><i class="fa-solid fa-city" />attached</button
-                        >
-                        <button class="housing-tp-buttton" type="button"
-                            ><i
-                                class="fa-solid fa-house-chimney"
-                            />house</button
-                        >
-                        <button class="housing-tp-buttton" type="button"
-                            ><i class="fa-solid fa-building" />apartment</button
-                        >
-                        <button class="housing-tp-buttton" type="button"
-                            ><i class="fa-solid fa-stairs" />basement</button
-                        >
-                        <h2 class="numberOfBedrooms">Number of Bedrooms</h2>
-                        <input
-                            type="range"
-                            id="rangeBedrooms"
-                            min="1"
-                            max="6"
-                            step="1"
-                        />
-                        <h3>
-                            You are choosing<span id="current-value" />bedrooms
-                            now.
-                        </h3>
-                        <h2 class="typeOfLease">Type of Lease</h2>
-                        <div class="lease">
-                            <input
-                                type="checkbox"
-                                name="leaseTerm"
-                                value="shortterm"
-                                id="shortterm"
-                            />
-                            <label for="shortterm" class="leaseLabel"
-                                >Less than 6 months</label
-                            >
-                            <input
-                                type="checkbox"
-                                name="leaseTerm"
-                                value="middleterm"
-                                id="middleterm"
-                            />
-                            <label for="middleterm" class="leaseLabel"
-                                >6 months to 12 months</label
-                            >
-                            <input
-                                type="checkbox"
-                                name="leaseTerm"
-                                value="longterm"
-                                id="longterm"
-                            />
-                            <label for="longterm" class="leaseLabel"
-                                >Over 1 year</label
-                            >
-                            <input
-                                type="checkbox"
-                                name="leaseTerm"
-                                value="spring"
-                                id="sprint"
-                            />
-                            <label for="spring" class="leaseLabel"
-                                >Spring (Seasonal Rental)</label
-                            >
-                            <input
-                                type="checkbox"
-                                name="leaseTerm"
-                                value="summer"
-                                id="summer"
-                            />
-                            <label for="summer" class="leaseLabel"
-                                >Summer (Seasonal Rental)</label
-                            >
-                            <input
-                                type="checkbox"
-                                name="leaseTerm"
-                                value="fall"
-                                id="fall"
-                            />
-                            <label for="fall" class="leaseLabel"
-                                >Fall (Seasonal Rental)</label
-                            >
-                            <input
-                                type="checkbox"
-                                name="leaseTerm"
-                                value="winter"
-                                id="winter"
-                            />
-                            <label for="winter" class="leaseLabel"
-                                >Winter (Seasonal Rental)</label
-                            >
-                        </div>
-                    </div>
-                    <div id="closeModal" class="closeModal">×</div>
-                </div>
-            </section>
-            <div class="dropdown">
-                <button
-                    class="btn dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                >
-                    Categories
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">City/Town</a></li>
-                    <li><a class="dropdown-item" href="#">Price</a></li>
-                    <li><a class="dropdown-item" href="#">Housing Type</a></li>
-                    <li>
-                        <a class="dropdown-item" href="#">Number of bedrooms</a>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Type of Lease</a></li>
-                </ul>
-            </div>
+  <Button buttonColorVar={'--login-button-color'} />
+  <Button />
 
-            <button class="exportAll" type="button">Export All</button>
-            <button class="exportCurrent" type="button">Export Current</button>
-            <button class="getData" type="button" >Get Data</button>
-        </section>
-        <table>
-            <tr>
-                <th>Listing No.</th>
-                <th>Stratified Area</th>
-                <th>Municipality</th>
-                <th>Street #</th>
-                <th>Street Name</th>
-                <th>Housing Type</th>
-                <th>Unit Size</th>
-                <th>Secondary Suite</th>
-                <th>Monthly Rent</th>
-                <th>Utilities Included</th>
-                <th>Landlord Type</th>
-                <th>Stability</th>
-            </tr>
-           {#if Object.entries(result).length > 0}
-                {#each Object.entries(result) as [listingNumber, listingDetails]}
-                    <tr>
-                        <td>{listingNumber}</td>
-                        <td>{listingDetails.stratifiedArea}</td>
-                        <td>{listingDetails.municipality}</td>
-                        <td>{listingDetails.streetNumber}</td>
-                        <td>{listingDetails.streetName}</td>
-                        <td>{listingDetails.housingType}</td>
-                        <td>{listingDetails.unitSize}</td>
-                        <td>{listingDetails.secondarySuite}</td>
-                        <td>{listingDetails.monthlyRent}</td>
-                        <td>{listingDetails.utilitiesIncluded}</td>
-                        <td>{listingDetails.landlordType}</td>
-                        <td>{listingDetails.stability}</td>
-                    </tr>
-                {/each}
-            {:else}
-                <tr><td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>loading...</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td></tr>
-            {/if}>
-        </table>
-    </main>
+  <section class="buttonSection">
+    <button id="openModal">&emsp;&emsp;≡&emsp;filter&emsp;</button>
+    <section id="modalArea" class="modalArea">
+      <div id="modalBg" class="modalBg" />
+      <div class="modalWrapper">
+        <div class="modalContents">
+          <h1>Filter</h1>
+          <h2>City/Town</h2>
+          <button class="cityTown" type="button">Alliston/Bradford</button>
+          <button class="cityTown" type="button">Barrie</button>
+          <button class="cityTown" type="button">Collingwood</button>
+          <button class="cityTown" type="button">Midland</button>
+          <button class="cityTown" type="button">Orillia</button>
+          <h2 class="priceRange">Price Range</h2>
+          <div class="price">
+            <div class="minPrice">
+              <label for="minprice">Min Price:&nbsp;</label>
+              <input type="text" id="minprice" size="15" value="$ " />
+            </div>
+            <span>-</span>
+            <div class="maxPrice">
+              <label for="maxprice">Max Price:&nbsp;</label>
+              <input type="text" id="maxprice" size="15" value="$ " />
+            </div>
+          </div>
+          <h2 class="housingType">Housing Type</h2>
+          <button class="housing-tp-buttton" type="button"
+            ><i class="fa-solid fa-house" />detached</button
+          >
+          <button class="housing-tp-buttton" type="button"
+            ><i class="fa-solid fa-city" />attached</button
+          >
+          <button class="housing-tp-buttton" type="button"
+            ><i class="fa-solid fa-house-chimney" />house</button
+          >
+          <button class="housing-tp-buttton" type="button"
+            ><i class="fa-solid fa-building" />apartment</button
+          >
+          <button class="housing-tp-buttton" type="button"
+            ><i class="fa-solid fa-stairs" />basement</button
+          >
+          <h2 class="numberOfBedrooms">Number of Bedrooms</h2>
+          <input type="range" id="rangeBedrooms" min="1" max="6" step="1" />
+          <h3>
+            You are choosing<span id="current-value" />bedrooms now.
+          </h3>
+          <h2 class="typeOfLease">Type of Lease</h2>
+          <div class="lease">
+            <input
+              type="checkbox"
+              name="leaseTerm"
+              value="shortterm"
+              id="shortterm"
+            />
+            <label for="shortterm" class="leaseLabel">Less than 6 months</label>
+            <input
+              type="checkbox"
+              name="leaseTerm"
+              value="middleterm"
+              id="middleterm"
+            />
+            <label for="middleterm" class="leaseLabel"
+              >6 months to 12 months</label
+            >
+            <input
+              type="checkbox"
+              name="leaseTerm"
+              value="longterm"
+              id="longterm"
+            />
+            <label for="longterm" class="leaseLabel">Over 1 year</label>
+            <input
+              type="checkbox"
+              name="leaseTerm"
+              value="spring"
+              id="sprint"
+            />
+            <label for="spring" class="leaseLabel"
+              >Spring (Seasonal Rental)</label
+            >
+            <input
+              type="checkbox"
+              name="leaseTerm"
+              value="summer"
+              id="summer"
+            />
+            <label for="summer" class="leaseLabel"
+              >Summer (Seasonal Rental)</label
+            >
+            <input type="checkbox" name="leaseTerm" value="fall" id="fall" />
+            <label for="fall" class="leaseLabel">Fall (Seasonal Rental)</label>
+            <input
+              type="checkbox"
+              name="leaseTerm"
+              value="winter"
+              id="winter"
+            />
+            <label for="winter" class="leaseLabel"
+              >Winter (Seasonal Rental)</label
+            >
+          </div>
+        </div>
+        <div id="closeModal" class="closeModal">×</div>
+      </div>
+    </section>
+    <div class="dropdown">
+      <button
+        class="btn dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Categories
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">City/Town</a></li>
+        <li><a class="dropdown-item" href="#">Price</a></li>
+        <li><a class="dropdown-item" href="#">Housing Type</a></li>
+        <li>
+          <a class="dropdown-item" href="#">Number of bedrooms</a>
+        </li>
+        <li><a class="dropdown-item" href="#">Type of Lease</a></li>
+      </ul>
+    </div>
+
+    <button class="exportAll" type="button">Export All</button>
+    <button class="exportCurrent" type="button">Export Current</button>
+    <Button
+      buttonText={'Get Data'}
+      borderRadius={'--login-button-border-radius'}
+      buttonColorVar={'--getdata-button-color'}
+    />
+  </section>
+  <table>
+    <tr>
+      <th>Listing No.</th>
+      <th>Stratified Area</th>
+      <th>Municipality</th>
+      <th>Street #</th>
+      <th>Street Name</th>
+      <th>Housing Type</th>
+      <th>Unit Size</th>
+      <th>Secondary Suite</th>
+      <th>Monthly Rent</th>
+      <th>Utilities Included</th>
+      <th>Landlord Type</th>
+      <th>Stability</th>
+    </tr>
+    {#if Object.entries(result).length > 0}
+      {#each Object.entries(result) as [listingNumber, listingDetails]}
+        <tr>
+          <td>{listingNumber}</td>
+          <td>{listingDetails.stratifiedArea}</td>
+          <td>{listingDetails.municipality}</td>
+          <td>{listingDetails.streetNumber}</td>
+          <td>{listingDetails.streetName}</td>
+          <td>{listingDetails.housingType}</td>
+          <td>{listingDetails.unitSize}</td>
+          <td>{listingDetails.secondarySuite}</td>
+          <td>{listingDetails.monthlyRent}</td>
+          <td>{listingDetails.utilitiesIncluded}</td>
+          <td>{listingDetails.landlordType}</td>
+          <td>{listingDetails.stability}</td>
+        </tr>
+      {/each}
+    {:else}
+      <tr
+        ><td />
+        <td />
+        <td />
+        <td />
+        <td />
+        <td>loading...</td>
+        <td />
+        <td />
+        <td />
+        <td />
+        <td /></tr
+      >
+    {/if}>
+  </table>
 </main>
 
 <style>
-    header {
-        justify-content: space-between;
-        border: solid white 3px;
-    }
+  header {
+    justify-content: space-between;
+    border: solid white 3px;
+  }
 
-    /* toggle button */
+  /* toggle button */
 
-    .toggle {
-        margin: 0.6em 4em 0 0;
-        position: relative;
-        width: 55px;
-        height: 28px;
-        border-radius: 30px;
-        overflow: hidden;
-        cursor: pointer;
-    }
+  .toggle {
+    margin: 0.6em 4em 0 0;
+    position: relative;
+    width: 55px;
+    height: 28px;
+    border-radius: 30px;
+    overflow: hidden;
+    cursor: pointer;
+  }
 
-    .toggle:before {
-        content: "";
-        height: 100%;
-        display: block;
-        background: darkgray;
-    }
+  .toggle:before {
+    content: '';
+    height: 100%;
+    display: block;
+    background: darkgray;
+  }
 
-    .toggle:after {
-        content: "";
-        position: absolute;
-        top: 3px;
-        left: 3px;
-        width: 19px;
-        height: 22px;
-        border-radius: 30px;
-        background: #fff;
-        transition: 0.2s ease-out;
-    }
+  .toggle:after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 19px;
+    height: 22px;
+    border-radius: 30px;
+    background: #fff;
+    transition: 0.2s ease-out;
+  }
 
-    .toggle.checked:before {
-        background: #35c759;
-    }
+  .toggle.checked:before {
+    background: #35c759;
+  }
 
-    .toggle.checked:after {
-        left: 33px;
-    }
+  .toggle.checked:after {
+    left: 33px;
+  }
 
-    /* body */
+  /* body */
 
-    .buttonSection {
-        height: clamp(50px, 7.5vh, 100px);
-        background-color: #f0f0f0;
-        display: flex;
-        justify-content: space-between;
-    }
+  .buttonSection {
+    height: clamp(50px, 7.5vh, 100px);
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+  }
 
-    /* filter */
+  /* filter */
 
-    .modalContents h1 {
-        border-bottom: 2px lightgray solid;
-        text-align: center;
-    }
+  .modalContents h1 {
+    border-bottom: 2px lightgray solid;
+    text-align: center;
+  }
 
-    .modalContents h2 {
-        margin-bottom: 1em;
-    }
+  .modalContents h2 {
+    margin-bottom: 1em;
+  }
 
-    .cityTown {
-        font-size: 1.3em;
-        padding: 0.5em 1.8em;
-        margin-right: 1.7em;
-    }
+  .cityTown {
+    font-size: 1.3em;
+    padding: 0.5em 1.8em;
+    margin-right: 1.7em;
+  }
 
-    .priceRange,
-    .housingType,
-    .numberOfBedrooms,
-    .typeOfLease {
-        margin-top: 1.2em;
-        border-top: 2px lightgray solid;
-        padding-top: 0.8em;
-    }
+  .priceRange,
+  .housingType,
+  .numberOfBedrooms,
+  .typeOfLease {
+    margin-top: 1.2em;
+    border-top: 2px lightgray solid;
+    padding-top: 0.8em;
+  }
 
-    .price {
-        text-align: center;
-        font-size: 1.3em;
-    }
+  .price {
+    text-align: center;
+    font-size: 1.3em;
+  }
 
-    span {
-        margin: 0 2em;
-    }
+  span {
+    margin: 0 2em;
+  }
 
-    .minPrice,
-    .maxPrice {
-        display: inline;
-    }
+  .minPrice,
+  .maxPrice {
+    display: inline;
+  }
 
-    #minprice,
-    #maxprice {
-        outline: 2px black solid;
-        border-radius: 10px;
-    }
+  #minprice,
+  #maxprice {
+    outline: 2px black solid;
+    border-radius: 10px;
+  }
 
-    .housing-tp-buttton {
-        background-color: rgb(230, 230, 230);
-        font-size: 1.5em;
-        padding: 0.5em;
-        margin-right: 2em;
-    }
+  .housing-tp-buttton {
+    background-color: rgb(230, 230, 230);
+    font-size: 1.5em;
+    padding: 0.5em;
+    margin-right: 2em;
+  }
 
-    i {
-        margin-right: 0.5em;
-    }
+  i {
+    margin-right: 0.5em;
+  }
 
-    .lease {
-        display: grid;
-        grid-template-columns: 5% 45% 5% 45%;
-    }
+  .lease {
+    display: grid;
+    grid-template-columns: 5% 45% 5% 45%;
+  }
 
-    .leaseLabel {
-        font-weight: normal;
-        font-size: 1.3em;
-    }
+  .leaseLabel {
+    font-weight: normal;
+    font-size: 1.3em;
+  }
 
-    .modalArea {
-        display: none;
-        position: fixed;
-        z-index: 10;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
+  .modalArea {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
-    .modalBg {
-        width: 100%;
-        height: 100%;
-        background-color: rgba(30, 30, 30, 0.6);
-    }
+  .modalBg {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(30, 30, 30, 0.6);
+  }
 
-    .modalWrapper {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 70%;
-        max-width: 1000px;
-        padding: 10px 30px;
-        background-color: #fff;
-        height: 90vh;
-        overflow: auto;
-    }
+  .modalWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    max-width: 1000px;
+    padding: 10px 30px;
+    background-color: #fff;
+    height: 90vh;
+    overflow: auto;
+  }
 
-    .closeModal {
-        position: absolute;
-        top: 0.5rem;
-        right: 1rem;
-        cursor: pointer;
-        font-size: 2em;
-    }
+  .closeModal {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    cursor: pointer;
+    font-size: 2em;
+  }
 
-    button {
-        background-color: rgb(190, 190, 190);
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-    }
+  button {
+    background-color: rgb(190, 190, 190);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
 
-    #openModal {
-        font-size: 1.3em;
-        margin: 0.3em 0 0.3em 6em;
-    }
+  #openModal {
+    font-size: 1.3em;
+    margin: 0.3em 0 0.3em 6em;
+  }
 
-    /* dropdown menu */
+  /* dropdown menu */
 
-    .dropdown {
-        border-radius: 10px;
-        background-color: rgb(190, 190, 190);
-        padding: 0.1em;
-        margin: 0.3em 30em 0.4em 0em;
-    }
+  .dropdown {
+    border-radius: 10px;
+    background-color: rgb(190, 190, 190);
+    padding: 0.1em;
+    margin: 0.3em 30em 0.4em 0em;
+  }
 
-    .btn {
-        border: none;
-        font-size: 1.3em;
-    }
+  .btn {
+    border: none;
+    font-size: 1.3em;
+  }
 
-    /* buttons */
+  /* buttons */
 
-    .exportAll,
-    .exportCurrent,
-    .getData {
-        font-size: 1.3em;
-        margin: 0.3em 0;
-    }
+  .exportAll,
+  .exportCurrent,
+  .getData {
+    font-size: 1.3em;
+    margin: 0.3em 0;
+  }
 
-    .getData {
-        margin-right: 5em;
-    }
+  .getData {
+    margin-right: 5em;
+  }
 
-    /* Table */
+  /* Table */
 
-    table {
-        border-collapse: collapse;
-        border-spacing: 0;
-        width: 95vw;
-        margin: 1em 0 0 2.5em;
-    }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 95vw;
+    margin: 1em 0 0 2.5em;
+  }
 
-    table tr {
-        border-bottom: solid 1px #eee;
-    }
+  table tr {
+    border-bottom: solid 1px #eee;
+  }
 
-    table th,
-    table td {
-        text-align: center;
-        padding: 15px 0;
-    }
+  table th,
+  table td {
+    text-align: center;
+    padding: 15px 0;
+  }
 
-    table td.icon {
-        background-size: 35px;
-        background-position: left 5px center;
-        background-repeat: no-repeat;
-        padding-left: 30px;
-    }
+  table td.icon {
+    background-size: 35px;
+    background-position: left 5px center;
+    background-repeat: no-repeat;
+    padding-left: 30px;
+  }
 
-    table td.icon.row1 {
-        background-image: url(../public/images/sample1.jpg);
-    }
+  table td.icon.row1 {
+    background-image: url(../public/images/sample1.jpg);
+  }
 
-    table td.icon.row2 {
-        background-image: url(../public/images/sample2.jpg);
-    }
+  table td.icon.row2 {
+    background-image: url(../public/images/sample2.jpg);
+  }
 
-    table td.icon.row3 {
-        background-image: url(../public/images/sample3.jpg);
-    }
+  table td.icon.row3 {
+    background-image: url(../public/images/sample3.jpg);
+  }
 
-    table td.icon.row4 {
-        background-image: url(../public/images/sample4.jpg);
-    }
+  table td.icon.row4 {
+    background-image: url(../public/images/sample4.jpg);
+  }
 
-    table td.icon.row5 {
-        background-image: url(../public/images/sample5.jpg);
-    }
+  table td.icon.row5 {
+    background-image: url(../public/images/sample5.jpg);
+  }
 
-    table tr:nth-child(odd) {
-        background: #e9faf9;
-    }
+  table tr:nth-child(odd) {
+    background: #e9faf9;
+  }
 
-    table th {
-        background-color: skyblue;
-    }
+  table th {
+    background-color: skyblue;
+  }
 </style>
