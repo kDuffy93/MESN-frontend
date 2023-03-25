@@ -1,0 +1,7 @@
+:root {
+  --default-button-color: red;
+  --login-button-color: blue;
+  --getdata-button-color: purple;
+  --default-border-radius: 25px;
+  --login-button-border-radius: 10px;
+}

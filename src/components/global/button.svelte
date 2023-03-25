@@ -1,18 +1,21 @@
-<!-- leave empty -->
+<!-- js -->
 <script>
-    export let buttonId;
-    export let buttonText = 'default text';
-    export let buttonColor = 'red';
-  </script>
-  
-  <!-- html -->
-  <button id={buttonId} style='--buttoncolor:{buttonColor};'>
-    {buttonText}
-  </button>
-  
-  <!-- css -->
-  <style>
-    button {
-      color: var(--buttoncolor);
-    }
-  </style>
+  // some of the buttons could have
+  export let buttonId;
+  export let buttonText = 'default text';
+  export let buttonColorVar = '--default-button-color';
+  export let borderRadius = '--default-border-radius';
+</script>
+
+<!-- every button have: -->
+<!-- html -->
+<button
+  id={buttonId}
+  style="background-color:var({buttonColorVar}); border-radius:var({borderRadius});"
+>
+  {buttonText}
+</button>
+
+<!-- css -->
+<style>
+</style>
