@@ -10,6 +10,7 @@
 <!-- every button have: -->
 <!-- html -->
 <button
+  on:click
   id={buttonId}
   style="background-color:var({buttonColorVar}); border-radius:var({borderRadius});"
 >

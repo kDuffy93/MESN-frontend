@@ -59,13 +59,16 @@
         result = rentalListings;
       });
   }
+
+ 
+  
   
 
 
 </script>
 
 <main>
-  <Button buttonColorVar={'--login-button-color'} />
+  <Button  buttonColorVar={'--login-button-color'} buttonText={'populateDB'} />
   <Button />
 
   <section class="buttonSection">
