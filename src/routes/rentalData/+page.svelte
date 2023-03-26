@@ -37,6 +37,31 @@
     console.log(result);
     console.log(Object.entries(result));
   })();
+
+
+
+  let addSampleRecord = async () => {
+    await fetch(`${currentURL}/rentalData/sample`, {
+      method: 'post',
+    })
+      .then((data) => {
+        return data.json();
+      })
+      .then((rentalListings) => {
+        //loop through thr result and console log each obj
+        /* for (const listing in rentalListings) {
+                    if (Object.hasOwnProperty.call(rentalListings, listing)) {
+                        const listingObj = rentalListings[listing];
+                        console.log(listingObj);
+                    }
+                } */
+        //assign the rentalListings from the fetch to the global result varible
+        result = rentalListings;
+      });
+  }
+  
+
+
 </script>
 
 <main>
@@ -170,6 +195,7 @@
 
     <button class="exportAll" type="button">Export All</button>
     <button class="exportCurrent" type="button">Export Current</button>
+    <button class="" type="button" on:click={addSampleRecord}>Add sample Record</button>
     <Button
       buttonText={'Get Data'}
       borderRadius={'--login-button-border-radius'}
@@ -222,7 +248,9 @@
         <td />
         <td /></tr
       >
-    {/if}>
+    {/if}
+
+
   </table>
 </main>
 
