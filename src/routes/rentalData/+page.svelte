@@ -9,6 +9,11 @@
 
   // import components to be used on this page
   import Button from '../../components/global/button.svelte';
+  import Table from '../../components/global/Table.svelte';
+  //import data
+  import { rentalDataSvelteStore } from '../../../scripts/data-store.js';
+  import DataButtonDiv from '../../components/partials/DataButtonDiv.svelte';
+
   // declare a varible to hold the data from the fetch
   let result = {};
   //perform fetch and assign the result to the above varible
@@ -38,8 +43,6 @@
     console.log(Object.entries(result));
   })();
 
-
-
   let addSampleRecord = async () => {
     await fetch(`${currentURL}/rentalData/sample`, {
       method: 'post',
@@ -58,19 +61,12 @@
         //assign the rentalListings from the fetch to the global result varible
         result = rentalListings;
       });
-  }
-
- 
-  
-  
-
-
+  };
 </script>
 
 <main>
-  <Button  buttonColorVar={'--login-button-color'} buttonText={'populateDB'} />
-  <Button />
-
+  <!-- <Button buttonColorVar={'--login-button-color'} buttonText={'populateDB'} />
+  <Button /> -->
   <section class="buttonSection">
     <button id="openModal">&emsp;&emsp;≡&emsp;filter&emsp;</button>
     <section id="modalArea" class="modalArea">
@@ -178,7 +174,7 @@
     </section>
     <div class="dropdown">
       <button
-        class="btn dropdown-toggle"
+        class="dropdown-toggle"
         type="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"
@@ -195,16 +191,9 @@
         <li><a class="dropdown-item" href="#">Type of Lease</a></li>
       </ul>
     </div>
-
-    <button class="exportAll" type="button">Export All</button>
-    <button class="exportCurrent" type="button">Export Current</button>
-    <button class="" type="button" on:click={addSampleRecord}>Add sample Record</button>
-    <Button
-      buttonText={'Get Data'}
-      borderRadius={'--login-button-border-radius'}
-      buttonColorVar={'--getdata-button-color'}
-    />
+    <DataButtonDiv />
   </section>
+  <Table tableData={$rentalDataSvelteStore} />
   <table>
     <tr>
       <th>Listing No.</th>
@@ -252,8 +241,6 @@
         <td /></tr
       >
     {/if}
-
-
   </table>
 </main>
 
@@ -305,12 +292,12 @@
   /* body */
 
   .buttonSection {
-    height: clamp(50px, 7.5vh, 100px);
+    height: 80px;
     background-color: #f0f0f0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    padding: 0 2vw;
   }
-
   /* filter */
 
   .modalContents h1 {
@@ -362,10 +349,6 @@
     font-size: 1.5em;
     padding: 0.5em;
     margin-right: 2em;
-  }
-
-  i {
-    margin-right: 0.5em;
   }
 
   .lease {
@@ -436,24 +419,6 @@
     margin: 0.3em 30em 0.4em 0em;
   }
 
-  .btn {
-    border: none;
-    font-size: 1.3em;
-  }
-
-  /* buttons */
-
-  .exportAll,
-  .exportCurrent,
-  .getData {
-    font-size: 1.3em;
-    margin: 0.3em 0;
-  }
-
-  .getData {
-    margin-right: 5em;
-  }
-
   /* Table */
 
   table {
@@ -471,33 +436,6 @@
   table td {
     text-align: center;
     padding: 15px 0;
-  }
-
-  table td.icon {
-    background-size: 35px;
-    background-position: left 5px center;
-    background-repeat: no-repeat;
-    padding-left: 30px;
-  }
-
-  table td.icon.row1 {
-    background-image: url(../public/images/sample1.jpg);
-  }
-
-  table td.icon.row2 {
-    background-image: url(../public/images/sample2.jpg);
-  }
-
-  table td.icon.row3 {
-    background-image: url(../public/images/sample3.jpg);
-  }
-
-  table td.icon.row4 {
-    background-image: url(../public/images/sample4.jpg);
-  }
-
-  table td.icon.row5 {
-    background-image: url(../public/images/sample5.jpg);
   }
 
   table tr:nth-child(odd) {

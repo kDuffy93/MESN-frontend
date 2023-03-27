@@ -1,7 +1,11 @@
 :root {
-  --default-button-color: red;
+  --default-button-color: black;
   --login-button-color: blue;
-  --getdata-button-color: purple;
+  --export-all-icon-color: purple;
+  --export-current-icon-color: #ede682;
+  --add-sample-record-icon-color: #febf63;
+  --getdata-button-color: #ade498;
+
   --default-border-radius: 25px;
   --login-button-border-radius: 10px;
 }
