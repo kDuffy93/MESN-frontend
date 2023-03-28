@@ -1,27 +1,26 @@
 <script>
   //page level varibles
-  let liveServerURL = 'https://mesn-backend.onrender.com';
-  let localServerURL = 'http://localhost:5001';
+  let liveServerURL = "https://mesn-backend.onrender.com";
+  let localServerURL = "http://localhost:5001";
 
   //change which is commented dependant on where youre working
   //let currentURL = liveServerURL;
   let currentURL = localServerURL;
 
   // import components to be used on this page
-  import Button from '../../components/global/button.svelte';
-  import Table from '../../components/global/Table.svelte';
+  import Button from "../../components/global/button.svelte";
+  import Table from "../../components/global/Table.svelte";
   //import data
-  import { rentalDataSvelteStore } from '../../../scripts/data-store.js';
+  import { rentalDataSvelteStore } from "../../../scripts/data-store.js";
 
-  import DataButtonDiv from '../../components/partials/DataButtonDiv.svelte';
-
+  import DataButtonDiv from "../../components/partials/DataButtonDiv.svelte";
 
   // declare a varible to hold the data from the fetch
   let result = {};
   //perform fetch and assign the result to the above varible
   async function getData() {
     await fetch(`${currentURL}/rentalData`, {
-      method: 'GET',
+      method: "GET",
     })
       .then((data) => {
         return data.json();
@@ -46,28 +45,23 @@
   })();
 
   let addSampleRecord = async () => {
+    console.log(`fetching...`);
     await fetch(`${currentURL}/rentalData/sample`, {
-      method: 'post',
-    })
-      .then((data) => {
-        return data.json();
-      })
-      .then((rentalListings) => {
-        //loop through thr result and console log each obj
-        /* for (const listing in rentalListings) {
-                    if (Object.hasOwnProperty.call(rentalListings, listing)) {
-                        const listingObj = rentalListings[listing];
-                        console.log(listingObj);
-                    }
-                } */
-        //assign the rentalListings from the fetch to the global result varible
-        result = rentalListings;
-      });
+      method: "post",
+    });
+  };
+
+  let dataButtonDivHandleClick = async (e) => {
+    console.log(e.target);
+
+    if (e.target.id == "add") {
+      await addSampleRecord();
+    } else {
+    }
   };
 </script>
 
 <main>
-
   <!-- <Button buttonColorVar={'--login-button-color'} buttonText={'populateDB'} />
   <Button /> -->
 
@@ -195,60 +189,14 @@
         <li><a class="dropdown-item" href="#">Type of Lease</a></li>
       </ul>
     </div>
-
-    <DataButtonDiv />
-
-
+    <DataButtonDiv on:click={dataButtonDivHandleClick} />
   </section>
-  <Table tableData={$rentalDataSvelteStore} />
-  <table>
-    <tr>
-      <th>Listing No.</th>
-      <th>Stratified Area</th>
-      <th>Municipality</th>
-      <th>Street #</th>
-      <th>Street Name</th>
-      <th>Housing Type</th>
-      <th>Unit Size</th>
-      <th>Secondary Suite</th>
-      <th>Monthly Rent</th>
-      <th>Utilities Included</th>
-      <th>Landlord Type</th>
-      <th>Stability</th>
-    </tr>
-    {#if Object.entries(result).length > 0}
-      {#each Object.entries(result) as [listingNumber, listingDetails]}
-        <tr>
-          <td>{listingNumber}</td>
-          <td>{listingDetails.stratifiedArea}</td>
-          <td>{listingDetails.municipality}</td>
-          <td>{listingDetails.streetNumber}</td>
-          <td>{listingDetails.streetName}</td>
-          <td>{listingDetails.housingType}</td>
-          <td>{listingDetails.unitSize}</td>
-          <td>{listingDetails.secondarySuite}</td>
-          <td>{listingDetails.monthlyRent}</td>
-          <td>{listingDetails.utilitiesIncluded}</td>
-          <td>{listingDetails.landlordType}</td>
-          <td>{listingDetails.stability}</td>
-        </tr>
-      {/each}
-    {:else}
-      <tr
-        ><td />
-        <td />
-        <td />
-        <td />
-        <td />
-        <td>loading...</td>
-        <td />
-        <td />
-        <td />
-        <td />
-        <td /></tr
-      >
-    {/if}
-  </table>
+  <!-- table -->
+  {#if Object.entries(result).length > 0}
+    <Table tableData={result} />
+  {:else}
+    <Table />
+  {/if}
 </main>
 
 <style>
@@ -270,14 +218,14 @@
   }
 
   .toggle:before {
-    content: '';
+    content: "";
     height: 100%;
     display: block;
     background: darkgray;
   }
 
   .toggle:after {
-    content: '';
+    content: "";
     position: absolute;
     top: 3px;
     left: 3px;
@@ -302,7 +250,9 @@
     height: 80px;
     background-color: #f0f0f0;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
     padding: 0 2vw;
   }
   /* filter */
@@ -423,7 +373,6 @@
     border-radius: 10px;
     background-color: rgb(190, 190, 190);
     padding: 0.1em;
-    margin: 0.3em 30em 0.4em 0em;
   }
 
   /* Table */
