@@ -11,7 +11,7 @@
 </script>
 
 {#if shown}
-  <div class="modal-wrapper" />
+  <div class="modal-wrapper"></div>
   <div class="modal" />
   <span>&times;</span>
   <slot />
