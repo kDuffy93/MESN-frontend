@@ -12,6 +12,8 @@
   import Table from '../../components/global/Table.svelte';
   import Modal from '../../components/partials/Modal.svelte';
   let modal;
+  import Modal from '../../components/partials/Modal.svelte';
+  let modal;
   //import data
   import { rentalDataSvelteStore } from "../../../scripts/data-store.js";
 
@@ -120,6 +122,20 @@
         </div>
         <div class="housingType">
           <h2>Housing Type</h2>
+        </div>
+        <div class="price">
+          <div class="minPrice">
+            <label for="minprice">Min Price:&nbsp;</label>
+            <input type="text" id="minprice" size="15" value="$ " />
+          </div>
+          <span>-</span>
+          <div class="maxPrice">
+            <label for="maxprice">Max Price:&nbsp;</label>
+            <input type="text" id="maxprice" size="15" value="$ " />
+          </div>
+        </div>
+        <div class="housingType">
+          <h2>Housing Type</h2>
           <button class="housing-tp-buttton" type="button"
             ><i class="fa-solid fa-house" />detached</button
           >
@@ -138,10 +154,51 @@
         </div>
         <div class="bedroomsNumber">
           <h2>Number of Bedrooms</h2>
+        </div>
+        <div class="bedroomsNumber">
+          <h2>Number of Bedrooms</h2>
           <input type="range" id="rangeBedrooms" min="1" max="6" step="1" />
           <h3>
             You are choosing<span id="current-value" />bedrooms now.
           </h3>
+        </div>
+        <div class="typeOfLease">
+          <h2>Type of Lease</h2>
+          <input
+            type="checkbox"
+            name="leaseTerm"
+            value="shortterm"
+            id="shortterm"
+          />
+          <label for="shortterm" class="leaseLabel">Less than 6 months</label>
+          <input
+            type="checkbox"
+            name="leaseTerm"
+            value="middleterm"
+            id="middleterm"
+          />
+          <label for="middleterm" class="leaseLabel"
+            >6 months to 12 months</label
+          >
+          <input
+            type="checkbox"
+            name="leaseTerm"
+            value="longterm"
+            id="longterm"
+          />
+          <label for="longterm" class="leaseLabel">Over 1 year</label>
+          <input type="checkbox" name="leaseTerm" value="spring" id="sprint" />
+          <label for="spring" class="leaseLabel">Spring (Seasonal Rental)</label
+          >
+          <input type="checkbox" name="leaseTerm" value="summer" id="summer" />
+          <label for="summer" class="leaseLabel">Summer (Seasonal Rental)</label
+          >
+          <input type="checkbox" name="leaseTerm" value="fall" id="fall" />
+          <label for="fall" class="leaseLabel">Fall (Seasonal Rental)</label>
+          <input type="checkbox" name="leaseTerm" value="winter" id="winter" />
+          <label for="winter" class="leaseLabel">Winter (Seasonal Rental)</label
+          >
+        </div>
         </div>
         <div class="typeOfLease">
           <h2>Type of Lease</h2>
@@ -393,6 +450,17 @@
 
   table th {
     background-color: skyblue;
+  }
+  .backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .modalContents {
+    z-index: 5;
   }
   .backdrop {
     position: fixed;
