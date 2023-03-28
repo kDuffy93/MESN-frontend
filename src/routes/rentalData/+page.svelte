@@ -90,7 +90,8 @@
         <li><a class="dropdown-item" href="#">Type of Lease</a></li>
       </ul>
     </div>
-    <DataButtonDiv />
+    <DataButtonDiv on:click={dataButtonDivHandleClick} />
+
   </section>
   <section class="contentSection">
     <Modal bind:this={modal}>
@@ -180,28 +181,9 @@
           >
         </div>
       </div>
+      </Modal>
     </section>
-    <div class="dropdown">
-      <button
-        class="dropdown-toggle"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        Categories
-      </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">City/Town</a></li>
-        <li><a class="dropdown-item" href="#">Price</a></li>
-        <li><a class="dropdown-item" href="#">Housing Type</a></li>
-        <li>
-          <a class="dropdown-item" href="#">Number of bedrooms</a>
-        </li>
-        <li><a class="dropdown-item" href="#">Type of Lease</a></li>
-      </ul>
-    </div>
-    <DataButtonDiv on:click={dataButtonDivHandleClick} />
-  </section>
+    
   <!-- table -->
   {#if Object.entries(result).length > 0}
     <Table tableData={result} />
