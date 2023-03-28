@@ -89,7 +89,6 @@
   table tbody tr {
     height: 50px;
   }
-
   table tbody tr:last-child {
     border: 0;
   }

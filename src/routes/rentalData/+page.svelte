@@ -12,6 +12,10 @@
   import Table from '../../components/global/Table.svelte';
   //import data
   import { rentalDataSvelteStore } from '../../../scripts/data-store.js';
+
+  import DataButtonDiv from '../../components/partials/DataButtonDiv.svelte';
+
+
   // declare a varible to hold the data from the fetch
   let result = {};
   //perform fetch and assign the result to the above varible
@@ -63,10 +67,9 @@
 </script>
 
 <main>
-  <!-- 
-    <Button buttonColorVar={'--login-button-color'} buttonText={'populateDB'} />
-  <Button /> 
--->
+
+  <!-- <Button buttonColorVar={'--login-button-color'} buttonText={'populateDB'} />
+  <Button /> -->
 
   <section class="buttonSection">
     <button id="openModal">&emsp;&emsp;≡&emsp;filter&emsp;</button>
@@ -175,7 +178,7 @@
     </section>
     <div class="dropdown">
       <button
-        class="btn dropdown-toggle"
+        class="dropdown-toggle"
         type="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"
@@ -193,16 +196,9 @@
       </ul>
     </div>
 
-    <button class="exportAll" type="button">Export All</button>
-    <button class="exportCurrent" type="button">Export Current</button>
-    <button class="" type="button" on:click={addSampleRecord}
-      >Add sample Record</button
-    >
-    <Button
-      buttonText={'Get Data'}
-      borderRadius={'--login-button-border-radius'}
-      buttonColorVar={'--getdata-button-color'}
-    />
+    <DataButtonDiv />
+
+
   </section>
   <Table tableData={$rentalDataSvelteStore} />
   <table>
@@ -303,12 +299,12 @@
   /* body */
 
   .buttonSection {
-    height: clamp(50px, 7.5vh, 100px);
+    height: 80px;
     background-color: #f0f0f0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    padding: 0 2vw;
   }
-
   /* filter */
 
   .modalContents h1 {
@@ -360,10 +356,6 @@
     font-size: 1.5em;
     padding: 0.5em;
     margin-right: 2em;
-  }
-
-  i {
-    margin-right: 0.5em;
   }
 
   .lease {
@@ -432,24 +424,6 @@
     background-color: rgb(190, 190, 190);
     padding: 0.1em;
     margin: 0.3em 30em 0.4em 0em;
-  }
-
-  .btn {
-    border: none;
-    font-size: 1.3em;
-  }
-
-  /* buttons */
-
-  .exportAll,
-  .exportCurrent,
-  .getData {
-    font-size: 1.3em;
-    margin: 0.3em 0;
-  }
-
-  .getData {
-    margin-right: 5em;
   }
 
   /* Table */
