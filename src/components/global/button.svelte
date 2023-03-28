@@ -4,7 +4,7 @@
   export let buttonId;
   export let buttonText = 'default text';
   export let buttonColorVar = '--default-button-color';
-  export let borderRadius = '--default-border-radius';
+  export let borderRadius = 15;
 </script>
 
 <!-- every button have: -->
