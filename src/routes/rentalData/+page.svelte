@@ -12,7 +12,9 @@
   import Table from '../../components/global/Table.svelte';
   //import data
   import { rentalDataSvelteStore } from '../../../scripts/data-store.js';
+
   import DataButtonDiv from '../../components/partials/DataButtonDiv.svelte';
+
 
   // declare a varible to hold the data from the fetch
   let result = {};
@@ -65,8 +67,10 @@
 </script>
 
 <main>
+
   <!-- <Button buttonColorVar={'--login-button-color'} buttonText={'populateDB'} />
   <Button /> -->
+
   <section class="buttonSection">
     <button id="openModal">&emsp;&emsp;≡&emsp;filter&emsp;</button>
     <section id="modalArea" class="modalArea">
@@ -169,7 +173,7 @@
             >
           </div>
         </div>
-        <div id="closeModal" class="closeModal">×</div>
+        <div id="closeModal" class="closeModal">X</div>
       </div>
     </section>
     <div class="dropdown">
@@ -191,7 +195,10 @@
         <li><a class="dropdown-item" href="#">Type of Lease</a></li>
       </ul>
     </div>
+
     <DataButtonDiv />
+
+
   </section>
   <Table tableData={$rentalDataSvelteStore} />
   <table>
