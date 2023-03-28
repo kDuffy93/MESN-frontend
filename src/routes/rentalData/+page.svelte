@@ -9,6 +9,9 @@
 
   // import components to be used on this page
   import Button from '../../components/global/button.svelte';
+  import Table from '../../components/global/Table.svelte';
+  //import data
+  import { rentalDataSvelteStore } from '../../../scripts/data-store.js';
   // declare a varible to hold the data from the fetch
   let result = {};
   //perform fetch and assign the result to the above varible
@@ -38,8 +41,6 @@
     console.log(Object.entries(result));
   })();
 
-
-
   let addSampleRecord = async () => {
     await fetch(`${currentURL}/rentalData/sample`, {
       method: 'post',
@@ -58,18 +59,14 @@
         //assign the rentalListings from the fetch to the global result varible
         result = rentalListings;
       });
-  }
-
- 
-  
-  
-
-
+  };
 </script>
 
 <main>
-  <Button  buttonColorVar={'--login-button-color'} buttonText={'populateDB'} />
-  <Button />
+  <!-- 
+    <Button buttonColorVar={'--login-button-color'} buttonText={'populateDB'} />
+  <Button /> 
+-->
 
   <section class="buttonSection">
     <button id="openModal">&emsp;&emsp;≡&emsp;filter&emsp;</button>
@@ -173,7 +170,7 @@
             >
           </div>
         </div>
-        <div id="closeModal" class="closeModal">×</div>
+        <div id="closeModal" class="closeModal">X</div>
       </div>
     </section>
     <div class="dropdown">
@@ -198,13 +195,16 @@
 
     <button class="exportAll" type="button">Export All</button>
     <button class="exportCurrent" type="button">Export Current</button>
-    <button class="" type="button" on:click={addSampleRecord}>Add sample Record</button>
+    <button class="" type="button" on:click={addSampleRecord}
+      >Add sample Record</button
+    >
     <Button
       buttonText={'Get Data'}
       borderRadius={'--login-button-border-radius'}
       buttonColorVar={'--getdata-button-color'}
     />
   </section>
+  <Table tableData={$rentalDataSvelteStore} />
   <table>
     <tr>
       <th>Listing No.</th>
@@ -252,8 +252,6 @@
         <td /></tr
       >
     {/if}
-
-
   </table>
 </main>
 
@@ -471,33 +469,6 @@
   table td {
     text-align: center;
     padding: 15px 0;
-  }
-
-  table td.icon {
-    background-size: 35px;
-    background-position: left 5px center;
-    background-repeat: no-repeat;
-    padding-left: 30px;
-  }
-
-  table td.icon.row1 {
-    background-image: url(../public/images/sample1.jpg);
-  }
-
-  table td.icon.row2 {
-    background-image: url(../public/images/sample2.jpg);
-  }
-
-  table td.icon.row3 {
-    background-image: url(../public/images/sample3.jpg);
-  }
-
-  table td.icon.row4 {
-    background-image: url(../public/images/sample4.jpg);
-  }
-
-  table td.icon.row5 {
-    background-image: url(../public/images/sample5.jpg);
   }
 
   table tr:nth-child(odd) {
