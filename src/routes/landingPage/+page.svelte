@@ -1,9 +1,12 @@
 <script >
+import PartialsLinks from "../../components/global/partialsLinks.svelte";
 </script>
 
 <main class="container">
     <h1><span>Welcome to</span><br>the Affordable Housing Community Lab's<br><p>Online Tool.</p></h1>
-    <h3>If you're a community member looking for renal listings information you can view the public reports <a href="#" >here</a>.</h3>
+    <h3>If you're a community member looking for renal listings information you can view the public reports <PartialsLinks linkName={'#'} linksText={'here'}/>
+        <!-- <a href="#" >here</a> -->
+        .</h3>
 </main>
 
 <style>h1{

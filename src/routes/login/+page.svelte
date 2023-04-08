@@ -1,23 +1,31 @@
 
 <script>
-
-
-
-    
+// import LoginInfo from "../../components/global/loginInfo.svelte";
+// import LoginButton from "../../components/global/loginButton.svelte";
+// import PartialsLinks from "../../components/global/partialsLinks.svelte";
+import Login from "../../components/global/login.svelte";
 </script>
-
+<!--
 <main>
-    <section class="container">
+
+<section class="container">
         <form>
-            <label for="username">Username:</label>
-            <input type="text" id="username" />
+            <LoginInfo inputId={'username'} labelText={'Username: '} InputType={'text'} labelClass={'userName'}/>    
+             <label for="username">Username:</label>
+            <input type="text" id="username" /> 
+            <LoginInfo inputId={'password'} labelText={'Password:'} InputType={'text'} labelClass={'password'}/>
             <label for="password">password:</label>
             <input type="text" id="password" />
-            <a href="rentalData">Log In</a>
+            <LoginButton linkName={'rentalData'} linksText={'Login'}/>
+            <a href="rentalData">Log In</a> 
         </form>
+        <PartialsLinks linkName={'forgotPassword'} linksText={'Forgot Password.'}/>
         <a href="forgotPassword">Forgot Password</a>
-    </section>
-</main>
+    </section> 
+</main>  -->
+
+
+<Login inputIdUser={'username'} labelClassUser={'userName'} labelTextUser={'Username: '} InputTypeUser={'text'} inputIdPwd={'password'} labelClassPwd={'password'} labelTextPwd={'Password: '} InputTypePwd={'text'} linkNameLog={'rentalData'} linksTextLog={'Login'} linkNamePwd={'forgotPassword'} linksTextPwd={'Forgot Password.'} loginText={'Login Information'} loginClass={'loginClass'} pwdClass={'pwdClass'} />
 
 
 <style>

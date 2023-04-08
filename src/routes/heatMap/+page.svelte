@@ -1,5 +1,5 @@
 <script>
-
+import HeatToggle from "../../components/global/heatToggle.svelte";
 </script>
 
 
@@ -121,10 +121,11 @@
             <h2>Filter By</h2>
             <div>
                 <span id="noUnits">Number Of Units</span>
-                <label id="slider" class="switch">
+                <HeatToggle heatId={'slider'} heatClass={'switch'} heatToggleType={'checkbox'} heatSpanClassOne={'slider round one'} heatSpanClassTwo={'slider round two'}/>
+                <!-- <label id="slider" class="switch">
                     <input type="checkbox">
                     <span class="slider round"></span>
-                </label>
+                </label> -->
                 <span id="avgRent">Average Rent</span>
             </div>
         </aside>
