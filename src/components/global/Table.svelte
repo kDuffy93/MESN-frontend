@@ -5,18 +5,18 @@
 
   export let tableData = [
     {
-      ListingNo: '',
-      StratifiedArea: '',
-      Municipality: '',
-      StreetNo: '',
-      StreetName: '',
-      HousingType: 'loading...',
-      UnitSize: '',
-      SecondarySuite: '',
-      MonthlyRent: '',
-      UtilitiesIncluded: '',
-      LandlordType: '',
-      Stability: '',
+      ListingNo: "",
+      StratifiedArea: "",
+      Municipality: "",
+      StreetNo: "",
+      StreetName: "",
+      HousingType: "loading...",
+      UnitSize: "",
+      SecondarySuite: "",
+      MonthlyRent: "",
+      UtilitiesIncluded: "",
+      LandlordType: "",
+      Stability: "",
     },
   ];
 </script>

@@ -1,21 +1,18 @@
 <script>
-  
-    export let inputId
-    export let inputName
- 
-    export let inputPlaceholder;
-    export let value = '';
-    export let min;
-    export let max;
-    export let step;
-    
+  export let inputId;
+  export let inputName;
+
+  export let inputPlaceholder;
+  export let value = "";
+  export let min;
+  export let max;
+  export let step;
 </script>
 
-<input 
-bind:value id={inputId} name={inputName} placeholder={inputPlaceholder} size="15" min={min} max={max} step={step}/>
+<input bind:value id={inputId} name={inputName} placeholder={inputPlaceholder} size="15" {min} {max} {step} />
 
 <style>
-     #rangeBedrooms {
+  #rangeBedrooms {
     width: 100%;
     margin: 10px;
   }
@@ -34,5 +31,4 @@ bind:value id={inputId} name={inputName} placeholder={inputPlaceholder} size="15
     border: none;
     border-bottom: black solid 2px;
   }
-
 </style>

@@ -20,7 +20,7 @@
   import InputChecked from "../../components/global/InputChecked.svelte";
   function handleInputChange(event) {
     minPrice = event.target.value;
-    maxPrice= event.target.value;
+    maxPrice = event.target.value;
   }
   let isChecked = false;
   let showModal = false;
@@ -31,7 +31,7 @@
   let middleterm = false;
   let longterm = false;
   let spring = false;
-  let summer =false;
+  let summer = false;
   let fall = false;
   let winter = false;
   // declare a varible to hold the data from the fetch
@@ -86,25 +86,14 @@
 
   <section class="buttonSection">
     <!-- Filter Button Starts -->
-    <FilterButton
-      on:click={() => (showModal = true)}
-      buttonId={"filterButton"}
-      buttonIconClass={"fa-solid fa-bars"}
-      buttonText={"Filter"}
-    />
+    <FilterButton on:click={() => (showModal = true)} buttonId={"filterButton"} buttonIconClass={"fa-solid fa-bars"} buttonText={"Filter"} />
     <Modal bind:showModal>
       <div class="modalContent">
         <div class="cityTown modalDiv">
           <h2>City/Town</h2>
-          <FilterButton
-            buttonClass={"cityTownButton"}
-            buttonText={"Alliston/Bradford"}
-          />
+          <FilterButton buttonClass={"cityTownButton"} buttonText={"Alliston/Bradford"} />
           <FilterButton buttonClass={"cityTownButton"} buttonText={"Barrie"} />
-          <FilterButton
-            buttonClass={"cityTownButton"}
-            buttonText={"Collingwood"}
-          />
+          <FilterButton buttonClass={"cityTownButton"} buttonText={"Collingwood"} />
           <FilterButton buttonClass={"cityTownButton"} buttonText={"Midland"} />
           <FilterButton buttonClass={"cityTownButton"} buttonText={"Orillia"} />
         </div>
@@ -116,59 +105,29 @@
               <label for="minprice">From</label>
               <!-- check if bind:value works -->
               <!-- <p>{minPrice || 'stranger'},{maxPrice}!</p> -->
-              <InputValue bind:value={minPrice} on:input={handleInputChange} inputPlaceholder={'minimum price'} inputId={'minprice'} size={'15'}/>
-             
-              
+              <InputValue bind:value={minPrice} on:input={handleInputChange} inputPlaceholder={"minimum price"} inputId={"minprice"} size={"15"} />
             </div>
             <i class="fa-solid fa-minus" />
             <div class="maxPrice">
               <label for="maxprice">To</label>
-              <InputValue bind:value={maxPrice} on:input={handleInputChange} inputPlaceholder={'maximum price'} inputId={'maxprice'} size={'15'}/>
-             
+              <InputValue bind:value={maxPrice} on:input={handleInputChange} inputPlaceholder={"maximum price"} inputId={"maxprice"} size={"15"} />
             </div>
           </div>
         </div>
         <hr />
         <div class="housingType modalDiv">
           <h2>Housing Type</h2>
-          <FilterButton
-            buttonClass={"housingTypeButton"}
-            buttonIconClass={"fa-solid fa-house"}
-            buttonText={"Detached"}
-          />
-          <FilterButton
-            buttonClass={"housingTypeButton"}
-            buttonIconClass={"fa-solid fa-city"}
-            buttonText={"Attached"}
-          />
-          <FilterButton
-            buttonClass={"housingTypeButton"}
-            buttonIconClass={"fa-solid fa-house-chimney"}
-            buttonText={"House"}
-          />
-          <FilterButton
-            buttonClass={"housingTypeButton"}
-            buttonIconClass={"fa-solid fa-building"}
-            buttonText={"Apartment"}
-          />
-          <FilterButton
-            buttonClass={"housingTypeButton"}
-            buttonIconClass={"fa-solid fa-stairs"}
-            buttonText={"Basement"}
-          />
+          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-house"} buttonText={"Detached"} />
+          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-city"} buttonText={"Attached"} />
+          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-house-chimney"} buttonText={"House"} />
+          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-building"} buttonText={"Apartment"} />
+          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-stairs"} buttonText={"Basement"} />
         </div>
         <hr />
         <div class="numberOfBedrooms modalDiv">
           <h2>Number of Bedrooms</h2>
-          
-          <input
-            type="range"
-            id="rangeBedrooms"
-            bind:value={numberOfBedrooms}
-            min="1"
-            max="6"
-            step="1"
-          />
+
+          <input type="range" id="rangeBedrooms" bind:value={numberOfBedrooms} min="1" max="6" step="1" />
           <h3>
             You are choosing {numberOfBedrooms} bedrooms now.
           </h3>
@@ -177,58 +136,22 @@
         <div class="typeOfLease modalDiv">
           <h2>Type of Lease</h2>
           <div class="lease">
-            <input
-              type="checkbox"
-              name="leaseTerm"
-              bind:checked={shortterm}
-              id="shortterm"
-            />
+            <input type="checkbox" name="leaseTerm" bind:checked={shortterm} id="shortterm" />
             <label for="shortterm" class="leaseLabel">Less than 6 months</label>
-            <input
-              type="checkbox"
-              name="leaseTerm"
-              bind:checked={middleterm}
-              id="middleterm"
-            />
-            <label for="middleterm" class="leaseLabel"
-              >6 months to 12 months</label
-            >
-            <input
-              type="checkbox"
-              name="leaseTerm"
-              bind:checked={longterm}
-              id="longterm"
-            />
+
+            <input type="checkbox" name="leaseTerm" bind:checked={middleterm} id="middleterm" />
+            <label for="middleterm" class="leaseLabel">6 months to 12 months</label>
+
+            <input type="checkbox" name="leaseTerm" bind:checked={longterm} id="longterm" />
             <label for="longterm" class="leaseLabel">Over 1 year</label>
-            <input
-              type="checkbox"
-              name="leaseTerm"
-              bind:checked={spring}
-              id="spring"
-            />
-            <label for="spring" class="leaseLabel"
-              >Spring (Seasonal Rental)</label
-            >
-            <input
-              type="checkbox"
-              name="leaseTerm"
-              bind:checked={summer}
-              id="summer"
-            />
-            <label for="summer" class="leaseLabel"
-              >Summer (Seasonal Rental)</label
-            >
+            <input type="checkbox" name="leaseTerm" bind:checked={spring} id="spring" />
+            <label for="spring" class="leaseLabel">Spring (Seasonal Rental)</label>
+            <input type="checkbox" name="leaseTerm" bind:checked={summer} id="summer" />
+            <label for="summer" class="leaseLabel">Summer (Seasonal Rental)</label>
             <input type="checkbox" name="leaseTerm" bind:checked={fall} id="fall" />
             <label for="fall" class="leaseLabel">Fall (Seasonal Rental)</label>
-            <input
-              type="checkbox"
-              name="leaseTerm"
-              bind:checked={winter}
-              id="winter"
-            />
-            <label for="winter" class="leaseLabel"
-              >Winter (Seasonal Rental)</label
-            >
+            <input type="checkbox" name="leaseTerm" bind:checked={winter} id="winter" />
+            <label for="winter" class="leaseLabel">Winter (Seasonal Rental)</label>
           </div>
         </div>
       </div>
@@ -236,14 +159,7 @@
     <!-- Filter Button Ends -->
 
     <div class="dropdown">
-      <button
-        class="dropdown-toggle"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        Categories
-      </button>
+      <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"> Categories </button>
       <ul class="dropdown-menu">
         <li><a class="dropdown-item" href="#">City/Town</a></li>
 
@@ -373,7 +289,6 @@
     font-weight: 400;
   }
 
-  
   button {
     background-color: rgb(190, 190, 190);
     border: none;

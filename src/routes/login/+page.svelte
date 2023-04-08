@@ -1,10 +1,10 @@
-
 <script>
-// import LoginInfo from "../../components/global/loginInfo.svelte";
-// import LoginButton from "../../components/global/loginButton.svelte";
-// import PartialsLinks from "../../components/global/partialsLinks.svelte";
-import Login from "../../components/global/login.svelte";
+  // import LoginInfo from "../../components/global/loginInfo.svelte";
+  // import LoginButton from "../../components/global/loginButton.svelte";
+  // import PartialsLinks from "../../components/global/partialsLinks.svelte";
+  import Login from "../../components/global/login.svelte";
 </script>
+
 <!--
 <main>
 
@@ -24,24 +24,22 @@ import Login from "../../components/global/login.svelte";
     </section> 
 </main>  -->
 
-
-<Login inputIdUser={'username'} labelClassUser={'userName'} labelTextUser={'Username: '} InputTypeUser={'text'} inputIdPwd={'password'} labelClassPwd={'password'} labelTextPwd={'Password: '} InputTypePwd={'text'} linkNameLog={'rentalData'} linksTextLog={'Login'} linkNamePwd={'forgotPassword'} linksTextPwd={'Forgot Password.'} loginText={'Login Information'} loginClass={'loginClass'} pwdClass={'pwdClass'} />
-
+<Login inputIdUser={"username"} labelClassUser={"userName"} labelTextUser={"Username: "} InputTypeUser={"text"} inputIdPwd={"password"} labelClassPwd={"password"} labelTextPwd={"Password: "} InputTypePwd={"text"} linkNameLog={"rentalData"} linksTextLog={"Login"} linkNamePwd={"forgotPassword"} linksTextPwd={"Forgot Password."} loginText={"Login Information"} loginClass={"loginClass"} pwdClass={"pwdClass"} />
 
 <style>
-    main>section{
+  main > section {
     display: flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    height:76vh;
-}
-main>section>a{
-    width:25%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 76vh;
+  }
+  main > section > a {
+    width: 25%;
     text-align: right;
-}
-form {
-    padding:2.5%;
+  }
+  form {
+    padding: 2.5%;
     border-radius: 20px;
     background-color: grey;
     width: 30%;
@@ -50,47 +48,43 @@ form {
     display: grid;
     grid-template-columns: 40% 60%;
     grid-template-areas:
-        "unLabel unInput"
-        "pwLabel pwInput"
-        ". submit"
-      
-}
+      "unLabel unInput"
+      "pwLabel pwInput"
+      ". submit";
+  }
 
-form>label:first-of-type {
+  form > label:first-of-type {
     grid-area: unLabel;
-    margin:0;
+    margin: 0;
     text-align: center;
-    padding-top:5%;
+    padding-top: 5%;
+  }
 
-
-}
-
-form>input:first-of-type {
+  form > input:first-of-type {
     grid-area: unInput;
-    border-radius:10px;
-    height:100%;
-}
+    border-radius: 10px;
+    height: 100%;
+  }
 
-form>label:last-of-type {
+  form > label:last-of-type {
     grid-area: pwLabel;
-    margin:0;
+    margin: 0;
     text-align: center;
-    padding-top:5%;
+    padding-top: 5%;
+  }
 
-}
-
-form>input:nth-of-type(2) {
+  form > input:nth-of-type(2) {
     grid-area: pwInput;
-    border-radius:10px;
-    height:100%;
-}
-form>a{
-    margin-top:5%;
+    border-radius: 10px;
+    height: 100%;
+  }
+  form > a {
+    margin-top: 5%;
     grid-area: submit;
-margin-left:25%;
-width:50%;
-text-align:center;
-background-color: #f3f3f3;
-border-radius: 25px;
-}
+    margin-left: 25%;
+    width: 50%;
+    text-align: center;
+    background-color: #f3f3f3;
+    border-radius: 25px;
+  }
 </style>

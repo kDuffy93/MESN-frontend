@@ -1,26 +1,19 @@
 <!-- Input.svelte -->
 <script>
-    
-    export let inputId;
-    export let inputName;
-   
-    export let summerChecked;
-export let fallChecked;
+  export let inputId;
+  export let inputName;
+  export let summerChecked;
+  export let fallChecked;
+</script>
 
-  </script>
-  
+<input type="checkbox" bind:checked={summerChecked} id={inputId} name={inputName} />
+Summer
 
- 
-<input type="checkbox" bind:checked={summerChecked} id={inputId} name={inputName}/>
-    Summer
- 
-  
-
-    <input type="checkbox" bind:checked={fallChecked} id={inputId} name={inputName} />
-    Fall
+<input type="checkbox" bind:checked={fallChecked} id={inputId} name={inputName} />
+Fall
 
 <style>
-     #rangeBedrooms {
+  #rangeBedrooms {
     width: 100%;
     margin: 10px;
   }
@@ -39,5 +32,4 @@ export let fallChecked;
     border: none;
     border-bottom: black solid 2px;
   }
-
 </style>
