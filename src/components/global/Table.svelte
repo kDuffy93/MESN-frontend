@@ -27,14 +27,16 @@
 <table id={tableId} class={tableClass}>
   <thead>
     <tr>
+      <th>Record No.</th>
       {#each Object.keys(tableData[0]) as columnHeading}
         <th>{columnHeading}</th>
       {/each}
     </tr>
   </thead>
   <tbody>
-    {#each Object.values(tableData) as row}
+    {#each Object.values(tableData) as row, i}
       <tr>
+        <td>{i+1}</td>
         {#each Object.values(row) as cell}
           <td>{cell}</td>
         {/each}

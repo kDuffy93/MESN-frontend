@@ -18,10 +18,27 @@
   import Modal from "../../components/global/Modal.svelte";
   import InputValue from "../../components/global/InputValue.svelte";
   import InputChecked from "../../components/global/InputChecked.svelte";
+
   function handleInputChange(event) {
     minPrice = event.target.value;
     maxPrice = event.target.value;
   }
+
+  let activeFilters = {
+    leaseType: [],
+  };
+  let leaseTypeFilters = {
+    shortTerm: "Less Than 6 Months",
+    middleTerm: "6 Months To 1 Year",
+    longTerm: "Over 1 Year",
+    spring: "Seasonal (Spring)",
+    summer: "Seasonal (Summer)",
+    fall: "Seasonal (Fall)",
+    winter: "Seasonal (Winter)",
+  };
+  const leaseTypeFiltersArray = Object.entries(leaseTypeFilters).map(([key, value]) => ({ key, value }));
+  console.log(leaseTypeFiltersArray);
+
   let isChecked = false;
   let showModal = false;
   let minPrice = "";
@@ -34,6 +51,7 @@
   let summer = false;
   let fall = false;
   let winter = false;
+
   // declare a varible to hold the data from the fetch
   let result = {};
   //perform fetch and assign the result to the above varible
@@ -42,9 +60,10 @@
       method: "GET",
     })
       .then((data) => {
-        return data.json();
+        
+                return data.json();
       })
-      .then((rentalListings) => {
+      .then(async (rentalListings) => {
         //loop through thr result and console log each obj
         /* for (const listing in rentalListings) {
                     if (Object.hasOwnProperty.call(rentalListings, listing)) {
@@ -53,7 +72,13 @@
                     }
                 } */
         //assign the rentalListings from the fetch to the global result varible
-        result = rentalListings;
+        let temparray= [];
+        await rentalListings.forEach(listing => {
+          temparray.push(JSON.parse(listing))
+        });
+        
+        console.log(temparray);
+        result=temparray;
       });
   }
   //IFFIE to run at component initialization
@@ -136,22 +161,13 @@
         <div class="typeOfLease modalDiv">
           <h2>Type of Lease</h2>
           <div class="lease">
-            <input type="checkbox" name="leaseTerm" bind:checked={shortterm} id="shortterm" />
-            <label for="shortterm" class="leaseLabel">Less than 6 months</label>
-
-            <input type="checkbox" name="leaseTerm" bind:checked={middleterm} id="middleterm" />
-            <label for="middleterm" class="leaseLabel">6 months to 12 months</label>
-
-            <input type="checkbox" name="leaseTerm" bind:checked={longterm} id="longterm" />
-            <label for="longterm" class="leaseLabel">Over 1 year</label>
-            <input type="checkbox" name="leaseTerm" bind:checked={spring} id="spring" />
-            <label for="spring" class="leaseLabel">Spring (Seasonal Rental)</label>
-            <input type="checkbox" name="leaseTerm" bind:checked={summer} id="summer" />
-            <label for="summer" class="leaseLabel">Summer (Seasonal Rental)</label>
-            <input type="checkbox" name="leaseTerm" bind:checked={fall} id="fall" />
-            <label for="fall" class="leaseLabel">Fall (Seasonal Rental)</label>
-            <input type="checkbox" name="leaseTerm" bind:checked={winter} id="winter" />
-            <label for="winter" class="leaseLabel">Winter (Seasonal Rental)</label>
+            {#each leaseTypeFiltersArray as leasetype}
+              <label class="leaseLabel">
+                <input type="checkbox" bind:group={activeFilters.leaseType} name="leaseTerm" value={leasetype.key} />
+                {leasetype.value}
+                {console.log(activeFilters)}
+              </label>
+            {/each}
           </div>
         </div>
       </div>
@@ -255,7 +271,7 @@
   }
   .lease {
     display: grid;
-    grid-template-columns: 3% 53% 3% 41%;
+    grid-template-columns: repeat(3, 33%);
     margin: 10px;
   }
 
