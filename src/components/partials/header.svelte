@@ -25,10 +25,17 @@ export let navList = [{href : "/login", linkText : "Log In"}];
 
 <style>
     header {
-        width:100%;
+    width:100%;
+    /* width: 100vw;
+    height: 100vh; */
     display: flex;
     height: clamp(50px, 7.50vh, 100px);
     background-color: #f0f0f0;
+    background-image: url("https://i.esdrop.com/d/f/00nJAaeIIr/VtQRGIxNCE.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat : no-repeat;
+    /* position: absolute; */
 }
 
 
@@ -55,5 +62,8 @@ header>nav>ul {
 
 header>nav>ul>li:last-of-type {
     margin-right:2.5vw;
+}
+nav {
+    
 }
 </style>

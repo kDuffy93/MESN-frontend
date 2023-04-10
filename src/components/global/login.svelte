@@ -1,4 +1,6 @@
 <script>
+  //  import Button from "./button.svelte";
+    // import Partialslinks from "./partialslinks.svelte";
     export let inputIdUser;
     export let labelClassUser;
     export let labelTextUser;
@@ -25,7 +27,9 @@
         <input type={InputTypeUser} id={inputIdUser} />
         <label for={inputIdPwd} class={labelClassPwd}>{labelTextPwd}</label>
         <input type={InputTypePwd} id={inputIdPwd} />
+        <!-- <Partialslinks loginClass={'loginClass'} linksText={'Login'}/> -->
         <a href={linkNameLog} class={loginClass}>{linksTextLog}<span></span></a><br>
+        <!-- <Button /> -->
         <a href={linkNamePwd} class={pwdClass}>{linksTextPwd}<span></span></a>
     </form>
     

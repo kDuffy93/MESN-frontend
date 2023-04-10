@@ -1,13 +1,15 @@
-<script >
-import PartialsLinks from "../../components/global/partialsLinks.svelte";
+<script>
+// import Partialslinks from "../../components/global/partialslinks.svelte";
+import LandingPage from "../../components/global/landingPage.svelte";
 </script>
 
-<main class="container">
+<!-- <main class="container">
     <h1><span>Welcome to</span><br>the Affordable Housing Community Lab's<br><p>Online Tool.</p></h1>
     <h3>If you're a community member looking for renal listings information you can view the public reports <PartialsLinks linkName={'#'} linksText={'here'}/>
-        <!-- <a href="#" >here</a> -->
+        <a href="#" >here</a>
         .</h3>
-</main>
+</main> -->
+<LandingPage landingMainClass={'container'} landingSpanText={'Welcome to'} landingBrText={"the Affordable Housing Community Lab's"} landingPText={'Online Tool.'} landingH3Text={"If you're a community member looking for renal listings information you can view the public reports "} landingA={'#'} landingLinkText={'here'}/>
 
 <style>h1{
     font-size:large;

@@ -1,13 +1,36 @@
 <script>
-export let linkName;
-export let linksText;
-export let loginClass;
+// import Partialslinks from "./partialslinks.svelte";
+export let landingMainClass;
+export let landingSpanText;
+export let landingBrText;
+export let landingPText;
+export let landingH3Text;
+export let landingA;
+export let landingLinkText;
 </script>
-    
+
 <!-- html -->
-<a href={linkName} class={loginClass}>{linksText}<span></span></a>
-<!-- style -->
+<main class={landingMainClass}>
+    <h1><span>{landingSpanText}</span><br>{landingBrText}<br><p>{landingPText}</p></h1>
+    <h3>{landingH3Text} .<a href={landingA} >{landingLinkText}<span></span></a>
+    </h3>
+</main>
+
 <style>
+/* container */
+main{
+  background: url('https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png');
+  width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat : no-repeat;
+    z-index: -1;
+    position: absolute;
+    transition: 0.3s;
+    /* opacity: 0.5; */
+    color: #F5F5F5;
+}
 a{
     --color: #00539B;
   position: relative;
@@ -74,5 +97,30 @@ a span::after {
   width: var(--line-arrow-height);
   transform-origin: 100% 0%;
   transform: translateX(-1px) rotate(0deg);
+}
+
+/*  */
+/* h1{
+    font-size:large;
+    width:33vw;
+}
+h1>span:first-of-type{
+    font-size: xx-large;
+    margin-left:-2.5vw;
+} */
+h1>p{
+    text-align: center;
+    padding-right:5vw;
+}
+
+h2{
+    font-size: medium;
+    text-align: right;
+}
+
+h3{
+text-align:center;
+    font-size: large;
+    margin-top:25vh;
 }
 </style>
