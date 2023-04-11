@@ -1,10 +1,14 @@
 <script>
+
   export let linkName;
   export let linksText;
+
 </script>
 
 <!-- html -->
+
 <a href={linkName}>{linksText}<span /></a>
+
 
 <!-- style -->
 <style>

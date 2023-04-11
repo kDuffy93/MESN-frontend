@@ -1,4 +1,5 @@
 <script>
+
   export let inputIdUser;
   export let labelClassUser;
   export let labelTextUser;
@@ -14,12 +15,14 @@
   export let loginText;
   export let pwdClass;
   export let loginClass;
+
 </script>
 
 <!-- html -->
 <main>
   <section class="container">
     <form>
+
       <h1>{loginText}</h1>
       <label for={inputIdUser} class={labelClassUser}>{labelTextUser}</label>
       <input type={InputTypeUser} id={inputIdUser} />
@@ -27,6 +30,7 @@
       <input type={InputTypePwd} id={inputIdPwd} />
       <a href={linkNameLog} class={loginClass}>{linksTextLog}<span /></a><br />
       <a href={linkNamePwd} class={pwdClass}>{linksTextPwd}<span /></a>
+
     </form>
   </section>
 </main>
