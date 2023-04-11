@@ -5,44 +5,103 @@
 
   export let tableData = [
     {
-      ListingNo: "",
-      StratifiedArea: "",
-      Municipality: "",
-      StreetNo: "",
-      StreetName: "",
-      HousingType: "loading...",
+      Address: {
+        "Street Address": "",
+        Area: "",
+        Municipality: "",
+        "Geo-Location": "",
+      },
+      Rent: {
+        Price: `$0`,
+        Frequency: "",
+      },
       UnitSize: "",
-      SecondarySuite: "",
-      MonthlyRent: "",
-      UtilitiesIncluded: "",
-      LandlordType: "",
-      Stability: "",
+      Description: "",
+      Utilities: {
+        Included: "",
+        Additional: "",
+      },
+      Available: "",
     },
   ];
+  let formattedTableData;
+  $: {
+    formattedTableData = [];
+    tableData.forEach((listing) => {
+      let tempObject = {
+        Address: {
+          "Street Address": listing.address != undefined ? listing.address : "Unknown",
+          Area: listing.StratifiedAreas != undefined ? listing.StratifiedAreas : "Unknown",
+          Municipality: listing.Municipalities != undefined ? listing.Municipalities : "Unknown",
+          "Geo-Location": listing.geolocation != undefined ? listing.geolocation : "Unknown",
+        },
+        Rent: {
+          Price: listing.rent != undefined ? listing.rent : "Unknown",
+          Frequency: listing.rentFrequency != undefined ?  listing.rentFrequency : "Unknown",
+        },
+        "Unit Size": listing.unitSize != undefined ? listing.unitSize : "Unknown",
+        Description: listing.description != undefined ? listing.description : "Unknown",
+        Utilities: {
+          Included: listing.utilitiesIncluded != undefined ? listing.utilitiesIncluded : "Unknown",
+          Additional: listing.utilitiesAdditional != undefined ? listing.utilitiesAdditional : "Unknown",
+        },
+        Available: listing.avaibility != undefined ? listing.avaibility : "Unknown",
+      };
+      formattedTableData.push(tempObject);
+    });
+  }
 </script>
 
 <!-- reference link: https://italo-silva.medium.com/svelte-how-to-create-a-dynamic-table-component-1c7d33a307e3 -->
 
 <!-- html -->
 <table id={tableId} class={tableClass}>
-  <thead>
-    <tr>
-      <th>Record No.</th>
-      {#each Object.keys(tableData[0]) as columnHeading}
-        <th>{columnHeading}</th>
-      {/each}
-    </tr>
-  </thead>
-  <tbody>
-    {#each Object.values(tableData) as row, i}
+  {#if formattedTableData.length > 0}
+    <thead>
       <tr>
-        <td>{i+1}</td>
-        {#each Object.values(row) as cell}
-          <td>{cell}</td>
+        <th>Record No.</th>
+        {#each Object.keys(formattedTableData[0]) as columnHeading}
+          <th>{columnHeading}</th>
         {/each}
       </tr>
-    {/each}
-  </tbody>
+    </thead>
+    <tbody>
+      {#each Object.values(formattedTableData) as row, i}
+        <tr>
+          <td>{i + 1}</td>
+          {#each Object.values(row) as cell}
+            {#if cell}
+              {#if typeof cell == typeof {}}
+                <td>
+                  {#each Object.keys(cell) as nestedKey, i}
+                    <div>
+                      <label for="{String(nestedKey)}{i}">{nestedKey}</label>
+                      {#each Object.values(cell) as nestedValue, i2}
+                        {#if i == i2}
+                          <p id="{String(nestedValue)}{i2}">{nestedValue}</p>
+                        {/if}
+                      {/each}
+                    </div>
+                  {/each}
+                </td>
+              {:else if typeof cell == typeof ""}
+                <td>{cell}</td>
+              {:else}
+                <td />
+              {/if}
+              {:else}
+              <td></td>
+            {/if}
+          {/each}
+        </tr>
+      {/each}
+    </tbody>
+  {:else}<thead>
+      <tr><th>loading...</th></tr>
+    </thead><tbody>
+      <tr><td>loading...</td></tr>
+    </tbody>
+  {/if}
 </table>
 
 <!-- css -->
