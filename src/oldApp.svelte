@@ -13,6 +13,7 @@
     }
   }
 </script>
+
 <main>
   <h1>Hello {name}!</h1>
   <div class="search-block">
@@ -29,7 +30,6 @@
     {:else}No gifs to show yet{/if}
   </div>
 </main>
-
 
 <style>
   .gifs-grid {

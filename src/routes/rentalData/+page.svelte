@@ -9,11 +9,48 @@
 
   // import components to be used on this page
   import Button from "../../components/global/button.svelte";
+  import FilterButton from "../../components/global/FilterButton.svelte";
   import Table from "../../components/global/Table.svelte";
   //import data
   import { rentalDataSvelteStore } from "../../../scripts/data-store.js";
 
   import DataButtonDiv from "../../components/partials/DataButtonDiv.svelte";
+  import Modal from "../../components/global/Modal.svelte";
+  import InputValue from "../../components/global/InputValue.svelte";
+  import InputChecked from "../../components/global/InputChecked.svelte";
+
+  function handleInputChange(event) {
+    minPrice = event.target.value;
+    maxPrice = event.target.value;
+  }
+
+  let activeFilters = {
+    leaseType: [],
+  };
+  let leaseTypeFilters = {
+    shortTerm: "Less Than 6 Months",
+    middleTerm: "6 Months To 1 Year",
+    longTerm: "Over 1 Year",
+    spring: "Seasonal (Spring)",
+    summer: "Seasonal (Summer)",
+    fall: "Seasonal (Fall)",
+    winter: "Seasonal (Winter)",
+  };
+  const leaseTypeFiltersArray = Object.entries(leaseTypeFilters).map(([key, value]) => ({ key, value }));
+  console.log(leaseTypeFiltersArray);
+
+  let isChecked = false;
+  let showModal = false;
+  let minPrice = "";
+  let maxPrice = "";
+  let numberOfBedrooms = 2;
+  let shortterm = false;
+  let middleterm = false;
+  let longterm = false;
+  let spring = false;
+  let summer = false;
+  let fall = false;
+  let winter = false;
 
   // declare a varible to hold the data from the fetch
   let result = {};
@@ -23,9 +60,10 @@
       method: "GET",
     })
       .then((data) => {
-        return data.json();
+        
+                return data.json();
       })
-      .then((rentalListings) => {
+      .then(async (rentalListings) => {
         //loop through thr result and console log each obj
         /* for (const listing in rentalListings) {
                     if (Object.hasOwnProperty.call(rentalListings, listing)) {
@@ -34,7 +72,13 @@
                     }
                 } */
         //assign the rentalListings from the fetch to the global result varible
-        result = rentalListings;
+        let temparray= [];
+        await rentalListings.forEach(listing => {
+          temparray.push(JSON.parse(listing))
+        });
+        
+        console.log(temparray);
+        result=temparray;
       });
   }
   //IFFIE to run at component initialization
@@ -66,122 +110,77 @@
   <Button /> -->
 
   <section class="buttonSection">
-    <button id="openModal">&emsp;&emsp;≡&emsp;filter&emsp;</button>
-    <section id="modalArea" class="modalArea">
-      <div id="modalBg" class="modalBg" />
-      <div class="modalWrapper">
-        <div class="modalContents">
-          <h1>Filter</h1>
+    <!-- Filter Button Starts -->
+    <FilterButton on:click={() => (showModal = true)} buttonId={"filterButton"} buttonIconClass={"fa-solid fa-bars"} buttonText={"Filter"} />
+    <Modal bind:showModal>
+      <div class="modalContent">
+        <div class="cityTown modalDiv">
           <h2>City/Town</h2>
-          <button class="cityTown" type="button">Alliston/Bradford</button>
-          <button class="cityTown" type="button">Barrie</button>
-          <button class="cityTown" type="button">Collingwood</button>
-          <button class="cityTown" type="button">Midland</button>
-          <button class="cityTown" type="button">Orillia</button>
-          <h2 class="priceRange">Price Range</h2>
+          <FilterButton buttonClass={"cityTownButton"} buttonText={"Alliston/Bradford"} />
+          <FilterButton buttonClass={"cityTownButton"} buttonText={"Barrie"} />
+          <FilterButton buttonClass={"cityTownButton"} buttonText={"Collingwood"} />
+          <FilterButton buttonClass={"cityTownButton"} buttonText={"Midland"} />
+          <FilterButton buttonClass={"cityTownButton"} buttonText={"Orillia"} />
+        </div>
+        <hr />
+        <div class="priceRange modalDiv">
+          <h2>Price Range</h2>
           <div class="price">
             <div class="minPrice">
-              <label for="minprice">Min Price:&nbsp;</label>
-              <input type="text" id="minprice" size="15" value="$ " />
+              <label for="minprice">From</label>
+              <!-- check if bind:value works -->
+              <!-- <p>{minPrice || 'stranger'},{maxPrice}!</p> -->
+              <InputValue bind:value={minPrice} on:input={handleInputChange} inputPlaceholder={"minimum price"} inputId={"minprice"} size={"15"} />
             </div>
-            <span>-</span>
+            <i class="fa-solid fa-minus" />
             <div class="maxPrice">
-              <label for="maxprice">Max Price:&nbsp;</label>
-              <input type="text" id="maxprice" size="15" value="$ " />
+              <label for="maxprice">To</label>
+              <InputValue bind:value={maxPrice} on:input={handleInputChange} inputPlaceholder={"maximum price"} inputId={"maxprice"} size={"15"} />
             </div>
-          </div>
-          <h2 class="housingType">Housing Type</h2>
-          <button class="housing-tp-buttton" type="button"
-            ><i class="fa-solid fa-house" />detached</button
-          >
-          <button class="housing-tp-buttton" type="button"
-            ><i class="fa-solid fa-city" />attached</button
-          >
-          <button class="housing-tp-buttton" type="button"
-            ><i class="fa-solid fa-house-chimney" />house</button
-          >
-          <button class="housing-tp-buttton" type="button"
-            ><i class="fa-solid fa-building" />apartment</button
-          >
-          <button class="housing-tp-buttton" type="button"
-            ><i class="fa-solid fa-stairs" />basement</button
-          >
-          <h2 class="numberOfBedrooms">Number of Bedrooms</h2>
-          <input type="range" id="rangeBedrooms" min="1" max="6" step="1" />
-          <h3>
-            You are choosing<span id="current-value" />bedrooms now.
-          </h3>
-          <h2 class="typeOfLease">Type of Lease</h2>
-          <div class="lease">
-            <input
-              type="checkbox"
-              name="leaseTerm"
-              value="shortterm"
-              id="shortterm"
-            />
-            <label for="shortterm" class="leaseLabel">Less than 6 months</label>
-            <input
-              type="checkbox"
-              name="leaseTerm"
-              value="middleterm"
-              id="middleterm"
-            />
-            <label for="middleterm" class="leaseLabel"
-              >6 months to 12 months</label
-            >
-            <input
-              type="checkbox"
-              name="leaseTerm"
-              value="longterm"
-              id="longterm"
-            />
-            <label for="longterm" class="leaseLabel">Over 1 year</label>
-            <input
-              type="checkbox"
-              name="leaseTerm"
-              value="spring"
-              id="sprint"
-            />
-            <label for="spring" class="leaseLabel"
-              >Spring (Seasonal Rental)</label
-            >
-            <input
-              type="checkbox"
-              name="leaseTerm"
-              value="summer"
-              id="summer"
-            />
-            <label for="summer" class="leaseLabel"
-              >Summer (Seasonal Rental)</label
-            >
-            <input type="checkbox" name="leaseTerm" value="fall" id="fall" />
-            <label for="fall" class="leaseLabel">Fall (Seasonal Rental)</label>
-            <input
-              type="checkbox"
-              name="leaseTerm"
-              value="winter"
-              id="winter"
-            />
-            <label for="winter" class="leaseLabel"
-              >Winter (Seasonal Rental)</label
-            >
           </div>
         </div>
-        <div id="closeModal" class="closeModal">X</div>
+        <hr />
+        <div class="housingType modalDiv">
+          <h2>Housing Type</h2>
+          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-house"} buttonText={"Detached"} />
+          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-city"} buttonText={"Attached"} />
+          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-house-chimney"} buttonText={"House"} />
+          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-building"} buttonText={"Apartment"} />
+          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-stairs"} buttonText={"Basement"} />
+        </div>
+        <hr />
+        <div class="numberOfBedrooms modalDiv">
+          <h2>Number of Bedrooms</h2>
+
+          <input type="range" id="rangeBedrooms" bind:value={numberOfBedrooms} min="1" max="6" step="1" />
+          <h3>
+            You are choosing {numberOfBedrooms} bedrooms now.
+          </h3>
+        </div>
+        <hr />
+        <div class="typeOfLease modalDiv">
+          <h2>Type of Lease</h2>
+          <div class="lease">
+            {#each leaseTypeFiltersArray as leasetype}
+              <label class="leaseLabel">
+                <input type="checkbox" bind:group={activeFilters.leaseType} name="leaseTerm" value={leasetype.key} />
+                {leasetype.value}
+                {console.log(activeFilters)}
+              </label>
+            {/each}
+          </div>
+        </div>
       </div>
-    </section>
+    </Modal>
+    <!-- Filter Button Ends -->
+
     <div class="dropdown">
-      <button
-        class="dropdown-toggle"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        Categories
-      </button>
+      <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"> Categories </button>
       <ul class="dropdown-menu">
         <li><a class="dropdown-item" href="#">City/Town</a></li>
+
         <li><a class="dropdown-item" href="#">Price</a></li>
+
         <li><a class="dropdown-item" href="#">Housing Type</a></li>
         <li>
           <a class="dropdown-item" href="#">Number of bedrooms</a>
@@ -255,104 +254,55 @@
     justify-content: space-between;
     padding: 0 2vw;
   }
-  /* filter */
 
-  .modalContents h1 {
-    border-bottom: 2px lightgray solid;
-    text-align: center;
+  /* Modal Dialoge */
+  .modalDiv {
+    padding: 10px 20px;
+  }
+  .modalContent h2 {
+    margin: 10px;
+    font-size: 23px;
+  }
+  .modalContent h3,
+  .modalContent label,
+  .modalContent div label {
+    margin: 10px;
+    font-size: 17px;
+  }
+  .lease {
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    margin: 10px;
   }
 
-  .modalContents h2 {
-    margin-bottom: 1em;
+  .leaseLabel {
+    font-weight: normal;
+    font-size: 17px;
+    margin: 0;
+  }
+  #rangeBedrooms {
+    width: 100%;
+    margin: 10px;
+  }
+  #shortterm,
+  #middleterm,
+  #longterm,
+  #spring,
+  #summer,
+  #fall,
+  #winter {
+    width: 20px;
+    margin: 0;
   }
 
-  .cityTown {
-    font-size: 1.3em;
-    padding: 0.5em 1.8em;
-    margin-right: 1.7em;
-  }
-
-  .priceRange,
-  .housingType,
-  .numberOfBedrooms,
-  .typeOfLease {
-    margin-top: 1.2em;
-    border-top: 2px lightgray solid;
-    padding-top: 0.8em;
-  }
-
-  .price {
-    text-align: center;
-    font-size: 1.3em;
-  }
-
-  span {
-    margin: 0 2em;
+  .fa-minus {
+    margin: 0 1em;
   }
 
   .minPrice,
   .maxPrice {
     display: inline;
-  }
-
-  #minprice,
-  #maxprice {
-    outline: 2px black solid;
-    border-radius: 10px;
-  }
-
-  .housing-tp-buttton {
-    background-color: rgb(230, 230, 230);
-    font-size: 1.5em;
-    padding: 0.5em;
-    margin-right: 2em;
-  }
-
-  .lease {
-    display: grid;
-    grid-template-columns: 5% 45% 5% 45%;
-  }
-
-  .leaseLabel {
-    font-weight: normal;
-    font-size: 1.3em;
-  }
-
-  .modalArea {
-    display: none;
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .modalBg {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(30, 30, 30, 0.6);
-  }
-
-  .modalWrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    max-width: 1000px;
-    padding: 10px 30px;
-    background-color: #fff;
-    height: 90vh;
-    overflow: auto;
-  }
-
-  .closeModal {
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-    cursor: pointer;
-    font-size: 2em;
+    font-weight: 400;
   }
 
   button {
@@ -360,11 +310,6 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
-  }
-
-  #openModal {
-    font-size: 1.3em;
-    margin: 0.3em 0 0.3em 6em;
   }
 
   /* dropdown menu */

@@ -1,4 +1,5 @@
 <script>
+
 // import Partialslinks from "../../components/global/partialslinks.svelte";
 import LandingPage from "../../components/global/landingPage.svelte";
 </script>
@@ -9,9 +10,11 @@ import LandingPage from "../../components/global/landingPage.svelte";
         <a href="#" >here</a>
         .</h3>
 </main> -->
+
 <LandingPage landingMainClass={'container'} landingSpanText={'Welcome to'} landingBrText={"the Affordable Housing Community Lab's"} landingPText={'Online Tool.'} landingH3Text={"If you're a community member looking for renal listings information you can view the public reports "} landingA={'#'} landingLinkText={'here'}/>
 
-<style>h1{
+<style>
+h1{
     font-size:large;
     width:33vw;
 }
@@ -33,4 +36,6 @@ h3{
 text-align:center;
     font-size: large;
     margin-top:25vh;
-}</style>
+}
+</style>
+

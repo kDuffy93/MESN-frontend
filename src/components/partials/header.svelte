@@ -1,5 +1,6 @@
 
 <script>
+
 export let title = 'Landing Page';
 $: document.title = title;
 
@@ -67,3 +68,4 @@ nav {
     
 }
 </style>
+
