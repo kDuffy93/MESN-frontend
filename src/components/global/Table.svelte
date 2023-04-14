@@ -31,8 +31,8 @@
       let tempObject = {
         Address: {
           "Street Address": listing.address != undefined ? listing.address : "Unknown",
-          Area: listing.StratifiedAreas != undefined ? listing.StratifiedAreas : "Unknown",
-          Municipality: listing.Municipalities != undefined ? listing.Municipalities : "Unknown",
+          Area: listing.area != undefined ? listing.area : "Unknown",
+          Municipality: listing.municipality != undefined ? listing.municipality : "Unknown",
           "Geo-Location": listing.geolocation != undefined ? listing.geolocation : "Unknown",
         },
         Rent: {
