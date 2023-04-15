@@ -7,7 +7,10 @@
 
   //change which is commented dependant on where youre working
   //let currentURL = liveServerURL;
-  let currentURL = liveServerURL;
+  let currentURL = localServerURL;
+
+let checked = false;
+
 
   let result = {};
   async function getData() {
@@ -35,7 +38,7 @@
 <main class="container">
   <div>
     {#if Object.entries(result).length > 0}
-      <HeatMap Data={result} />
+      <HeatMap Data={result} filterToggleValue={checked} />
     {:else}
       <HeatMap />
     {/if}
@@ -45,7 +48,7 @@
     <div>
       <label id="noUnits">Total Listings</label>
       <div>
-        <HeatToggle heatId={"slider"} class="heatToggle" heatClass={"switch"} heatToggleType={"checkbox"} heatSpanClassOne={"slider round one"} heatSpanClassTwo={"slider round two"} />
+        <HeatToggle heatId={"slider"} class="heatToggle" bind:checked heatClass={"switch"} heatSpanClassOne={"slider round one"} heatSpanClassTwo={"slider round two"} />
       </div>
       <label id="avgRent">Average Rent</label>
     </div>
@@ -63,7 +66,7 @@
   main > div {
     background-color: #f6f6f6;
     width: 60%;
-    height: 70vh;
+    height: fit-content;
     margin-top: 2.5vh;
     margin-left: 15%;
 

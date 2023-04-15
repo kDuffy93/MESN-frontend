@@ -11,7 +11,7 @@ import LandingPage from "../../components/global/landingPage.svelte";
         .</h3>
 </main> -->
 
-<LandingPage landingMainClass={'container'} landingSpanText={'Welcome to'} landingBrText={"the Affordable Housing Community Lab's"} landingPText={'Online Tool.'} landingH3Text={"If you're a community member looking for renal listings information you can view the public reports "} landingA={'#'} landingLinkText={'here'}/>
+<LandingPage landingMainClass={'container'} landingSpanText={'Welcome to'} landingBrText={"the Affordable Housing Community Lab's"} landingPText={'Online Tool.'} landingH3Text={`We hope to make this tool available for public use in the futue. Check back soon for updates.`} landingA={'#'} landingLinkText={'here'}/>
 
 <style>
 h1{

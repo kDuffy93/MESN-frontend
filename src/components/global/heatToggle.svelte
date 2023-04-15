@@ -1,14 +1,15 @@
 <script>
   export let heatId;
   export let heatClass;
-  export let heatToggleType;
   export let heatSpanClassOne;
   export let heatSpanClassTwo;
+export let checked = false;
+
 </script>
 
 <!-- html -->
 <label id={heatId} class={heatClass}>
-  <input type={heatToggleType} />
+  <input bind:checked={checked} type='checkbox' />
   <div>
     <span class={heatSpanClassOne} />
     <span class={heatSpanClassTwo} />

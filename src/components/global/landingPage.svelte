@@ -14,7 +14,8 @@ export let landingLinkText;
 
 <main class={landingMainClass}>
     <h1><span>{landingSpanText}</span><br>{landingBrText}<br><p>{landingPText}</p></h1>
-    <h3>{landingH3Text} .<a href={landingA} >{landingLinkText}<span></span></a>
+    <h3>{landingH3Text}.
+      <!-- <a href={landingA} >{landingLinkText}<span></span></a> -->
     </h3>
 </main>
 
@@ -28,7 +29,7 @@ export let landingLinkText;
 main{
  
   width: 100vw;
-    height: 100vh;
+    height: 85vh;
     background-size: cover;
     background-position: center;
     background-repeat : no-repeat;

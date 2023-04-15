@@ -19,11 +19,10 @@
 
 <style>
   footer {
-    height: 15vh;
     background-color: #f0f0f0;
     display: flex;
     align-items: center;
-    position: fixed;
+    position:fixed;
     bottom: 0vh;
     right: 0;
     width: 100%;
@@ -65,6 +64,6 @@
   footer > div > div:last-of-type > img,
   footer > div > div:first-of-type > img {
     width: auto;
-    height: 8vh;
+    height: clamp(50px, 7.50vh, 75px);
   }
 </style>

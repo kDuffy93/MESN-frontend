@@ -41,7 +41,7 @@
   main {
     background: #362100 url("https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png");
     width: 100vw;
-    height: 100vh;
+    height: 85vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

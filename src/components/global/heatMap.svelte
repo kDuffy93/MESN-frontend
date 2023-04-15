@@ -1,10 +1,13 @@
 <script>
-  import { dataset_dev, each } from "svelte/internal";
-  import Button from "./button.svelte";
+  export let filterToggleValue;
+
+  $: {
+    console.log(filterToggleValue);
+  }
 
   export let Data = [
     {
-      Error: "Error Loading Data",
+      Error: "Loading",
     },
   ];
 
@@ -37,7 +40,7 @@
         // Check if sizeNum is a valid number
         if (!isNaN(numberOfBedrooms) && !isNaN(numberOfBathrooms)) {
           uniqueUnitSizes.push(`[${numberOfBedrooms}, ${numberOfBathrooms}]`);
-        } 
+        }
       });
 
       uniqueUnitSizes = [...new Set(uniqueUnitSizes)];
@@ -76,10 +79,13 @@
     console.log(areaCounts);
     console.log(areaSum);
   }
+
+  
+
 </script>
 
-{#if Data.Error != undefined}
-  <p>{Data.Error}</p>
+{#if Data.Error == "Error Loading Data"}
+  <div>{Data.Error}</div>
 {:else}
   <table>
     <tbody>
@@ -101,24 +107,39 @@
             <td>
               {#if areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`]}
                 <div class="areaInfo">
-                  <h4 class="Active">{areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].count}</h4>
-                  <span class="notActive">$ {(areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].rent / areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].count).toFixed(0)}<span /> </span>
+                  {#if filterToggleValue == false}
+                    <h2 class="activeNumber">{areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].count}</h2>
+                    <h4 class="notActiveRent">(${(areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].rent / areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].count).toFixed(0)} )</h4>
+                  {:else}
+                    <h2 class="activeRent activeClass">$ {(areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].rent / areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].count).toFixed(0)}</h2>
+
+                    <h4 class="notActiveNumber">({areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].count})</h4>
+                  {/if}
                 </div>
               {:else}
                 <div class="areaInfo">
-                  <h4 class="Active">0</h4>
-                  <span class="notActive">$ 0000</span>
+                  {#if filterToggleValue == false}
+                    <h2 class="activeNumber">0</h2>
+                    <h4 class="notActiveRent">($ 0000)</h4>
+                  {:else}
+                    <h2 class="activeRent">$ 0000</h2>
+
+                    <h4 class="notActiveNumber">(0)</h4>
+                  {/if}
                 </div>
               {/if}
 
-              <!--  <table class="municInfo">
+              <!--  
+                **dont have the data i need in areaSum**
+                <table class="municInfo">
                 {#if area in uniqueMunicipalities}
+                
                   {#each uniqueMunicipalities[area] as municipality}
                     <tr>
                       {#if areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`]}
                         <div class="areaInfo">
                           <h4>{areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].count}</h4>
-                          <span>$ {areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].rent / areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].count}<span /></span>
+                          <h4>$ {areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].rent / areaSum[area][`${JSON.parse(unitSize)[0]} Bedroom ${JSON.parse(unitSize)[1]} Bathroom`].count}<h4 /></h4>
                         </div>
                       {/if}
                     </tr>
@@ -141,13 +162,26 @@
 {/if}
 
 <style>
-  .Active {
-    font-size: 12pt;
+  .activeRent {
+    flex-grow: 2;
+    font-size: 9pt;
     color: blue;
     font-weight: 900;
   }
-  .notActive {
+  .notActiveRent {
+    flex-shrink: 1;
     font-size: 7pt;
+    color: #0050e3;
+  }
+  .activeNumber {
+    flex-grow: 2;
+    font-size: 15pt;
+    color: blue;
+    font-weight: 900;
+  }
+  .notActiveNumber {
+    flex-shrink: 1;
+    font-size: 9pt;
     color: #0050e3;
   }
 
@@ -174,11 +208,11 @@
     min-width: 100%;
     min-height: 100%;
   }
-table>tbody{
-    display:grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(5, .855fr);
-}
+  table > tbody {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 0.855fr);
+  }
   .mainRow {
     display: flex;
     flex-basis: 20%;

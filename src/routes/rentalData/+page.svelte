@@ -5,7 +5,7 @@
 
   //change which is commented dependant on where youre working
   //let currentURL = liveServerURL;
-  let currentURL = liveServerURL;
+  let currentURL = localServerURL;
 
   // import components to be used on this page
   import Button from "../../components/global/button.svelte";
