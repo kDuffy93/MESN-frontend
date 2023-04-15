@@ -12,7 +12,6 @@
   import FilterButton from "../../components/global/FilterButton.svelte";
   import Table from "../../components/global/Table.svelte";
   //import data
-  import { rentalDataSvelteStore } from "../../../scripts/data-store.js";
 
   import DataButtonDiv from "../../components/partials/DataButtonDiv.svelte";
   import Modal from "../../components/global/Modal.svelte";
@@ -26,6 +25,12 @@
 
   let activeFilters = {
     leaseType: [],
+    numberOfBedrooms: undefined,
+    price: {
+      priceMinimum: undefined,
+      priceMaximum: undefined
+    },
+    area: [],
   };
   let leaseTypeFilters = {
     shortTerm: "Less Than 6 Months",
@@ -111,7 +116,7 @@
 
   <section class="buttonSection">
     <!-- Filter Button Starts -->
-    <FilterButton on:click={() => (showModal = true)} buttonId={"filterButton"} buttonIconClass={"fa-solid fa-bars"} buttonText={"Filter"} />
+    <FilterButton class="filterButton" on:click={() => (showModal = true)} buttonId={"filterButton"} buttonIconClass={"fa-solid fa-bars"} buttonText={"Filter"} />
     <Modal bind:showModal>
       <div class="modalContent">
         <div class="cityTown modalDiv">
@@ -174,20 +179,7 @@
     </Modal>
     <!-- Filter Button Ends -->
 
-    <div class="dropdown">
-      <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"> Categories </button>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">City/Town</a></li>
 
-        <li><a class="dropdown-item" href="#">Price</a></li>
-
-        <li><a class="dropdown-item" href="#">Housing Type</a></li>
-        <li>
-          <a class="dropdown-item" href="#">Number of bedrooms</a>
-        </li>
-        <li><a class="dropdown-item" href="#">Type of Lease</a></li>
-      </ul>
-    </div>
     <DataButtonDiv on:click={dataButtonDivHandleClick} />
   </section>
   <!-- table -->
@@ -203,6 +195,8 @@
     justify-content: space-between;
     border: solid white 3px;
   }
+
+
 
   /* toggle button */
 
@@ -247,11 +241,12 @@
 
   .buttonSection {
     height: 80px;
-    background-color: #f0f0f0;
+    background-color: rgba(0, 0, 0, 0);
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
     padding: 0 2vw;
   }
 

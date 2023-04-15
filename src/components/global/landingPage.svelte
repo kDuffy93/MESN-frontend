@@ -7,19 +7,26 @@ export let landingPText;
 export let landingH3Text;
 export let landingA;
 export let landingLinkText;
+
 </script>
 
 <!-- html -->
+
 <main class={landingMainClass}>
     <h1><span>{landingSpanText}</span><br>{landingBrText}<br><p>{landingPText}</p></h1>
     <h3>{landingH3Text} .<a href={landingA} >{landingLinkText}<span></span></a>
     </h3>
 </main>
 
+
+
 <style>
 /* container */
-main{
+:global(body){
   background: url('https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png');
+}
+main{
+ 
   width: 100vw;
     height: 100vh;
     background-size: cover;
