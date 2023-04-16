@@ -5,8 +5,8 @@
   let localServerURL = "http://localhost:5001";
 
   //change which is commented dependant on where youre working
-  let currentURL = liveServerURL;
-  //let currentURL = localServerURL;
+  //let currentURL = liveServerURL;
+  let currentURL = localServerURL;
 
   // import components to be used on this page
   import Button from "../../components/global/button.svelte";
@@ -93,9 +93,17 @@
                 } */
         //assign the rentalListings from the fetch to the global result varible
         let temparray = [];
-        await rentalListings.forEach((listing) => {
-          temparray.push(JSON.parse(listing));
-        });
+        if (typeof rentalListings[0] == typeof {}) {
+          //rentalListings = rentalListings.map((rentalListing) => JSON.stringify(rentalListing));
+          rentalListings = JSON.stringify(rentalListings);
+          await rentalListings.forEach((listing) => {
+            temparray.push(JSON.parse(listing));
+          });
+        } else {
+          await rentalListings.forEach((listing) => {
+            temparray.push(JSON.parse(listing));
+          });
+        }
 
         console.log(temparray);
         result = temparray;
@@ -142,7 +150,7 @@
         // "Utilities Additional": element.utilitiesAdditional,
         Avaibility: element.avaibility,
       };
-    exportAllObject.push(tempObject);
+      exportAllObject.push(tempObject);
     });
     csvExporter.generateCsv(exportAllObject);
     console.log(exportAllObject);
