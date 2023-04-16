@@ -1,4 +1,5 @@
 <script>
+import { ExportToCsv } from 'export-to-csv';
   export let filterToggleValue;
 
   $: {
@@ -193,7 +194,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    opacity: 0;
   }
   td {
     min-width: 8.75%;

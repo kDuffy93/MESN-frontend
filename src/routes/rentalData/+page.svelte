@@ -102,7 +102,28 @@
   };
 
   let exportAll = async () => {
-    console.log(`exporting all...`);
+    console.log(`exporting all...`); 
+    exportAllObject =[];
+    result.forEach(element => {
+    console.log( element);
+    let tempObject = {
+    "Source": element.collectedFrom,
+    "Date Collected": element.dateCollected,
+    "Stratified Area": element.area,
+    "Local Municipality": element.municipality,
+    "Address": element.address,
+    "Geolocation": element.geolocation,
+    "Bedrooms": element.bedrooms,
+    "Monthly Rent": element.rent,
+    "Payment Interval": element.rentFrequency,   
+    "Utilities Included": element.utilitiesIncluded,
+    // "Utilities Additional": element.utilitiesAdditional,
+    "Avaibility": element.avaibility
+    };
+    exportAllObject.push(tempObject);
+  });
+
+
     console.log(exportAllObject);
   };
 
@@ -128,31 +149,20 @@
   };
 
   const csvExporter = new ExportToCsv(options);
+
+
   let exportAllObject = [];
 
 
-$:{
 
-  Object.entries(result).forEach(element => {
-    console.log("element" + element);
-    let tempObject = {
-      "Collected From": element.values.collectedFrom,
-      "Date Collected": element.values.dateCollected,
-    "Area": element.values.area,
-    "Municipality": element.values.municipality,
-    "Address": element.values.address,
-    "Geolocation": element.values.geolocation,
-    "Unit Size": element.values.bedrooms,
-    "Rent": element.values.rent,
-    "Rent Frequency": element.values.rentFrequency,   
-    "Utilities Included": element.values.utilitiesIncluded,
-    // "Utilities Additional": element.values.utilitiesAdditional,
-    "Avaibility": element.values.avaibility
-    };
 
-    exportAllObject = [...exportAllObject,tempObject];
-  });
-}
+ 
+
+
+
+
+
+
 
 
 
