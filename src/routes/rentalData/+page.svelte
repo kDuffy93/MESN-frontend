@@ -1,12 +1,12 @@
 <script>
-  import { ExportToCsv } from 'export-to-csv';
+  import { ExportToCsv } from "export-to-csv";
   //page level varibles
   let liveServerURL = "https://mesn-backend.onrender.com";
   let localServerURL = "http://localhost:5001";
 
   //change which is commented dependant on where youre working
-  //let currentURL = liveServerURL;
-  let currentURL = localServerURL;
+  let currentURL = liveServerURL;
+  //let currentURL = localServerURL;
 
   // import components to be used on this page
   import Button from "../../components/global/button.svelte";
@@ -29,7 +29,7 @@
     numberOfBedrooms: undefined,
     price: {
       priceMinimum: undefined,
-      priceMaximum: undefined
+      priceMaximum: undefined,
     },
     area: [],
   };
@@ -58,11 +58,11 @@
   let fall = false;
   let winter = false;
 
-  const options = { 
-    fieldSeparator: ',',
+  const options = {
+    fieldSeparator: ",",
     quoteStrings: '"',
-    decimalSeparator: '.',
-    showLabels: false, 
+    decimalSeparator: ".",
+    showLabels: false,
     showTitle: false,
     title: `${Date.now()}-AllRentalListings`,
     filename: `${Date.now()}-AllRentalListings`,
@@ -73,7 +73,6 @@
   const csvExporter = new ExportToCsv(options);
   let exportAllObject = [];
 
-
   // declare a varible to hold the data from the fetch
   let result = {};
   //perform fetch and assign the result to the above varible
@@ -82,8 +81,7 @@
       method: "GET",
     })
       .then((data) => {
-        
-                return data.json();
+        return data.json();
       })
       .then(async (rentalListings) => {
         //loop through thr result and console log each obj
@@ -94,13 +92,13 @@
                     }
                 } */
         //assign the rentalListings from the fetch to the global result varible
-        let temparray= [];
-        await rentalListings.forEach(listing => {
-          temparray.push(JSON.parse(listing))
+        let temparray = [];
+        await rentalListings.forEach((listing) => {
+          temparray.push(JSON.parse(listing));
         });
-        
+
         console.log(temparray);
-        result=temparray;
+        result = temparray;
       });
   }
   //IFFIE to run at component initialization
@@ -120,32 +118,32 @@
   let dataButtonDivHandleClick = async (e) => {
     if (e.target.id == "add") {
       await addSampleRecord();
-    } else if(e.target.id == "all") {
+    } else if (e.target.id == "all") {
       await exportAll();
     }
   };
 
-  
   let exportAll = async () => {
-    console.log(`exporting all...`); 
-    exportAllObject =[];
-    result.forEach(element => {
-    let tempObject = {
-    "Source": element.collectedFrom,
-    "Date Collected": element.dateCollected,
-    "Stratified Area": element.area,
-    "Local Municipality": element.municipality,
-    "Address": element.address,
-    "Geolocation": element.geolocation,
-    "Bedrooms": element.bedrooms,
-    "Monthly Rent": element.rent,
-    "Payment Interval": element.rentFrequency,   
-    "Utilities Included": element.utilitiesIncluded,
-    // "Utilities Additional": element.utilitiesAdditional,
-    "Avaibility": element.avaibility
-    };
+    console.log(`exporting all...`);
+    exportAllObject = [];
+
+    result.forEach((element) => {
+      let tempObject = {
+        Source: element.collectedFrom,
+        "Date Collected": element.dateCollected,
+        "Stratified Area": element.area,
+        "Local Municipality": element.municipality,
+        Address: element.address,
+        Geolocation: element.geolocation,
+        Bedrooms: element.bedrooms,
+        "Monthly Rent": element.rent,
+        "Payment Interval": element.rentFrequency,
+        "Utilities Included": element.utilitiesIncluded,
+        // "Utilities Additional": element.utilitiesAdditional,
+        Avaibility: element.avaibility,
+      };
     exportAllObject.push(tempObject);
-  });
+    });
     csvExporter.generateCsv(exportAllObject);
     console.log(exportAllObject);
   };
@@ -220,7 +218,6 @@
     </Modal>
     <!-- Filter Button Ends -->
 
-
     <DataButtonDiv on:click={dataButtonDivHandleClick} />
   </section>
   <!-- table -->
@@ -236,8 +233,6 @@
     justify-content: space-between;
     border: solid white 3px;
   }
-
-
 
   /* toggle button */
 
