@@ -94,8 +94,8 @@
         //assign the rentalListings from the fetch to the global result varible
         let temparray = [];
         if (typeof rentalListings[0] == typeof {}) {
-          //rentalListings = rentalListings.map((rentalListing) => JSON.stringify(rentalListing));
-          rentalListings = JSON.stringify(rentalListings);
+          rentalListings = rentalListings.map((rentalListing) => JSON.stringify(rentalListing));
+          //rentalListings = JSON.stringify(rentalListings);
           await rentalListings.forEach((listing) => {
             temparray.push(JSON.parse(listing));
           });
