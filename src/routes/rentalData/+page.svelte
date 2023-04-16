@@ -1,5 +1,6 @@
 <script>
   import { ExportToCsv } from 'export-to-csv';
+  import { ExportToCsv } from 'export-to-csv';
   //page level varibles
   let liveServerURL = "https://mesn-backend.onrender.com";
   let localServerURL = "http://localhost:5001";
@@ -156,14 +157,26 @@
 
   <section class="buttonSection">
     <!-- Filter Button Starts -->
-    <FilterButton class="filterButton" on:click={() => (showModal = true)} buttonId={"filterButton"} buttonIconClass={"fa-solid fa-bars"} buttonText={"Filter"} />
+    <FilterButton
+      class="filterButton"
+      on:click={() => (showModal = true)}
+      buttonId={"filterButton"}
+      buttonIconClass={"fa-solid fa-bars"}
+      buttonText={"Filter"}
+    />
     <Modal bind:showModal>
       <div class="modalContent">
         <div class="cityTown modalDiv">
           <h2>City/Town</h2>
-          <FilterButton buttonClass={"cityTownButton"} buttonText={"Alliston/Bradford"} />
+          <FilterButton
+            buttonClass={"cityTownButton"}
+            buttonText={"Alliston/Bradford"}
+          />
           <FilterButton buttonClass={"cityTownButton"} buttonText={"Barrie"} />
-          <FilterButton buttonClass={"cityTownButton"} buttonText={"Collingwood"} />
+          <FilterButton
+            buttonClass={"cityTownButton"}
+            buttonText={"Collingwood"}
+          />
           <FilterButton buttonClass={"cityTownButton"} buttonText={"Midland"} />
           <FilterButton buttonClass={"cityTownButton"} buttonText={"Orillia"} />
         </div>
@@ -175,29 +188,68 @@
               <label for="minprice">From</label>
               <!-- check if bind:value works -->
               <!-- <p>{minPrice || 'stranger'},{maxPrice}!</p> -->
-              <InputValue bind:value={minPrice} on:input={handleInputChange} inputPlaceholder={"minimum price"} inputId={"minprice"} size={"15"} />
+              <InputValue
+                bind:value={minPrice}
+                on:input={handleInputChange}
+                inputPlaceholder={"minimum price"}
+                inputId={"minprice"}
+                size={"15"}
+              />
             </div>
             <i class="fa-solid fa-minus" />
             <div class="maxPrice">
               <label for="maxprice">To</label>
-              <InputValue bind:value={maxPrice} on:input={handleInputChange} inputPlaceholder={"maximum price"} inputId={"maxprice"} size={"15"} />
+              <InputValue
+                bind:value={maxPrice}
+                on:input={handleInputChange}
+                inputPlaceholder={"maximum price"}
+                inputId={"maxprice"}
+                size={"15"}
+              />
             </div>
           </div>
         </div>
         <hr />
         <div class="housingType modalDiv">
           <h2>Housing Type</h2>
-          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-house"} buttonText={"Detached"} />
-          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-city"} buttonText={"Attached"} />
-          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-house-chimney"} buttonText={"House"} />
-          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-building"} buttonText={"Apartment"} />
-          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-stairs"} buttonText={"Basement"} />
+          <FilterButton
+            buttonClass={"housingTypeButton"}
+            buttonIconClass={"fa-solid fa-house"}
+            buttonText={"Detached"}
+          />
+          <FilterButton
+            buttonClass={"housingTypeButton"}
+            buttonIconClass={"fa-solid fa-city"}
+            buttonText={"Attached"}
+          />
+          <FilterButton
+            buttonClass={"housingTypeButton"}
+            buttonIconClass={"fa-solid fa-house-chimney"}
+            buttonText={"House"}
+          />
+          <FilterButton
+            buttonClass={"housingTypeButton"}
+            buttonIconClass={"fa-solid fa-building"}
+            buttonText={"Apartment"}
+          />
+          <FilterButton
+            buttonClass={"housingTypeButton"}
+            buttonIconClass={"fa-solid fa-stairs"}
+            buttonText={"Basement"}
+          />
         </div>
         <hr />
         <div class="numberOfBedrooms modalDiv">
           <h2>Number of Bedrooms</h2>
 
-          <input type="range" id="rangeBedrooms" bind:value={numberOfBedrooms} min="1" max="6" step="1" />
+          <input
+            type="range"
+            id="rangeBedrooms"
+            bind:value={numberOfBedrooms}
+            min="1"
+            max="6"
+            step="1"
+          />
           <h3>
             You are choosing {numberOfBedrooms} bedrooms now.
           </h3>
@@ -208,7 +260,12 @@
           <div class="lease">
             {#each leaseTypeFiltersArray as leasetype}
               <label class="leaseLabel">
-                <input type="checkbox" bind:group={activeFilters.leaseType} name="leaseTerm" value={leasetype.key} />
+                <input
+                  type="checkbox"
+                  bind:group={activeFilters.leaseType}
+                  name="leaseTerm"
+                  value={leasetype.key}
+                />
                 {leasetype.value}
                 {console.log(activeFilters)}
               </label>
@@ -218,7 +275,6 @@
       </div>
     </Modal>
     <!-- Filter Button Ends -->
-
 
     <DataButtonDiv on:click={dataButtonDivHandleClick} />
   </section>
@@ -235,8 +291,6 @@
     justify-content: space-between;
     border: solid white 3px;
   }
-
-
 
   /* toggle button */
 
