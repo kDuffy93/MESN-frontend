@@ -193,6 +193,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    /* comment the Opacity to show the nested table*/
     opacity: 0;
   }
   td {

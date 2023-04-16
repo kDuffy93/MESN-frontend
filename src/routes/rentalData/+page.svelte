@@ -1,4 +1,5 @@
 <script>
+  import { ExportToCsv } from 'export-to-csv';
   //page level varibles
   let liveServerURL = "https://mesn-backend.onrender.com";
   let localServerURL = "http://localhost:5001";
@@ -57,6 +58,20 @@
   let fall = false;
   let winter = false;
 
+  const options = { 
+    fieldSeparator: ',',
+    quoteStrings: '"',
+    decimalSeparator: '.',
+    showLabels: false, 
+    showTitle: false,
+    title: `${Date.now()}-AllRentalListings`,
+    filename: `${Date.now()}-AllRentalListings`,
+    useTextFile: false,
+    useBom: true,
+    useKeysAsHeaders: true,
+  };
+  const csvExporter = new ExportToCsv(options);
+  let exportAllObject = [];
   // declare a varible to hold the data from the fetch
   let result = {};
   //perform fetch and assign the result to the above varible
@@ -100,13 +115,38 @@
     });
   };
 
-  let dataButtonDivHandleClick = async (e) => {
-    console.log(e.target);
 
+  let dataButtonDivHandleClick = async (e) => {
     if (e.target.id == "add") {
       await addSampleRecord();
-    } else {
+    } else if(e.target.id == "all") {
+      await exportAll();
     }
+  };
+
+  
+  let exportAll = async () => {
+    console.log(`exporting all...`); 
+    exportAllObject =[];
+    result.forEach(element => {
+    let tempObject = {
+    "Source": element.collectedFrom,
+    "Date Collected": element.dateCollected,
+    "Stratified Area": element.area,
+    "Local Municipality": element.municipality,
+    "Address": element.address,
+    "Geolocation": element.geolocation,
+    "Bedrooms": element.bedrooms,
+    "Monthly Rent": element.rent,
+    "Payment Interval": element.rentFrequency,   
+    "Utilities Included": element.utilitiesIncluded,
+    // "Utilities Additional": element.utilitiesAdditional,
+    "Avaibility": element.avaibility
+    };
+    exportAllObject.push(tempObject);
+  });
+    csvExporter.generateCsv(exportAllObject);
+    console.log(exportAllObject);
   };
 </script>
 
