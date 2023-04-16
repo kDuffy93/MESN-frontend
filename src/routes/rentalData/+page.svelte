@@ -105,7 +105,6 @@
     console.log(`exporting all...`); 
     exportAllObject =[];
     result.forEach(element => {
-    console.log( element);
     let tempObject = {
     "Source": element.collectedFrom,
     "Date Collected": element.dateCollected,
@@ -123,7 +122,7 @@
     exportAllObject.push(tempObject);
   });
 
-
+    csvExporter.generateCsv(exportAllObject);
     console.log(exportAllObject);
   };
 
@@ -140,9 +139,10 @@
     fieldSeparator: ',',
     quoteStrings: '"',
     decimalSeparator: '.',
-    showLabels: true, 
-    showTitle: true,
+    showLabels: false, 
+    showTitle: false,
     title: `${Date.now()}-AllRentalListings`,
+    filename: `${Date.now()}-AllRentalListings`,
     useTextFile: false,
     useBom: true,
     useKeysAsHeaders: true,
