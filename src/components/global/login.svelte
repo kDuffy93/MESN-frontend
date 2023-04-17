@@ -32,7 +32,7 @@
       <label for={inputIdPwd} class={labelClassPwd}>{labelTextPwd}</label>
       <input type={InputTypePwd} id={inputIdPwd} />
       <a href={linkNameLog} class={loginClass}>{linksTextLog}<span /></a><br />
-      <a href={linkRegister} class={registerClass}>{registerText}<span /></a><br />
+      <!-- <a href={linkRegister} class={registerClass}>{registerText}<span /></a><br /> -->
       <a href={linkNamePwd} class={pwdClass}>{linksTextPwd}<span /></a>
 
     </form>

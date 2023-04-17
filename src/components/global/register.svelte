@@ -117,7 +117,7 @@
   /* register button */
   .registerClass {
     display: inline-block;
-    background: #4e8abf;
+    background: #00539b;
     color: #f5f5f5;
     border: none;
     text-decoration: none;

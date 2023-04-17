@@ -19,11 +19,12 @@
     { href: "/", linkText: "Log Out" },
   ];
   let rentalDataLinks = [
+    { href: "/register", linkText: "Register User Account" },
     { href: "/heatMap", linkText: "View Heat Map" },
     { href: "/", linkText: "Log Out" },
   ];
   let landingPageLinks = [{ href: "/login", linkText: "Log In" }];
-  let registerLinks = [{ href: "/", linkText: "Go Back"}];
+  let registerLinks = [{ href: "/rentalData", linkText: "Go Back to Rental Data page"}];
 </script>
 
 <Router {url}>
