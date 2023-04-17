@@ -375,13 +375,19 @@
   </section>
   <!-- table -->
   {#if Object.entries(result).length > 0}
-    <Table tableData={filteredTableData} />
+    <Table class="table" tableData={filteredTableData} />
   {:else}
     <Table />
   {/if}
 </main>
 
 <style>
+  main{
+    display:flex;
+  }
+.table{
+  margin-right:2vw;
+}
   .housingType,
   .typeOfLease {
     pointer-events: none;
@@ -452,14 +458,19 @@
   /* body */
 
   .buttonSection {
-    height: 80px;
+    height: 80vh;
     background-color: rgba(0, 0, 0, 0);
     display: flex;
-    flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     padding: 0 2vw;
+    position:sticky;
+    top: 7.5px;
+    z-index: 100;
+    flex-direction: column;
+    max-width: 5%;
+    margin: 2vw;
   }
 
   /* Modal Dialoge */

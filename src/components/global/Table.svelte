@@ -113,6 +113,7 @@
   }
 
   table {
+
     border-spacing: 1;
     border-collapse: collapse;
     background: #fff;
@@ -121,6 +122,8 @@
     width: 95vw;
     margin: 5vh auto;
     position: relative;
+  margin-right:2vw;
+
   }
 
   table td,
