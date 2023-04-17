@@ -24,7 +24,7 @@
     </section> 
 </main>  -->
 
-<Login inputIdUser={"username"} labelClassUser={"userName"} labelTextUser={"Username: "} InputTypeUser={"text"} inputIdPwd={"password"} labelClassPwd={"password"} labelTextPwd={"Password: "} InputTypePwd={"text"} linkNameLog={"rentalData"} linksTextLog={"Login"} linkNamePwd={"forgotPassword"} linksTextPwd={"Forgot Password."} loginText={"Login Information"} loginClass={"loginClass"} pwdClass={"pwdClass"} />
+<Login inputIdUser={"username"} labelClassUser={"userName"} labelTextUser={"Username: "} InputTypeUser={"text"} inputIdPwd={"password"} labelClassPwd={"password"} labelTextPwd={"Password: "} InputTypePwd={"text"} linkNameLog={"rentalData"} linksTextLog={"Login"} linkRegister={"register"} registerText={"Register"} linkNamePwd={"forgotPassword"} linksTextPwd={"Forgot Password."} loginText={"Login Information"} loginClass={"loginClass"} registerClass={"registerClass"} pwdClass={"pwdClass"} />
 
 <style>
   main > section {
