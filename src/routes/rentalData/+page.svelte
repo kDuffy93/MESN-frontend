@@ -5,8 +5,8 @@
   let localServerURL = "http://localhost:5001";
 
   //change which is commented dependant on where youre working
-  let currentURL = liveServerURL;
-  //let currentURL = localServerURL;
+  //let currentURL = liveServerURL;
+  let currentURL = localServerURL;
 
   // import components to be used on this page
   import Button from "../../components/global/button.svelte";
@@ -19,20 +19,26 @@
   import InputValue from "../../components/global/InputValue.svelte";
   import InputChecked from "../../components/global/InputChecked.svelte";
 
-  function handleInputChange(event) {
-    minPrice = event.target.value;
-    maxPrice = event.target.value;
-  }
+  let priceFilters = {
+    minPrice: "",
+    maxPrice: "",
+  };
 
   let activeFilters = {
     leaseType: [],
-    numberOfBedrooms: undefined,
+    housingType: [],
+    numberOfBedrooms: {
+      number: 2,
+      active: false,
+    },
     price: {
-      priceMinimum: undefined,
-      priceMaximum: undefined,
+      priceMinimum: 0,
+      priceMaximum: 0,
+      active: false,
     },
     area: [],
   };
+
   let leaseTypeFilters = {
     shortTerm: "Less Than 6 Months",
     middleTerm: "6 Months To 1 Year",
@@ -42,21 +48,28 @@
     fall: "Seasonal (Fall)",
     winter: "Seasonal (Winter)",
   };
-  const leaseTypeFiltersArray = Object.entries(leaseTypeFilters).map(([key, value]) => ({ key, value }));
-  console.log(leaseTypeFiltersArray);
 
-  let isChecked = false;
+  let cityFilters = {
+    alliston: "Alliston/Bradford",
+    barrie: "Barrie",
+    collingwood: "Collingwood",
+    midland: "Midland",
+    orillia: "Orillia",
+  };
+
+  let housingFilters = {
+  Detached:  "fa-solid fa-house",
+  Attached:  "fa-solid fa-city",
+  House:  "fa-solid fa-house-chimney",
+  Apartment:  "fa-solid fa-building",
+  Basement:  "fa-solid fa-stairs"
+};
+
+const housingFiltersArray = Object.entries(housingFilters).map(([key, value]) => ({ key, value }));
+  const cityFiltersArray = Object.entries(cityFilters).map(([key, value]) => ({ key, value }));
+  const leaseTypeFiltersArray = Object.entries(leaseTypeFilters).map(([key, value]) => ({ key, value }));
+
   let showModal = false;
-  let minPrice = "";
-  let maxPrice = "";
-  let numberOfBedrooms = 2;
-  let shortterm = false;
-  let middleterm = false;
-  let longterm = false;
-  let spring = false;
-  let summer = false;
-  let fall = false;
-  let winter = false;
 
   const options = {
     fieldSeparator: ",",
@@ -93,18 +106,19 @@
                 } */
         //assign the rentalListings from the fetch to the global result varible
         let temparray = [];
-        if (typeof rentalListings[0] == typeof {}) {
-          rentalListings = rentalListings.map((rentalListing) => JSON.stringify(rentalListing));
-          //rentalListings = JSON.stringify(rentalListings);
-          await rentalListings.forEach((listing) => {
-            temparray.push(JSON.parse(listing));
-          });
-        } else {
-          await rentalListings.forEach((listing) => {
-            temparray.push(JSON.parse(listing));
-          });
-        }
 
+        try {
+          await rentalListings.forEach((listing) => {
+            temparray.push(JSON.parse(listing));
+          });
+        } catch {
+          for (const rentalisting in rentalListings) {
+            if (Object.hasOwnProperty.call(rentalListings, rentalisting)) {
+              const listing = rentalListings[rentalisting];
+              temparray.push(JSON.parse(JSON.stringify(listing)));
+            }
+          }
+        }
         console.log(temparray);
         result = temparray;
       });
@@ -155,6 +169,44 @@
     csvExporter.generateCsv(exportAllObject);
     console.log(exportAllObject);
   };
+
+  let cityButtonClick = async (e) => {
+    let buttonID = e.target.id;
+    if (activeFilters.area.includes(buttonID)) {
+      let indexOfObjToRemove = activeFilters.area.indexOf(buttonID);
+      activeFilters.area.splice(indexOfObjToRemove, 1);
+      activeFilters = activeFilters;
+    } else {
+      activeFilters.area.push(buttonID);
+      activeFilters = activeFilters;
+    }
+    console.log(activeFilters.area);
+  };
+
+  
+
+  let housingButtonClick = async (e) => {
+    let buttonID = e.target.id;
+    if (activeFilters.housingType.includes(buttonID)) {
+      let indexOfObjToRemove = activeFilters.housingType.indexOf(buttonID);
+      activeFilters.housingType.splice(indexOfObjToRemove, 1);
+      activeFilters = activeFilters;
+    } else {
+      activeFilters.housingType.push(buttonID);
+      activeFilters = activeFilters;
+    }
+    console.log(activeFilters.area);
+  };
+
+  let handleInputChange = async (e) => {
+    let inputId = e.target.id;
+    if (inputId == "minprice") {
+      activeFilters.price.priceMinimum = e.target.value;
+    } else {
+      activeFilters.price.priceMaximum = e.target.value;
+    }
+    console.log(activeFilters.price);
+  };
 </script>
 
 <main>
@@ -168,46 +220,58 @@
       <div class="modalContent">
         <div class="cityTown modalDiv">
           <h2>City/Town</h2>
-          <FilterButton buttonClass={"cityTownButton"} buttonText={"Alliston/Bradford"} />
-          <FilterButton buttonClass={"cityTownButton"} buttonText={"Barrie"} />
-          <FilterButton buttonClass={"cityTownButton"} buttonText={"Collingwood"} />
-          <FilterButton buttonClass={"cityTownButton"} buttonText={"Midland"} />
-          <FilterButton buttonClass={"cityTownButton"} buttonText={"Orillia"} />
+          {#each cityFiltersArray as cityFilter}
+            {#if activeFilters.area.includes(cityFilter.key)}
+              <FilterButton on:click={cityButtonClick} value={cityFilter.key} buttonClass={"cityTownButton active"} buttonId={cityFilter.key} buttonText={cityFilter.value} />
+            {:else}
+              <FilterButton on:click={cityButtonClick} value={cityFilter.key} buttonClass={"cityTownButton"} buttonId={cityFilter.key} buttonText={cityFilter.value} />
+            {/if}
+          {/each}
         </div>
         <hr />
         <div class="priceRange modalDiv">
           <h2>Price Range</h2>
-          <div class="price">
+          
+          <div class="price ">
+            <input type="checkbox" class="toggleFilterInput" id="filterByPriceToggle" bind:checked={activeFilters.price.active} />
             <div class="minPrice">
               <label for="minprice">From</label>
               <!-- check if bind:value works -->
               <!-- <p>{minPrice || 'stranger'},{maxPrice}!</p> -->
-              <InputValue bind:value={minPrice} on:input={handleInputChange} inputPlaceholder={"minimum price"} inputId={"minprice"} size={"15"} />
+              <InputValue bind:value={priceFilters.minPrice} on:input={handleInputChange} inputPlaceholder={"minimum price"} inputId={"minprice"} size={"15"} />
             </div>
             <i class="fa-solid fa-minus" />
             <div class="maxPrice">
               <label for="maxprice">To</label>
-              <InputValue bind:value={maxPrice} on:input={handleInputChange} inputPlaceholder={"maximum price"} inputId={"maxprice"} size={"15"} />
+              <InputValue bind:value={priceFilters.maxPrice} on:input={handleInputChange} inputPlaceholder={"maximum price"} inputId={"maxprice"} size={"15"} />
             </div>
           </div>
         </div>
         <hr />
         <div class="housingType modalDiv">
           <h2>Housing Type</h2>
-          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-house"} buttonText={"Detached"} />
-          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-city"} buttonText={"Attached"} />
-          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-house-chimney"} buttonText={"House"} />
-          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-building"} buttonText={"Apartment"} />
-          <FilterButton buttonClass={"housingTypeButton"} buttonIconClass={"fa-solid fa-stairs"} buttonText={"Basement"} />
+
+          {#each housingFiltersArray as housingFilter}
+          {#if activeFilters.housingType.includes(housingFilter.key)}
+          <FilterButton on:click={housingButtonClick} value={housingFilter.key} buttonIconClass={housingFilter.value} buttonClass={"housingTypeButton active"} buttonId={housingFilter.key} buttonText={housingFilter.key} />
+          {:else}
+          <FilterButton on:click={housingButtonClick} value={housingFilter.key} buttonIconClass={housingFilter.value} buttonClass={"housingTypeButton"} buttonId={housingFilter.key} buttonText={housingFilter.key} />
+          {/if}
+        {/each}
+
+
+
+          
+
         </div>
         <hr />
         <div class="numberOfBedrooms modalDiv">
           <h2>Number of Bedrooms</h2>
-
-          <input type="range" id="rangeBedrooms" bind:value={numberOfBedrooms} min="1" max="6" step="1" />
-          <h3>
-            You are choosing {numberOfBedrooms} bedrooms now.
-          </h3>
+          <div class="filterToggleRow">
+            <input class="toggleFilterInput" type="checkbox" id="filterByBedroomsToggle" bind:checked={activeFilters.numberOfBedrooms.active} />
+            <input type="range" id="rangeBedrooms" bind:value={activeFilters.numberOfBedrooms.number} min="1" max="6" step="1" />
+          </div>
+          <h3>You are choosing {activeFilters.numberOfBedrooms.number} bedrooms now.</h3>
         </div>
         <hr />
         <div class="typeOfLease modalDiv">
@@ -237,6 +301,26 @@
 </main>
 
 <style>
+#filterByBedroomsToggle{
+  margin:0;
+}
+#rangeBedrooms {
+    width: 85%;
+    display:unset;
+    margin-bottom: -5px;
+  }
+  
+.numberOfBedrooms >h3{
+  text-align: center;
+}
+
+
+.toggleFilterInput{
+width:10%;
+transform: scale(2);
+}
+
+
   header {
     justify-content: space-between;
     border: solid white 3px;
@@ -319,10 +403,7 @@
     font-size: 17px;
     margin: 0;
   }
-  #rangeBedrooms {
-    width: 100%;
-    margin: 10px;
-  }
+ 
   #shortterm,
   #middleterm,
   #longterm,

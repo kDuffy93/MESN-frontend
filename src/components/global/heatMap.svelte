@@ -193,6 +193,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    /* comment the Opacity to show the nested table*/
     opacity: 0;
   }
   td {
@@ -211,7 +212,7 @@
   table > tbody {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, 0.855fr);
+    grid-template-rows: repeat(5, 15vh)
   }
   .mainRow {
     display: flex;

@@ -9,7 +9,7 @@
   export let step;
 </script>
 
-<input bind:value id={inputId} name={inputName} placeholder={inputPlaceholder} size="15" {min} {max} {step} />
+<input bind:value on:input id={inputId} name={inputName} placeholder={inputPlaceholder} size="15" {min} {max} {step} />
 
 <style>
   #rangeBedrooms {

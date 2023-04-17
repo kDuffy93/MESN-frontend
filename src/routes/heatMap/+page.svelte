@@ -6,8 +6,8 @@
   let localServerURL = "http://localhost:5001";
 
   //change which is commented dependant on where youre working
-  let currentURL = liveServerURL;
-  //let currentURL = localServerURL;
+  //let currentURL = liveServerURL;
+  let currentURL = localServerURL;
 
 let checked = false;
 
@@ -35,7 +35,7 @@ let checked = false;
   })();
 </script>
 
-<main class="container">
+<main class="">
   <div>
     {#if Object.entries(result).length > 0}
       <HeatMap Data={result} filterToggleValue={checked} />
@@ -66,7 +66,7 @@ let checked = false;
   main > div {
     background-color: #f6f6f6;
     width: 60%;
-    height: fit-content;
+    min-height: 70%;
     margin-top: 2.5vh;
     margin-left: 15%;
 
@@ -78,16 +78,17 @@ let checked = false;
     padding-left: 1vw;
   }
   main > aside > h2 {
-    font-size: smaller;
+    font-size: xx-large;
     text-decoration: underline;
     text-align: center;
+    color: #f6f6f6;
   }
   main > aside > div {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding-top: 10%;
+    padding-top: 2.5%;
   }
   main > aside > div > div {
   }
@@ -96,14 +97,13 @@ let checked = false;
   }
 
   #noUnits {
-    margin-right: -15%;
-    font-size: smaller;
+    margin-right: -5%;
+    font-size: x-large;
     color: #c5e0ee;
   }
   #avgRent {
-    margin-left: -7.5%;
 
-    font-size: smaller;
+    font-size: x-large;
     color: #ade498;
   }
 

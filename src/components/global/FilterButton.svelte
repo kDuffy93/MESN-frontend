@@ -32,6 +32,16 @@
     margin: 10px 10px;
     padding: 0 12px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px -5px rgb(0 0 0 / 10%);
+    box-shadow: 0 5px 15px -5px rgb(0 0 0 / 10%);  background-color: #f9f9f9;
+  
+
   }
+
+.active{
+
+background-color: #999999;
+
+}
+
+
 </style>
