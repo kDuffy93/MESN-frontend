@@ -84,7 +84,7 @@
     useKeysAsHeaders: true,
   };
   const csvExporter = new ExportToCsv(options);
-  let exportAllObject = [];
+  let exportObject = [];
 
   // declare a varible to hold the data from the fetch
   let result = {};
@@ -229,15 +229,17 @@
     if (e.target.id == "add") {
       await addSampleRecord();
     } else if (e.target.id == "all") {
-      await exportAll();
+      await exportToCSV(result);
+    } else if (e.target.id == "current") {
+      await exportToCSV(filteredTableData);
     }
   };
 
-  let exportAll = async () => {
-    console.log(`exporting all...`);
-    exportAllObject = [];
+  let exportToCSV = async (objectToExport) => {
+    console.log(`exporting...`);
+    exportObject = [];
 
-    result.forEach((element) => {
+    objectToExport.forEach((element) => {
       let tempObject = {
         Source: element.collectedFrom,
         "Date Collected": element.dateCollected,
@@ -252,10 +254,10 @@
         // "Utilities Additional": element.utilitiesAdditional,
         Avaibility: element.avaibility,
       };
-      exportAllObject.push(tempObject);
+      exportObject.push(tempObject);
     });
-    csvExporter.generateCsv(exportAllObject);
-    console.log(exportAllObject);
+    csvExporter.generateCsv(exportObject);
+    console.log(exportObject);
   };
 
   let cityButtonClick = async (e) => {
