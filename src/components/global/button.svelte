@@ -7,11 +7,12 @@
   //export let borderRadius = '--default-border-radius';
   export let buttonIconClass = "fa-solid fa-plus fa";
   export let classList = "btn btn_house";
+  export let buttonTitle;
 </script>
 
 <!-- every button have:    -->
 <!-- html -->
-<button on:click id={buttonId} class={classList} style="background-color:var({buttonColorVar});">
+<button on:click id={buttonId} class={classList} style="background-color:var({buttonColorVar});" title={buttonTitle}>
   {#if buttonIconClass}<i class={buttonIconClass} />{/if}
 </button>
 
@@ -69,6 +70,9 @@
   }
   .btn_add::before {
     background-color: #476cf1;
+  }
+  .btn_az::before{
+    background-color: #febf63;
   }
 
   .btn:hover::before {

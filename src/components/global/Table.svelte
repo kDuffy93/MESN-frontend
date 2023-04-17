@@ -59,7 +59,8 @@
   {#if formattedTableData.length > 0}
     <thead>
       <tr>
-        <th>Record No.</th>
+        <!-- <th>Record No.</th> -->
+        <th>No.</th>
         {#each Object.keys(formattedTableData[0]) as columnHeading}
           <th>{columnHeading}</th>
         {/each}
@@ -146,12 +147,13 @@
 <style>
 
 .even{
-  background-color: #59ab4625;
+  /* background-color: #93b18c25; */
+
 
 }
 
 .odd{
-  background-color: #00539b25;
+  background-color: #3a9ef625;
 }
 
 
@@ -160,7 +162,7 @@
   }
 
   .description > p {
-    max-height: 115px;
+    max-height: 128px;
     overflow-y: scroll;
   }
 
@@ -181,11 +183,12 @@
   .objectCell {
     padding: 2% 0;
     display: grid;
-    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: 1fr 1fr;
     grid-row-gap: 10px;
     justify-content: center;
     align-items: center;
   }
+  
   .objectCell > div {
   }
   .objectCell > div > label {
@@ -207,12 +210,12 @@
     width: 95vw;
     margin: 5vh auto;
     position: relative;
-    margin-right: 2vw;
+    margin-right: 4vw;
   }
 
   table td,
   table th {
-    padding-left: 8px;
+    padding: 10px;
   }
 
   table thead tr {
@@ -256,5 +259,9 @@
     color: #555;
     background-color: #f5f5f5;
     cursor: pointer;
+  }
+  
+  div.objectCell div:nth-child(4) a{
+    word-wrap: break-word;
   }
 </style>
