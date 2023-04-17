@@ -34,9 +34,9 @@ export let landingImage;
 
 
 <style>
-/* :global(body){
+:global(body){
   background: url('https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png');
-} */
+}
 section {
   display: grid;
   grid-template-rows: repeat(1, 1fr);
