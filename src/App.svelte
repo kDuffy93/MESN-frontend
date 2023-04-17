@@ -48,12 +48,10 @@
     <Header title={"rentalData"} navList={rentalDataLinks} />
     <RentalData />
   </Route>
-  <div class='bottomSpacer'></div>
+  
   <Footer />
 </Router>
 
 <style>
-.bottomSpacer{
-  min-height:10vh;
-}
+
 </style>

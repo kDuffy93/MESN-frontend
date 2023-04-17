@@ -41,6 +41,12 @@
 
 <!-- style -->
 <style>
+
+form{
+  transform: scale(1.5);
+}
+
+
   /* container */
   main {
     background: #362100 url("https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png");
