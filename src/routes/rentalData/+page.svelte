@@ -387,7 +387,8 @@
 <style>
   main{
     display:flex;
-  }
+  background: url('https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png');
+}
 .table{
   margin-right:2vw;
 }

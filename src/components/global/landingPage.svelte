@@ -23,24 +23,24 @@ export let landingImage;
     <div class={textContent}>
       <h1>{WelcomeText}<br>{LabText}<br><p>{toolText}</p></h1>
       <h3>{landingH3Text}<br>{h3Text}<br>{h3TextTwo}<br>{h3TextThree}</h3>
-      <div class={linkDiv}>
-        <a href={landingA} >{landingLinkText}<span></span></a>
-      </div>
+     <!-- <div class={linkDiv}>
+         <a href={landingA} >{landingLinkText}<span></span></a> 
+      </div>-->
     </div>
-    <div class={imageContent}><img src={landingImage} /></div>
+    <div class={imageContent}>
+      <img src={landingImage} />
+    </div>
   </section>
 </main>
 
 
 
 <style>
-:global(body){
-  background: url('https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png');
-}
+
 section {
   display: grid;
   grid-template-rows: repeat(1, 1fr);
-  grid-template-columns: 770px 891px;
+  grid-template-columns: repeat(2, 1fr);
   height: inherit;
 }
 
@@ -55,6 +55,7 @@ main{
     transition: 0.3s;
     color: #efefef;
     background-color: #819796;
+    padding: 0;
 }
 .imageContent {
   background: url('https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png');
@@ -65,10 +66,9 @@ main{
   justify-content:center;
 }
 .textContent{
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 /* Here link */
@@ -149,24 +149,16 @@ a span::after {
 /* text */
 h1{
   font-size: 40px;
-  padding-top: 140px;
   text-align: center;
-  padding-left: 10px;
 }
-
-h2{
-  font-size: medium;
-  text-align: right;
-}
-
 h3{
   text-align:center;
   font-size: 23px;
-  padding-left: 40px;
 }
 /* logo image center */
 .imageContent > img{
-  width: 400px;
+  width: 50%;
+  height: auto;
   opacity: 0.5;
 }
 

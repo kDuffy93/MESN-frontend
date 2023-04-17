@@ -30,21 +30,26 @@
     bottom: 0vh;
     right: 0;
     width: 100%;
-  }
+    height: clamp(75px, 7.5vh, 100px);  }
 
-  footer > div > aside {
-    width: 40%;
+  footer > div > aside, footer > div > div {
     text-align: center;
+    height:100%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+  }
+  footer > div > div{
   }
 
   footer > div {
-    /* height: 100%;
-    width: 60%; */
+     height: 100%;
+     
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-
     grid-template-areas: 
     "partner1 title partner2";
+
   }
 
   footer > div > div:nth-child(2) {
@@ -68,7 +73,7 @@
 
   footer > div > div:last-of-type > img,
   footer > div > div:first-of-type > img {
-    width: 125px;
-    /* height: clamp(50px, 7.50vh, 75px); */
+    width: auto;
+     height: clamp(60px, 7.50vh, 90px); 
   }
 </style>
