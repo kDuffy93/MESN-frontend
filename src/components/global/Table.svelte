@@ -74,7 +74,7 @@
             {#if cell}
               {#if typeof cell == typeof {}}
                 {#if iterator % 2 == 0}<td class="even">
-                    <div class="objectCell">
+                    <div class="objectCell {key}">
                       {#each Object.keys(cell) as nestedKey, i}
                         <div>
                           <label for="{String(nestedKey)}{i}">{nestedKey}</label>
@@ -187,6 +187,10 @@
     grid-row-gap: 10px;
     justify-content: center;
     align-items: center;
+  }
+
+  .Address{
+    grid-template-columns: 1fr 1fr;
   }
   
   .objectCell > div {

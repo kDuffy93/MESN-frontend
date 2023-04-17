@@ -227,7 +227,7 @@
   };
 
   let dataButtonDivHandleClick = async (e) => {
-    if (e.target.id == "add") {
+    if (e.target.id == "update") {
       await addSampleRecord();
     } else if (e.target.id == "all") {
       await exportToCSV(result);
