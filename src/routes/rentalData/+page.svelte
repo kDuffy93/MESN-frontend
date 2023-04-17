@@ -50,7 +50,7 @@
   };
 
   let cityFilters = {
-    alliston: "Alliston/Bradford",
+    bradford: "Alliston/Bradford",
     barrie: "Barrie",
     collingwood: "Collingwood",
     midland: "Midland",
@@ -58,14 +58,14 @@
   };
 
   let housingFilters = {
-  Detached:  "fa-solid fa-house",
-  Attached:  "fa-solid fa-city",
-  House:  "fa-solid fa-house-chimney",
-  Apartment:  "fa-solid fa-building",
-  Basement:  "fa-solid fa-stairs"
-};
+    Detached: "fa-solid fa-house",
+    Attached: "fa-solid fa-city",
+    House: "fa-solid fa-house-chimney",
+    Apartment: "fa-solid fa-building",
+    Basement: "fa-solid fa-stairs",
+  };
 
-const housingFiltersArray = Object.entries(housingFilters).map(([key, value]) => ({ key, value }));
+  const housingFiltersArray = Object.entries(housingFilters).map(([key, value]) => ({ key, value }));
   const cityFiltersArray = Object.entries(cityFilters).map(([key, value]) => ({ key, value }));
   const leaseTypeFiltersArray = Object.entries(leaseTypeFilters).map(([key, value]) => ({ key, value }));
 
@@ -88,6 +88,94 @@ const housingFiltersArray = Object.entries(housingFilters).map(([key, value]) =>
 
   // declare a varible to hold the data from the fetch
   let result = {};
+
+  let filteredTableData = [];
+
+  let activeFilterscopy = {
+    leaseType: [],
+    housingType: [],
+    numberOfBedrooms: {
+      number: 2,
+      active: false,
+    },
+    price: {
+      priceMinimum: 0,
+      priceMaximum: 0,
+      active: false,
+    },
+    area: [],
+  };
+
+  $: {
+    try {
+      filteredTableData = [];
+
+      result.forEach((listing) => {
+        console.log(listing);
+        let ok = true;
+        // check if this listing adheres to the current filters. If it does, Push to filteredTableData - if not, dont.
+
+        // this checks if the area of the listing were currently on is in the list of active filters. if its now set ok to false
+        let matchedAny = false;
+
+        if (activeFilters.area.length > 0) {
+          activeFilters.area.forEach((area) => {
+            console.log(`ActiveFilterarea: ${area} | listing.area: ${listing.area} `)
+            if (area.includes(listing.area.toLowerCase())) {
+              matchedAny = true;
+            } else {
+            }
+          });
+        } else {
+          matchedAny = true;
+        }
+
+        // this checks if the number of bedrooms of the listing were currently on is bigger than the number of bedrooms set in the filter if the checkbox is checked.
+        // if it is set ok to false
+
+        let tooManyBedrooms = false;
+
+        if (activeFilters.numberOfBedrooms.active == true) {
+          if (Number(listing.bedrooms) > Number(activeFilters.numberOfBedrooms.number)) {
+            console.log(`Too many bedrooms`);
+            tooManyBedrooms = true;
+          }
+        }
+        
+       
+        // this checks if the listing's rent is between the minimum and maximum prices set in the activeFilters object if the checkbox is checked
+        // if its not, set ok to false
+
+         let inRange = true;
+        if (activeFilters.price.active == true) {
+          if (listing.rent < activeFilters.price.priceMinimum && activeFilters.price.priceMinimun !== 0 && activeFilters.price.priceMinimum!== undefined) {
+            console.log(`Rent too low`);
+            inRange = false;
+          } else if (listing.rent > activeFilters.price.priceMaximum && activeFilters.price.priceMaximum !== 0 && activeFilters.price.priceMaximum !== undefined) {
+            console.log(`Rent too High`);
+            inRange = false;
+          }
+        } 
+
+
+         if (!matchedAny) {
+          ok = false;
+        }
+        if(tooManyBedrooms){
+          ok = false;
+        }
+        if(!inRange){
+          ok = false;
+        }
+        if (ok) {
+          filteredTableData.push(listing);
+        }
+      });
+    } catch {
+      console.log("result is not an array yet");
+    }
+  }
+
   //perform fetch and assign the result to the above varible
   async function getData() {
     await fetch(`${currentURL}/rentalData`, {
@@ -183,8 +271,6 @@ const housingFiltersArray = Object.entries(housingFilters).map(([key, value]) =>
     console.log(activeFilters.area);
   };
 
-  
-
   let housingButtonClick = async (e) => {
     let buttonID = e.target.id;
     if (activeFilters.housingType.includes(buttonID)) {
@@ -231,8 +317,8 @@ const housingFiltersArray = Object.entries(housingFilters).map(([key, value]) =>
         <hr />
         <div class="priceRange modalDiv">
           <h2>Price Range</h2>
-          
-          <div class="price ">
+
+          <div class="price">
             <input type="checkbox" class="toggleFilterInput" id="filterByPriceToggle" bind:checked={activeFilters.price.active} />
             <div class="minPrice">
               <label for="minprice">From</label>
@@ -252,17 +338,12 @@ const housingFiltersArray = Object.entries(housingFilters).map(([key, value]) =>
           <h2>Housing Type</h2>
 
           {#each housingFiltersArray as housingFilter}
-          {#if activeFilters.housingType.includes(housingFilter.key)}
-          <FilterButton on:click={housingButtonClick} value={housingFilter.key} buttonIconClass={housingFilter.value} buttonClass={"housingTypeButton active"} buttonId={housingFilter.key} buttonText={housingFilter.key} />
-          {:else}
-          <FilterButton on:click={housingButtonClick} value={housingFilter.key} buttonIconClass={housingFilter.value} buttonClass={"housingTypeButton"} buttonId={housingFilter.key} buttonText={housingFilter.key} />
-          {/if}
-        {/each}
-
-
-
-          
-
+            {#if activeFilters.housingType.includes(housingFilter.key)}
+              <FilterButton on:click={housingButtonClick} value={housingFilter.key} buttonIconClass={housingFilter.value} buttonClass={"housingTypeButton active"} buttonId={housingFilter.key} buttonText={housingFilter.key} />
+            {:else}
+              <FilterButton on:click={housingButtonClick} value={housingFilter.key} buttonIconClass={housingFilter.value} buttonClass={"housingTypeButton"} buttonId={housingFilter.key} buttonText={housingFilter.key} />
+            {/if}
+          {/each}
         </div>
         <hr />
         <div class="numberOfBedrooms modalDiv">
@@ -294,32 +375,35 @@ const housingFiltersArray = Object.entries(housingFilters).map(([key, value]) =>
   </section>
   <!-- table -->
   {#if Object.entries(result).length > 0}
-    <Table tableData={result} />
+    <Table tableData={filteredTableData} />
   {:else}
     <Table />
   {/if}
 </main>
 
 <style>
-#filterByBedroomsToggle{
-  margin:0;
-}
-#rangeBedrooms {
+  .housingType,
+  .typeOfLease {
+    pointer-events: none;
+    opacity: 35%;
+  }
+  #filterByBedroomsToggle {
+    margin: 0;
+  }
+  #rangeBedrooms {
     width: 85%;
-    display:unset;
+    display: unset;
     margin-bottom: -5px;
   }
-  
-.numberOfBedrooms >h3{
-  text-align: center;
-}
 
+  .numberOfBedrooms > h3 {
+    text-align: center;
+  }
 
-.toggleFilterInput{
-width:10%;
-transform: scale(2);
-}
-
+  .toggleFilterInput {
+    width: 10%;
+    transform: scale(2);
+  }
 
   header {
     justify-content: space-between;
@@ -403,7 +487,7 @@ transform: scale(2);
     font-size: 17px;
     margin: 0;
   }
- 
+
   #shortterm,
   #middleterm,
   #longterm,
