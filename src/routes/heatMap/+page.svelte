@@ -62,6 +62,8 @@ let checked = false;
 
   main {
     display: flex;
+  background: url('https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png');
+    
   }
   main > div {
     background-color: #f6f6f6;

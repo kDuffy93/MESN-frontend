@@ -11,10 +11,10 @@ import LandingPage from "../../components/global/landingPage.svelte";
         .</h3>
 </main> -->
 
-<LandingPage landingMainClass={'container'} landingSpanText={'Welcome to'} landingBrText={"the Affordable Housing Community Lab's"} landingPText={'Online Tool.'} landingH3Text={`We hope to make this tool available for public use in the futue. Check back soon for updates.`} landingA={'#'} landingLinkText={'here'}/>
+<LandingPage landingMainClass={'container'} WelcomeText={'Welcome to the Affordable'} LabText={"Housing Community Lab's"} toolText={'Online Tool'} landingH3Text={'We hope to make this tool'} h3Text={'available for public use in the'} h3TextTwo={'future. Check back soon for'} h3TextThree={' updates..'} landingA={'#'} landingLinkText={'Here'} textContent={'textContent'} imageContent={'imageContent'} linkDiv={'linkDiv'} landingImage={'https://i.esdrop.com/d/f/00nJAaeIIr/wxUtHlyxYk.svg'}/>
 
 <style>
-h1{
+/* h1{
     font-size:large;
     width:33vw;
 }
@@ -36,6 +36,6 @@ h3{
 text-align:center;
     font-size: large;
     margin-top:25vh;
-}
+} */
 </style>
 

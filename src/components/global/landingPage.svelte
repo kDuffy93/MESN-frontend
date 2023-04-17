@@ -1,33 +1,50 @@
 <script>
 // import Partialslinks from "./partialslinks.svelte";
 export let landingMainClass;
-export let landingSpanText;
-export let landingBrText;
-export let landingPText;
+export let WelcomeText;
+export let LabText;
+export let toolText;
 export let landingH3Text;
+export let h3Text;
+export let h3TextTwo;
+export let h3TextThree;
 export let landingA;
 export let landingLinkText;
-
+export let textContent;
+export let imageContent;
+export let linkDiv;
+export let landingImage;
 </script>
 
 <!-- html -->
 
 <main class={landingMainClass}>
-    <h1><span>{landingSpanText}</span><br>{landingBrText}<br><p>{landingPText}</p></h1>
-    <h3>{landingH3Text}.
-      <!-- <a href={landingA} >{landingLinkText}<span></span></a> -->
-    </h3>
+  <section>
+    <div class={textContent}>
+      <h1>{WelcomeText}<br>{LabText}<br><p>{toolText}</p></h1>
+      <h3>{landingH3Text}<br>{h3Text}<br>{h3TextTwo}<br>{h3TextThree}</h3>
+     <!-- <div class={linkDiv}>
+         <a href={landingA} >{landingLinkText}<span></span></a> 
+      </div>-->
+    </div>
+    <div class={imageContent}>
+      <img src={landingImage} />
+    </div>
+  </section>
 </main>
 
 
 
 <style>
-/* container */
-:global(body){
-  background: url('https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png');
+
+section {
+  display: grid;
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  height: inherit;
 }
+
 main{
- 
   width: 100vw;
     height: 85vh;
     background-size: cover;
@@ -36,8 +53,28 @@ main{
     z-index: -1;
     position: absolute;
     transition: 0.3s;
-    /* opacity: 0.5; */
-    color: #F5F5F5;
+    color: #efefef;
+    background-color: #819796;
+    padding: 0;
+}
+.imageContent {
+  background: url('https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png');
+  background-repeat : no-repeat;
+  background-size: cover;
+  align-items:center; 
+  display: flex; 
+  justify-content:center;
+}
+.textContent{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+/* Here link */
+.linkDiv {
+  padding-left: 380px;
+  padding-bottom: 210px;
 }
 a{
     --color: #00539B;
@@ -45,7 +82,9 @@ a{
   text-decoration: none;
   color: var(--color);
   font-family: "Inter", sans-serif;
+  font-size: 20px;
   padding: 0.2rem 0;
+
 }
 a::before{
     --line-width: 115%;
@@ -107,28 +146,20 @@ a span::after {
   transform: translateX(-1px) rotate(0deg);
 }
 
-/*  */
-/* h1{
-    font-size:large;
-    width:33vw;
+/* text */
+h1{
+  font-size: 40px;
+  text-align: center;
 }
-h1>span:first-of-type{
-    font-size: xx-large;
-    margin-left:-2.5vw;
-} */
-h1>p{
-    text-align: center;
-    padding-right:5vw;
-}
-
-h2{
-    font-size: medium;
-    text-align: right;
-}
-
 h3{
-text-align:center;
-    font-size: large;
-    margin-top:25vh;
+  text-align:center;
+  font-size: 23px;
 }
+/* logo image center */
+.imageContent > img{
+  width: 50%;
+  height: auto;
+  opacity: 0.5;
+}
+
 </style>

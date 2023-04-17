@@ -2,47 +2,57 @@
 </script>
 
 <footer>
-  <aside>
-    &copy; Georgian College Web Project Studio 2023
-    <br />
-    Team Marshmallow
-  </aside>
+
   <div>
     <div>
       <img src="./images/CountyOfSimcoeLogo.png" />
     </div>
     <div>
+    <aside>
+      &copy; Georgian College Web Project Studio 2023
+      <br />
+      Team Marshmallow
+    </aside>
+    </div>
+    <div>
       <img src="./images/CCIS_Logo_Vertical.webp" />
     </div>
   </div>
+  
 </footer>
 
 <style>
   footer {
     background-color: #f0f0f0;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     position:fixed;
     bottom: 0vh;
     right: 0;
     width: 100%;
-  }
+    height: clamp(75px, 7.5vh, 100px);  }
 
-  footer > aside {
-    width: 40%;
+  footer > div > aside, footer > div > div {
     text-align: center;
+    height:100%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+  }
+  footer > div > div{
   }
 
   footer > div {
-    height: 100%;
-    width: 60%;
+     height: 100%;
+     
     display: grid;
-    grid-template-columns: repeat(1fr, 5);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+    "partner1 title partner2";
 
-    grid-template-areas: ". . title . ." " . partner1 . partner2 .";
   }
 
-  footer > div > p {
+  footer > div > div:nth-child(2) {
     grid-area: title;
     text-align: center;
     font-size: 8pt;
@@ -64,6 +74,6 @@
   footer > div > div:last-of-type > img,
   footer > div > div:first-of-type > img {
     width: auto;
-    height: clamp(50px, 7.50vh, 75px);
+     height: clamp(60px, 7.50vh, 90px); 
   }
 </style>
