@@ -5,12 +5,13 @@
   let localServerURL = "http://localhost:5001";
 
   //change which is commented dependant on where youre working
-  let currentURL = liveServerURL;
-  //let currentURL = localServerURL;
+  // let currentURL = liveServerURL;
+  let currentURL = localServerURL;
 
   // import components to be used on this page
   import Button from "../../components/global/button.svelte";
   import FilterButton from "../../components/global/FilterButton.svelte";
+  import FilterButtonLeft from "../../components/global/FilterButtonLeft.svelte";
   import Table from "../../components/global/Table.svelte";
   //import data
 
@@ -303,8 +304,8 @@
 
   <section class="buttonSection">
     <!-- Filter Button Starts -->
-    <FilterButton class="filterButton" on:click={() => (showModal = true)} buttonId={"filterButton"} buttonIconClass={"fa-solid fa-bars"} buttonText={"Filter"} />
-    <Modal bind:showModal>
+    <FilterButtonLeft class="filterButton" on:click={() => (showModal = true)} buttonId={"filterButton"} buttonIconClass={"fa-solid fa-bars"}  buttonTitle={"Filter"}/>
+      <Modal bind:showModal>
       <div class="modalContent">
         <div class="cityTown modalDiv">
           <h2>City/Town</h2>
