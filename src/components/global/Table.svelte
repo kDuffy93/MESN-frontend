@@ -143,6 +143,7 @@
   {/if}
 </table>
 
+
 <!-- css -->
 <style>
 
@@ -211,7 +212,7 @@
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
-    width: 95vw;
+    width: 87.5vw;
     margin: 5vh auto;
     position: relative;
     margin-right: 4vw;

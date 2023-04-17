@@ -121,7 +121,7 @@
 
         if (activeFilters.area.length > 0) {
           activeFilters.area.forEach((area) => {
-            console.log(`ActiveFilterarea: ${area} | listing.area: ${listing.area} `)
+            console.log(`ActiveFilterarea: ${area} | listing.area: ${listing.area} `);
             if (area.includes(listing.area.toLowerCase())) {
               matchedAny = true;
             } else {
@@ -142,30 +142,28 @@
             tooManyBedrooms = true;
           }
         }
-        
-       
+
         // this checks if the listing's rent is between the minimum and maximum prices set in the activeFilters object if the checkbox is checked
         // if its not, set ok to false
 
-         let inRange = true;
+        let inRange = true;
         if (activeFilters.price.active == true) {
-          if (listing.rent < activeFilters.price.priceMinimum && activeFilters.price.priceMinimun !== 0 && activeFilters.price.priceMinimum!== undefined) {
+          if (listing.rent < activeFilters.price.priceMinimum && activeFilters.price.priceMinimun !== 0 && activeFilters.price.priceMinimum !== undefined) {
             console.log(`Rent too low`);
             inRange = false;
           } else if (listing.rent > activeFilters.price.priceMaximum && activeFilters.price.priceMaximum !== 0 && activeFilters.price.priceMaximum !== undefined) {
             console.log(`Rent too High`);
             inRange = false;
           }
-        } 
+        }
 
-
-         if (!matchedAny) {
+        if (!matchedAny) {
           ok = false;
         }
-        if(tooManyBedrooms){
+        if (tooManyBedrooms) {
           ok = false;
         }
-        if(!inRange){
+        if (!inRange) {
           ok = false;
         }
         if (ok) {
@@ -304,8 +302,8 @@
 
   <section class="buttonSection">
     <!-- Filter Button Starts -->
-    <FilterButtonLeft class="filterButton" on:click={() => (showModal = true)} buttonId={"filterButton"} buttonIconClass={"fa-solid fa-bars"}  buttonTitle={"Filter"}/>
-      <Modal bind:showModal>
+    <FilterButtonLeft class="filterButton" on:click={() => (showModal = true)} buttonId={"filterButton"} buttonIconClass={"fa-solid fa-bars"} buttonTitle={"Filter"} />
+    <Modal bind:showModal>
       <div class="modalContent">
         <div class="cityTown modalDiv">
           <h2>City/Town</h2>
@@ -378,20 +376,39 @@
   </section>
   <!-- table -->
   {#if Object.entries(result).length > 0}
-    <Table class="table" tableData={filteredTableData} />
+    <div class="tableSection">
+      <Table class="table" tableData={filteredTableData} />
+      <div class="bottomSpacer" />
+    </div>
   {:else}
-    <Table />
+    <div class="tableSection">
+      <Table />
+    </div>
   {/if}
 </main>
 
 <style>
-  main{
-    display:flex;
-  background: url('https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png');
-}
-.table{
-  margin-right:2vw;
-}
+
+
+  .bottomSpacer {
+    min-height: 10vh;
+  }
+  main {
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png");;
+    margin: 0;
+    padding: 0;
+    height: inherit;
+  }
+  .body {
+    background: url("https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png");
+  }
+
+  .table {
+    margin-right: 2vw;
+  }
   .housingType,
   .typeOfLease {
     pointer-events: none;
@@ -469,7 +486,7 @@
     justify-content: space-evenly;
     align-items: center;
     padding: 0 2vw;
-    position:sticky;
+    position: sticky;
     top: 7.5px;
     z-index: 100;
     flex-direction: column;

@@ -63,6 +63,7 @@ let checked = false;
   main {
     display: flex;
   background: url('https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png');
+  height:85vh;
     
   }
   main > div {
@@ -71,6 +72,7 @@ let checked = false;
     min-height: 70%;
     margin-top: 2.5vh;
     margin-left: 15%;
+    height:75vh;
 
   }
   main > aside {
