@@ -8,6 +8,7 @@
   //import Pages
   import LandingPage from "./routes/landingPage/+page.svelte";
   import Login from "./routes/login/+page.svelte";
+  import Register from "./routes/register/+page.svelte";
   import HeatMap from "./routes/heatMap/+page.svelte";
   import RentalData from "./routes/rentalData/+page.svelte";
 
@@ -22,6 +23,7 @@
     { href: "/", linkText: "Log Out" },
   ];
   let landingPageLinks = [{ href: "/login", linkText: "Log In" }];
+  let registerLinks = [{ href: "/", linkText: "Go Back"}];
 </script>
 
 <Router {url}>
@@ -32,6 +34,10 @@
   <Route path="login">
     <Header title={"login"} navList={loginLinks} />
     <Login />
+  </Route>
+  <Route path="register">
+    <Header title={"register"} navList={registerLinks} />
+    <Register />
   </Route>
   <Route path="heatMap">
     <Header title={"heatMap"} navList={heatMapLinks} />

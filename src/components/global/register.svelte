@@ -1,39 +1,43 @@
 <script>
 
-  export let inputIdUser;
+  export let registerHeading;
   export let labelClassUser;
-  export let labelTextUser;
-  export let InputTypeUser;
-  export let inputIdPwd;
+  export let registerLabelUserId;
+  export let registerUserId;
+  export let registertTypeUserId;
+  export let registerPwd;
   export let labelClassPwd;
-  export let labelTextPwd;
-  export let InputTypePwd;
-  export let linkNameLog;
-  export let linksTextLog;
-  export let linkNamePwd;
-  export let linksTextPwd;
-  export let loginText;
-  export let pwdClass;
-  export let loginClass;
-  export let registerText;
-  export let linkRegister;
+  export let registerLabelPwd;
+  export let registerTypePwd;
+  export let registerConfirmPwd;
+  export let registerLabelComfirmPwd;
+  export let registerTypeConfirmPwd;
+  export let registerTextButton;
   export let registerClass;
+  export let registerMsg;
+  export let comparePasswords;
+
+  export let userNameValue = "";
+  export let passwordValue = "";
+  export let confirmPasswordValue = "";
+  
 
 </script>
 
 <!-- html -->
 <main>
   <section class="container">
-    <form>
+    <form method="post">
 
-      <h1>{loginText}</h1>
-      <label for={inputIdUser} class={labelClassUser}>{labelTextUser}</label>
-      <input type={InputTypeUser} id={inputIdUser} />
-      <label for={inputIdPwd} class={labelClassPwd}>{labelTextPwd}</label>
-      <input type={InputTypePwd} id={inputIdPwd} />
-      <a href={linkNameLog} class={loginClass}>{linksTextLog}<span /></a><br />
-      <a href={linkRegister} class={registerClass}>{registerText}<span /></a><br />
-      <a href={linkNamePwd} class={pwdClass}>{linksTextPwd}<span /></a>
+      <h1>{registerHeading}</h1>
+      <label for={registerUserId} class={labelClassUser}>{registerLabelUserId}</label>
+      <input id={registerUserId} bind:value={userNameValue}/>
+      <label for={registerPwd} class={labelClassPwd}>{registerLabelPwd}</label>
+      <input type="password" id={registerPwd} bind:value={passwordValue}/>
+      <label for={registerConfirmPwd} class={labelClassPwd}>{registerLabelComfirmPwd}</label>
+      <input type="password" id={registerConfirmPwd} bind:value={confirmPasswordValue}/>
+      <button on:click|preventDefault class={registerClass}>{registerTextButton}</button><br />
+      <span id={registerMsg}></span><br />
 
     </form>
   </section>
@@ -110,24 +114,8 @@
     outline: none;
   }
 
-  /* login button */
-  .loginClass {
-    display: inline-block;
-    background: #00539b;
-    color: #f5f5f5;
-    border: none;
-    text-decoration: none;
-    border-radius: 25px;
-    margin: 10px auto 10px auto;
-    padding: 8px 20px;
-  }
-  .loginClass:hover {
-    background: #64a70b;
-    /* color: black; */
-    outline: none;
-  }
   /* register button */
-    .registerClass {
+  .registerClass {
     display: inline-block;
     background: #4e8abf;
     color: #f5f5f5;
