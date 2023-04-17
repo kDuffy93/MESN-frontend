@@ -37,7 +37,7 @@
         },
         Rent: {
           Price: listing.rent != undefined ? listing.rent : "Unknown",
-          Frequency: listing.rentFrequency != undefined ?  listing.rentFrequency : "Unknown",
+          Frequency: listing.rentFrequency != undefined ? listing.rentFrequency : "Unknown",
         },
         "Unit Size": listing.unitSize != undefined ? listing.unitSize : "Unknown",
         Description: listing.description != undefined ? listing.description : "Unknown",
@@ -67,30 +67,68 @@
     </thead>
     <tbody>
       {#each Object.values(formattedTableData) as row, i}
-        <tr>
-          <td>{i + 1}</td>
-          {#each Object.values(row) as cell}
+        <tr class="MainTableRow">
+          <td class="odd">{i + 1}</td>
+          {#each Object.entries(row) as [key, cell], iterator}
             {#if cell}
               {#if typeof cell == typeof {}}
-                <td>
-                  {#each Object.keys(cell) as nestedKey, i}
-                    <div>
-                      <label for="{String(nestedKey)}{i}">{nestedKey}</label>
-                      {#each Object.values(cell) as nestedValue, i2}
-                        {#if i == i2}
-                          <p id="{String(nestedValue)}{i2}">{nestedValue}</p>
-                        {/if}
+                {#if iterator % 2 == 0}<td class="even">
+                    <div class="objectCell">
+                      {#each Object.keys(cell) as nestedKey, i}
+                        <div>
+                          <label for="{String(nestedKey)}{i}">{nestedKey}</label>
+                          {#each Object.values(cell) as nestedValue, i2}
+                            {#if i == i2}
+                              {#if nestedKey == "Geo-Location"}
+                                <a id="{String(nestedValue)}{i2}" href={`https://www.google.ca/maps/@${nestedValue},21z`}>{nestedValue}</a>
+                              {:else}
+                                <p id="{String(nestedValue)}{i2}">{nestedValue}</p>
+                              {/if}
+                            {/if}
+                          {/each}
+                        </div>
                       {/each}
                     </div>
-                  {/each}
-                </td>
+                  </td>
+                {:else}
+                  <td class="odd">
+                    <div class="objectCell">
+                      {#each Object.keys(cell) as nestedKey, i}
+                        <div>
+                          <label for="{String(nestedKey)}{i}">{nestedKey}</label>
+                          {#each Object.values(cell) as nestedValue, i2}
+                            {#if i == i2}
+                              {#if nestedKey == "Geo-Location"}
+                                <a id="{String(nestedValue)}{i2}" href={`https://www.google.ca/maps/@${nestedValue},21z`}>{nestedValue}</a>
+                              {:else}
+                                <p id="{String(nestedValue)}{i2}">{nestedValue}</p>
+                              {/if}
+                            {/if}
+                          {/each}
+                        </div>
+                      {/each}
+                    </div>
+                  </td>
+                {/if}
               {:else if typeof cell == typeof ""}
-                <td>{cell}</td>
+                {#if iterator % 2 == 0}
+                  {#if key == "Description"}
+                    <td class="description even"><p>{cell}</p></td>
+                  {:else}
+                    <td class="even">{cell}</td>
+                  {/if}
+                {:else}
+                    {#if key == "Description"}
+                    <td class="description odd"><p>{cell}</p></td>
+                  {:else}
+                    <td class="odd">{cell}</td>
+                  {/if}
+                {/if}
               {:else}
                 <td />
               {/if}
-              {:else}
-              <td></td>
+            {:else}
+              <td />
             {/if}
           {/each}
         </tr>
@@ -106,6 +144,53 @@
 
 <!-- css -->
 <style>
+
+.even{
+  background-color: #59ab4625;
+
+}
+
+.odd{
+  background-color: #00539b25;
+}
+
+
+  .MainTableRow {
+    height: 150px;
+  }
+
+  .description > p {
+    max-height: 115px;
+    overflow-y: scroll;
+  }
+
+
+  .MainTableRow > td {
+    width: 12.5%;
+  }
+  .MainTableRow > td:first-of-type {
+    width: 2.5%;
+
+  } 
+   .MainTableRow > .description {
+    width: 30%;
+    text-align: center;
+  }
+  :has(.objectCell) {
+  }
+  .objectCell {
+    padding: 2% 0;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-row-gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  .objectCell > div {
+  }
+  .objectCell > div > label {
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -113,7 +198,7 @@
   }
 
   table {
-
+    height: fit-content;
     border-spacing: 1;
     border-collapse: collapse;
     background: #fff;
@@ -122,8 +207,7 @@
     width: 95vw;
     margin: 5vh auto;
     position: relative;
-  margin-right:2vw;
-
+    margin-right: 2vw;
   }
 
   table td,
@@ -133,19 +217,19 @@
 
   table thead tr {
     height: 60px;
-    background: #36304a;
+    background: #00539be3;
   }
 
   table tbody tr {
-    height: 50px;
+    max-height: 50px;
+    overflow-y: hidden;
   }
   table tbody tr:last-child {
     border: 0;
   }
-
   table td,
   table th {
-    text-align: left;
+    text-align: center;
   }
 
   table thead tr th {
