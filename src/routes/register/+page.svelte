@@ -9,23 +9,29 @@
   let currentURL = localServerURL;
 
   $:userData = {
-    userName: "",
+    username: "",
     password: ""
   }
+  let registerUser = async () => {
+      console.log("registering user...");
+      const response = await fetch(`${currentURL}/register`, {
+      method: "post",
+      mode: "cors", 
+      body: JSON.stringify(userData),
+      headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    });
+      return response.json();
+    }
 
   function comparePasswords() {
     let pw1 = document.getElementById('password').value;
     let pw2 = document.getElementById('confirm').value;
     let pwMsg = document.getElementById('pwMsg');
 
-    let registerUser = async () => {
-      console.log("registering user...");
-      const response = await fetch(`${currentURL}/register`, {
-      method: "post",
-      body: JSON.stringify(userData)
-    });
-      return response.json();
-    }
+
     
 
     if (pw1 != pw2) {
@@ -37,14 +43,14 @@
           // redirect user to login page
           pwMsg.innerText = "registered";
         } else {
-          pwMsg.innerText = "problem registering user";
+          pwMsg.innerText = response.body.message;
           pwMsg.className = "registerError";
         }
     }
 }
 </script>
 
-<Register on:click={comparePasswords} bind:userNameValue={userData.userName} bind:passwordValue={userData.password}  registerUserId={"username"} labelClassUser={"userName"} registerLabelUserId={"Username: "} registertTypeUserId={"text"} registerPwd={"password"} labelClassPwd={"password"} registerLabelPwd={"Password: "} registerTypePwd={"text"} registerConfirmPwd={"confirm"} registerLabelComfirmPwd={"Confirm Password:"} registerTypeConfirmPwd={"text"} registerFunction={"Register"} registerHeading={"Register Your Account"} registerTextButton={"Register Account"} registerClass={"registerClass"} pwdClass={"pwdClass"} registerMsg={"pwMsg"}/>
+<Register on:click={comparePasswords} bind:userNameValue={userData.username} bind:passwordValue={userData.password}  registerUserId={"username"} labelClassUser={"userName"} registerLabelUserId={"Username: "} registertTypeUserId={"text"} registerPwd={"password"} labelClassPwd={"password"} registerLabelPwd={"Password: "} registerTypePwd={"text"} registerConfirmPwd={"confirm"} registerLabelComfirmPwd={"Confirm Password:"} registerTypeConfirmPwd={"text"} registerFunction={"Register"} registerHeading={"Register Your Account"} registerTextButton={"Register Account"} registerClass={"registerClass"} pwdClass={"pwdClass"} registerMsg={"pwMsg"}/>
 
 <style>
   main > section {

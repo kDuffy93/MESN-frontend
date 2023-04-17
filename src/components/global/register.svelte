@@ -28,7 +28,6 @@
 <main>
   <section class="container">
     <form method="post">
-
       <h1>{registerHeading}</h1>
       <label for={registerUserId} class={labelClassUser}>{registerLabelUserId}</label>
       <input id={registerUserId} bind:value={userNameValue}/>
@@ -38,7 +37,6 @@
       <input type="password" id={registerConfirmPwd} bind:value={confirmPasswordValue}/>
       <button on:click|preventDefault class={registerClass}>{registerTextButton}</button><br />
       <span id={registerMsg}></span><br />
-
     </form>
   </section>
 </main>
