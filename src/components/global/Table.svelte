@@ -4,25 +4,7 @@
   export let tableId;
 
   export let tableData = [
-    {
-      Address: {
-        "Street Address": "",
-        Area: "",
-        Municipality: "",
-        "Geo-Location": "",
-      },
-      Rent: {
-        Price: `$0`,
-        Frequency: "",
-      },
-      UnitSize: "",
-      Description: "",
-      Utilities: {
-        Included: "",
-        Additional: "",
-      },
-      Available: "",
-    },
+   
   ];
   let formattedTableData;
   $: {
