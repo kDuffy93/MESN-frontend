@@ -5,14 +5,14 @@
   let localServerURL = "http://localhost:5001";
 
   //change which is commented dependant on where youre working
-  //let currentURL = liveServerURL;
-  let currentURL = localServerURL;
+  let currentURL = liveServerURL;
+  //let currentURL = localServerURL;
 
   $: userData = {
     username: "",
     password: "",
   };
-  
+
   let registerUser = async () => {
     console.log("registering user...");
     const response = await fetch(`${currentURL}/register`, {
