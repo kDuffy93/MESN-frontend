@@ -3,9 +3,7 @@
   export let tableClass;
   export let tableId;
 
-  export let tableData = [
-   
-  ];
+  export let tableData = [];
   let formattedTableData;
   $: {
     formattedTableData = [];
@@ -63,14 +61,34 @@
                           {#each Object.values(cell) as nestedValue, i2}
                             {#if i == i2}
                               {#if nestedKey == "Geo-Location"}
-                                <a title="Open in Google Maps" id="{String(nestedValue)}{i2}" href={`https://www.google.ca/maps/@${nestedValue},21z`}><i class="fa-solid fa-map-location-dot"></i></a>
+                                <a title="Open in Google Maps" id="{String(nestedValue)}{i2}" href={`https://www.google.ca/maps/@${nestedValue},21z`}><i class="fa-solid fa-map-location-dot" /></a>
                               {:else if nestedKey == "Additional"}
-                               <div> {#if nestedValue.includes('Plus Water')}
-                                <i title="Plus Water" class="fa-solid fa-shower waterIcon"></i>{/if}
-                                {#if nestedValue.includes('Plus Heat') }
-                                <i title="Plus Heat" class="fa-solid fa-fire-burner heatIcon"></i>{/if}
-                                {#if nestedValue.includes('Plus Hydro') }
-                                <i title="Plus Hydro" class="fa-solid fa-bolt hydroIcon"></i>{/if}</div>
+                                {#if nestedValue.length == 0}
+                                  <div class="empty">
+                                    {#if nestedValue.includes("Plus Water")}
+                                      <i title="Plus Water" class="fa-solid fa-shower waterIcon" />{/if}
+                                    {#if nestedValue.includes("Plus Heat")}
+                                      <i title="Plus Heat" class="fa-solid fa-fire-burner heatIcon" />{/if}
+                                    {#if nestedValue.includes("Plus Hydro")}
+                                      <i title="Plus Hydro" class="fa-solid fa-bolt hydroIcon" />{/if}
+                                  </div>
+                                {:else}
+                                  <div>
+                                    {#if nestedValue.includes("Plus Water")}
+                                      <i title="Plus Water" class="fa-solid fa-shower waterIcon" />{/if}
+                                    {#if nestedValue.includes("Plus Heat")}
+                                      <i title="Plus Heat" class="fa-solid fa-fire-burner heatIcon" />{/if}
+                                    {#if nestedValue.includes("Plus Hydro")}
+                                      <i title="Plus Hydro" class="fa-solid fa-bolt hydroIcon" />{/if}
+                                  </div>
+                                {/if}
+                              {:else if nestedKey == "Included"}
+                                {#if nestedValue == "Yes"}
+                                  <div><i class="fa-solid fa-thumbs-up yesIcon" /></div>
+                                {:else}
+                                  <div>
+                                    <i class="fa-solid fa-thumbs-down noIcon" />
+                                  </div>{/if}
                               {:else}
                                 <p id="{String(nestedValue)}{i2}">{nestedValue}</p>
                               {/if}
@@ -89,14 +107,16 @@
                           {#each Object.values(cell) as nestedValue, i2}
                             {#if i == i2}
                               {#if nestedKey == "Geo-Location"}
-                                <a title="Open in Google Maps" id="{String(nestedValue)}{i2}" href={`https://www.google.ca/maps/@${nestedValue},21z`}><i class="fa-solid fa-map-location-dot"></a>
+                                <a title="Open in Google Maps" id="{String(nestedValue)}{i2}" href={`https://www.google.ca/maps/@${nestedValue},21z`}><i class="fa-solid fa-map-location-dot" /></a>
                               {:else if nestedKey == "Additional"}
-                              <div> {#if nestedValue.includes('Plus Water')}
-                                <i  title="Plus Water" class="fa-solid fa-shower waterIcon"></i>{/if}
-                                {#if nestedValue.includes('Plus Heat') }
-                                <i title="Plus Heat" class="fa-solid fa-fire-burner heatIcon"></i>{/if}
-                                {#if nestedValue.includes('Plus Hydro') }
-                                <i title="Plus Hydro" class="fa-solid fa-bolt hydroIcon"></i>{/if}</div>
+                                <div>
+                                  {#if nestedValue.includes("Plus Water")}
+                                    <i title="Plus Water" class="fa-solid fa-shower waterIcon" />{/if}
+                                  {#if nestedValue.includes("Plus Heat")}
+                                    <i title="Plus Heat" class="fa-solid fa-fire-burner heatIcon" />{/if}
+                                  {#if nestedValue.includes("Plus Hydro")}
+                                    <i title="Plus Hydro" class="fa-solid fa-bolt hydroIcon" />{/if}
+                                </div>
                               {:else}
                                 <p id="{String(nestedValue)}{i2}">{nestedValue}</p>
                               {/if}
@@ -114,12 +134,10 @@
                   {:else}
                     <td class="even">{cell}</td>
                   {/if}
+                {:else if key == "Description"}
+                  <td class="description odd"><p>{cell}</p></td>
                 {:else}
-                    {#if key == "Description"}
-                    <td class="description odd"><p>{cell}</p></td>
-                  {:else}
-                    <td class="odd">{cell}</td>
-                  {/if}
+                  <td class="odd">{cell}</td>
                 {/if}
               {:else}
                 <td />
@@ -139,34 +157,38 @@
   {/if}
 </table>
 
-
 <!-- css -->
 <style>
-
-.waterIcon{
-  color:#337ab7;
-}
-.heatIcon{
-  color:rgba(255, 123, 0, 0.856);
-}
-.hydroIcon{
-  color: goldenrod
-}
-  i{
+  :has(> .empty) {
+    display: none;
+  }
+  .waterIcon {
+    color: #337ab7;
+  }
+  .heatIcon {
+    color: rgba(255, 123, 0, 0.856);
+  }
+  .hydroIcon {
+    color: goldenrod;
+  }
+  .noIcon {
+    color: rgba(255, 0, 0, 0.718);
+  }
+  .yesIcon {
+    color: rgba(0, 128, 0, 0.801);
+  }
+  i {
     font-size: 22pt;
     margin: 7.5px 5px 0 0;
   }
 
-.even{
-  /* background-color: #93b18c25; */
+  .even {
+    /* background-color: #93b18c25; */
+  }
 
-
-}
-
-.odd{
-  background-color: #3a9ef625;
-}
-
+  .odd {
+    background-color: #3a9ef625;
+  }
 
   .MainTableRow {
     height: 150px;
@@ -177,15 +199,13 @@
     overflow-y: scroll;
   }
 
-
   .MainTableRow > td {
     width: 12.5%;
   }
   .MainTableRow > td:first-of-type {
     width: 2.5%;
-
-  } 
-   .MainTableRow > .description {
+  }
+  .MainTableRow > .description {
     width: 30%;
     text-align: center;
   }
@@ -200,10 +220,10 @@
     align-items: center;
   }
 
-  .Address{
+  .Address {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   .objectCell > div {
   }
   .objectCell > div > label {
@@ -275,8 +295,8 @@
     background-color: #f5f5f5;
     cursor: pointer;
   }
-  
-  div.objectCell div:nth-child(4) a{
+
+  div.objectCell div:nth-child(4) a {
     word-wrap: break-word;
   }
 </style>
