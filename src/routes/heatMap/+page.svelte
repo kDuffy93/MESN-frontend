@@ -2,12 +2,8 @@
   import HeatToggle from "../../components/global/heatToggle.svelte";
   import HeatMap from "../../components/global/heatMap.svelte";
   //page level varibles
-  let liveServerURL = "https://mesn-backend.onrender.com";
-  let localServerURL = "http://localhost:5001";
 
-  //change which is commented dependant on where youre working
-  //let currentURL = liveServerURL;
-  let currentURL = localServerURL;
+  export let currentURL = localServerURL;
 
 let checked = false;
 

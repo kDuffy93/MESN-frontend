@@ -1,12 +1,7 @@
 <script>
   import { ExportToCsv } from "export-to-csv";
-  //page level varibles
-  let liveServerURL = "https://mesn-backend.onrender.com";
-  let localServerURL = "http://localhost:5001";
+  export let currentURL = localServerURL;
 
-  //change which is commented dependant on where youre working
-  // let currentURL = liveServerURL;
-  let currentURL = localServerURL;
 
   // import components to be used on this page
   import Button from "../../components/global/button.svelte";

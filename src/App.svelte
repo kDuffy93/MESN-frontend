@@ -25,6 +25,16 @@
   ];
   let landingPageLinks = [{ href: "/login", linkText: "Log In" }];
   let registerLinks = [{ href: "/rentalData", linkText: "Go Back to Rental Data page"}];
+
+  let liveServerURL = "https://mesn-backend.onrender.com";
+  let localServerURL = "http://localhost:5001";
+
+  //change which is commented dependant on where youre working
+  let currentURL = liveServerURL;
+  //let currentURL = localServerURL;
+
+
+
 </script>
 
 <Router {url}>
@@ -34,19 +44,19 @@
   </Route>
   <Route path="login">
     <Header title={"login"} navList={loginLinks} />
-    <Login />
+    <Login bind:currentURL />
   </Route>
   <Route path="register">
     <Header title={"register"} navList={registerLinks} />
-    <Register />
+    <Register bind:currentURL/>
   </Route>
   <Route path="heatMap">
     <Header title={"heatMap"} navList={heatMapLinks} />
-    <HeatMap />
+    <HeatMap bind:currentURL />
   </Route>
   <Route path="rentalData">
     <Header title={"rentalData"} navList={rentalDataLinks} />
-    <RentalData />
+    <RentalData  bind:currentURL/>
   </Route>
   
   <Footer />
