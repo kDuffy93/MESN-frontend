@@ -63,7 +63,14 @@
                           {#each Object.values(cell) as nestedValue, i2}
                             {#if i == i2}
                               {#if nestedKey == "Geo-Location"}
-                                <a id="{String(nestedValue)}{i2}" href={`https://www.google.ca/maps/@${nestedValue},21z`}>{nestedValue}</a>
+                                <a title="Open in Google Maps" id="{String(nestedValue)}{i2}" href={`https://www.google.ca/maps/@${nestedValue},21z`}><i class="fa-solid fa-map-location-dot"></i></a>
+                              {:else if nestedKey == "Additional"}
+                               <div> {#if nestedValue.includes('Plus Water')}
+                                <i title="Plus Water" class="fa-solid fa-shower waterIcon"></i>{/if}
+                                {#if nestedValue.includes('Plus Heat') }
+                                <i title="Plus Heat" class="fa-solid fa-fire-burner heatIcon"></i>{/if}
+                                {#if nestedValue.includes('Plus Hydro') }
+                                <i title="Plus Hydro" class="fa-solid fa-bolt hydroIcon"></i>{/if}</div>
                               {:else}
                                 <p id="{String(nestedValue)}{i2}">{nestedValue}</p>
                               {/if}
@@ -82,7 +89,14 @@
                           {#each Object.values(cell) as nestedValue, i2}
                             {#if i == i2}
                               {#if nestedKey == "Geo-Location"}
-                                <a id="{String(nestedValue)}{i2}" href={`https://www.google.ca/maps/@${nestedValue},21z`}>{nestedValue}</a>
+                                <a title="Open in Google Maps" id="{String(nestedValue)}{i2}" href={`https://www.google.ca/maps/@${nestedValue},21z`}><i class="fa-solid fa-map-location-dot"></a>
+                              {:else if nestedKey == "Additional"}
+                              <div> {#if nestedValue.includes('Plus Water')}
+                                <i  title="Plus Water" class="fa-solid fa-shower waterIcon"></i>{/if}
+                                {#if nestedValue.includes('Plus Heat') }
+                                <i title="Plus Heat" class="fa-solid fa-fire-burner heatIcon"></i>{/if}
+                                {#if nestedValue.includes('Plus Hydro') }
+                                <i title="Plus Hydro" class="fa-solid fa-bolt hydroIcon"></i>{/if}</div>
                               {:else}
                                 <p id="{String(nestedValue)}{i2}">{nestedValue}</p>
                               {/if}
@@ -128,6 +142,20 @@
 
 <!-- css -->
 <style>
+
+.waterIcon{
+  color:#337ab7;
+}
+.heatIcon{
+  color:rgba(255, 123, 0, 0.856);
+}
+.hydroIcon{
+  color: goldenrod
+}
+  i{
+    font-size: 22pt;
+    margin: 7.5px 5px 0 0;
+  }
 
 .even{
   /* background-color: #93b18c25; */

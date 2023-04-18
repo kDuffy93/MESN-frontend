@@ -6,7 +6,6 @@ $: document.title = title;
 
 export let navList = [{href : "/login", linkText : "Log In"}];
 
-
 </script>
 
 

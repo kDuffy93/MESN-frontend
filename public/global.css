@@ -10,7 +10,7 @@
   --login-button-border-radius: 10px;
 }
 
-body{
-  background: url('https://i.esdrop.com/d/f/00nJAaeIIr/ARxxEA1V2j.png');
+header{
+  background: url('./images/Assets/headerBackground.png');
 
 }
