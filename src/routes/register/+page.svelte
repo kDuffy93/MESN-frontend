@@ -50,7 +50,7 @@
 }
 </script>
 
-<Register on:click={comparePasswords} bind:userNameValue={userData.username} bind:passwordValue={userData.password}  registerUserId={"username"} labelClassUser={"userName"} registerLabelUserId={"Username: "} registertTypeUserId={"text"} registerPwd={"password"} labelClassPwd={"password"} registerLabelPwd={"Password: "} registerTypePwd={"text"} registerConfirmPwd={"confirm"} registerLabelComfirmPwd={"Confirm Password:"} registerTypeConfirmPwd={"text"} registerFunction={"Register"} registerHeading={"Register Your Account"} registerTextButton={"Register Account"} registerClass={"registerClass"} pwdClass={"pwdClass"} registerMsg={"pwMsg"}/>
+<Register on:click={comparePasswords} bind:userNameValue={userData.userName} bind:passwordValue={userData.password}  registerUserId={"username"} labelClassUser={"userName"} registerLabelUserId={"Username: "} registertTypeUserId={"text"} registerPwd={"password"} labelClassPwd={"password"} registerLabelPwd={"Password: "} registerTypePwd={"text"} registerConfirmPwd={"confirm"} registerLabelComfirmPwd={"Confirm Password:"} registerTypeConfirmPwd={"text"} registerFunction={"Register"} registerHeading={"Register User Account"} registerTextButton={"Register Account"} registerClass={"registerClass"} pwdClass={"pwdClass"} registerMsg={"pwMsg"}/>
 
 <style>
   main > section {
