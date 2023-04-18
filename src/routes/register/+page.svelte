@@ -8,49 +8,50 @@
   //let currentURL = liveServerURL;
   let currentURL = localServerURL;
 
-  $:userData = {
+  $: userData = {
     username: "",
-    password: ""
-  }
+    password: "",
+  };
+  
   let registerUser = async () => {
-      console.log("registering user...");
-      const response = await fetch(`${currentURL}/register`, {
+    console.log("registering user...");
+    const response = await fetch(`${currentURL}/register`, {
       method: "post",
-      mode: "cors", 
+      mode: "cors",
       body: JSON.stringify(userData),
       headers: {
-      "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
     });
-      return response.json();
-    }
+    return response.json();
+  };
 
-  function comparePasswords() {
-    let pw1 = document.getElementById('password').value;
-    let pw2 = document.getElementById('confirm').value;
-    let pwMsg = document.getElementById('pwMsg');
-
-
-    
+  async function comparePasswords() {
+    let pw1 = document.getElementById("password").value;
+    let pw2 = document.getElementById("confirm").value;
+    let pwMsg = document.getElementById("pwMsg");
 
     if (pw1 != pw2) {
-        pwMsg.innerText = "Passwords do not match";
+      pwMsg.innerText = "Passwords do not match";
+    } else {
+      let response = await registerUser();
+      console.log(response.message);
+      if (response._id != undefined) {
+        // redirect user to login page
+        pwMsg.innerText = "You have been registered, Redirecting back to Rental Data page";
+        setTimeout(() => {
+          history.back();
+        }, "5000");
+      } else {
+        pwMsg.innerText = `${response.message}`;
+        pwMsg.className = "registerError";
+      }
     }
-    else {
-        let response = registerUser();
-        if (response.status == 200) {
-          // redirect user to login page
-          pwMsg.innerText = "registered";
-        } else {
-          pwMsg.innerText = response.body.message;
-          pwMsg.className = "registerError";
-        }
-    }
-}
+  }
 </script>
 
-<Register on:click={comparePasswords} bind:userNameValue={userData.userName} bind:passwordValue={userData.password}  registerUserId={"username"} labelClassUser={"userName"} registerLabelUserId={"Username: "} registertTypeUserId={"text"} registerPwd={"password"} labelClassPwd={"password"} registerLabelPwd={"Password: "} registerTypePwd={"text"} registerConfirmPwd={"confirm"} registerLabelComfirmPwd={"Confirm Password:"} registerTypeConfirmPwd={"text"} registerFunction={"Register"} registerHeading={"Register User Account"} registerTextButton={"Register Account"} registerClass={"registerClass"} pwdClass={"pwdClass"} registerMsg={"pwMsg"}/>
+<Register on:click={comparePasswords} bind:userNameValue={userData.username} bind:passwordValue={userData.password} registerUserId={"username"} labelClassUser={"userName"} registerLabelUserId={"Username: "} registertTypeUserId={"text"} registerPwd={"password"} labelClassPwd={"password"} registerLabelPwd={"Password: "} registerTypePwd={"text"} registerConfirmPwd={"confirm"} registerLabelComfirmPwd={"Confirm Password:"} registerTypeConfirmPwd={"text"} registerFunction={"Register"} registerHeading={"Register User Account"} registerTextButton={"Register Account"} registerClass={"registerClass"} pwdClass={"pwdClass"} registerMsg={"pwMsg"} />
 
 <style>
   main > section {

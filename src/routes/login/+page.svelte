@@ -3,28 +3,56 @@
   // import LoginButton from "../../components/global/loginButton.svelte";
   // import PartialsLinks from "../../components/global/partialsLinks.svelte";
   import Login from "../../components/global/login.svelte";
+
+  //page level varibles
+  let liveServerURL = "https://mesn-backend.onrender.com";
+  let localServerURL = "http://localhost:5001";
+
+  //change which is commented dependant on where youre working
+  //let currentURL = liveServerURL;
+  let currentURL = localServerURL;
+
+  $: userData = {
+    username: "",
+    password: "",
+  };
+
+  let handleLogin = async () => {
+    console.log("trying to login user...");
+    const response = await fetch(`${currentURL}/login`, {
+      method: "post",
+      mode: "cors",
+      body: JSON.stringify(userData),
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+    return response.json();
+  };
+
+    
+
+
+  let logUserIn = async () => {
+    let response = await handleLogin();
+
+    if (response._id != undefined) {
+      // redirect user to login page
+      window.location.href = window.location.href.replace("login", "rentalData");
+    } else {
+      loginMsg = `${response.message}`;
+    }
+
+
+  }
+
+
+
+  let loginMsg = "";
 </script>
 
-<!--
-<main>
-
-<section class="container">
-        <form>
-            <LoginInfo inputId={'username'} labelText={'Username: '} InputType={'text'} labelClass={'userName'}/>    
-             <label for="username">Username:</label>
-            <input type="text" id="username" /> 
-            <LoginInfo inputId={'password'} labelText={'Password:'} InputType={'text'} labelClass={'password'}/>
-            <label for="password">password:</label>
-            <input type="text" id="password" />
-            <LoginButton linkName={'rentalData'} linksText={'Login'}/>
-            <a href="rentalData">Log In</a> 
-        </form>
-        <PartialsLinks linkName={'forgotPassword'} linksText={'Forgot Password.'}/>
-        <a href="forgotPassword">Forgot Password</a>
-    </section> 
-</main>  -->
-
-<Login inputIdUser={"username"} labelClassUser={"userName"} labelTextUser={"Username: "} InputTypeUser={"text"} inputIdPwd={"password"} labelClassPwd={"password"} labelTextPwd={"Password: "} InputTypePwd={"text"} linkNameLog={"rentalData"} linksTextLog={"Login"} linkRegister={"register"} registerText={"Register"} linkNamePwd={"forgotPassword"} linksTextPwd={"Forgot Password."} loginText={"Login Information"} loginClass={"loginClass"} registerClass={"registerClass"} pwdClass={"pwdClass"} />
+<Login on:click={logUserIn} bind:loginMsg bind:userNameValue={userData.username} bind:passwordValue={userData.password} inputIdUser={"username"} labelClassUser={"userName"} labelTextUser={"Username: "} InputTypeUser={"text"} inputIdPwd={"password"} labelClassPwd={"password"} labelTextPwd={"Password: "} InputTypePwd={"text"} linkNameLog={"rentalData"} linksTextLog={"Login"} linkRegister={"register"} registerText={"Register"} linkNamePwd={"forgotPassword"} linksTextPwd={"Forgot Password."} loginText={"Login Information"} loginClass={"loginClass"} registerClass={"registerClass"} pwdClass={"pwdClass"} />
 
 <style>
   main > section {

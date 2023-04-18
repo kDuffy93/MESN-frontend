@@ -19,6 +19,11 @@
   export let linkRegister;
   export let registerClass;
 
+
+  export let loginMsg = '';
+  export let userNameValue;
+  export let passwordValue;
+
 </script>
 
 <!-- html -->
@@ -28,12 +33,14 @@
 
       <h1>{loginText}</h1>
       <label for={inputIdUser} class={labelClassUser}>{labelTextUser}</label>
-      <input type={InputTypeUser} id={inputIdUser} />
+      <input type='text' id={inputIdUser} bind:value={userNameValue}/>
       <label for={inputIdPwd} class={labelClassPwd}>{labelTextPwd}</label>
-      <input type={InputTypePwd} id={inputIdPwd} />
-      <a href={linkNameLog} class={loginClass}>{linksTextLog}<span /></a><br />
+      <input type='password' id={inputIdPwd} bind:value={passwordValue} />
+      <a href={linkNameLog} on:click|preventDefault class={loginClass}>{linksTextLog}<span /></a><br />
       <!-- <a href={linkRegister} class={registerClass}>{registerText}<span /></a><br /> -->
-      <a href={linkNamePwd} class={pwdClass}>{linksTextPwd}<span /></a>
+      <!-- <a href={linkNamePwd} class={pwdClass}>{linksTextPwd}<span /></a>-->
+      <p>{loginMsg}<p/>
+
 
     </form>
   </section>

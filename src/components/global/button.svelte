@@ -8,11 +8,12 @@
   export let buttonIconClass = "fa-solid fa-plus fa";
   export let classList = "btn btn_house";
   export let buttonTitle;
+  export let disabled = false;
 </script>
 
 <!-- every button have:    -->
 <!-- html -->
-<button on:click id={buttonId} class={classList} style="background-color:var({buttonColorVar});" title={buttonTitle}>
+<button on:click id={buttonId} class={classList} disabled={disabled} style="background-color:var({buttonColorVar});" title={buttonTitle}>
   {#if buttonIconClass}<i class={buttonIconClass} />{/if}
 </button>
 
